@@ -29,7 +29,7 @@ class StatisticsController < ApplicationController
         @families = Family.all
     end
     if @search
-      @families = @search.all 
+      @families = @search.all
       render 'pages/search'
     end
   end

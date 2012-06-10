@@ -3,7 +3,7 @@ class VisitsController < ApplicationController
     @visits = Visit.all
 
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: @visits }
     end
   end
@@ -12,7 +12,7 @@ class VisitsController < ApplicationController
     @visit = Visit.find(params[:id])
 
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: @visit }
     end
   end

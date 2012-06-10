@@ -13,6 +13,4 @@
   %b Учёба:
   = @child.study_name
 
-= link_to 'Редактировать', edit_child_path(@child)
-\|
-= link_to 'Назад', children_path
+= link_to 'Назад', family_path(@child.family), class: "btn primary"

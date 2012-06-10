@@ -6,7 +6,7 @@ authorization do
   end
 
   role :moderator do
-    
+
   end
 
   role :volunteer do

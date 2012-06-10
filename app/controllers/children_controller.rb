@@ -1,6 +1,4 @@
 class ChildrenController < ApplicationController
-  # GET /children
-  # GET /children.json
   def index
     @children = Child.all
 
@@ -10,8 +8,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # GET /children/1
-  # GET /children/1.json
   def show
     @child = Child.find(params[:id])
 
@@ -21,8 +17,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # GET /children/new
-  # GET /children/new.json
   def new
     @child = Child.new
 
@@ -32,13 +26,10 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # GET /children/1/edit
   def edit
     @child = Child.find(params[:id])
   end
 
-  # POST /children
-  # POST /children.json
   def create
     @child = Child.new(params[:child])
 
@@ -53,8 +44,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # PUT /children/1
-  # PUT /children/1.json
   def update
     @child = Child.find(params[:id])
 
@@ -69,8 +58,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  # DELETE /children/1
-  # DELETE /children/1.json
   def destroy
     @child = Child.find(params[:id])
     @child.destroy

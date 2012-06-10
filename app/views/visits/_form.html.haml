@@ -12,7 +12,7 @@
   .field
     = f.label :user_tokens, "Участники визита"
     = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @visit.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
-    
+
   .field.date_select
     = f.label :made_at, "Дата совершения визита"
     = f.date_select :made_at

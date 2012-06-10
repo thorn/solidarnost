@@ -65,7 +65,7 @@ class PagesController < ApplicationController
     else
       @search = Family.search(params[:search])
     end
-    
+
     @families  = @search.all
 
     respond_with @users

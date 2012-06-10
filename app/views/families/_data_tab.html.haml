@@ -39,7 +39,7 @@
       .info-block-body
         %table(style="width: 700px;")
           %tr
-            %th 
+            %th
             %th ФИО
             %th Дата рождения
             %th Здоровье
@@ -96,7 +96,7 @@
               %td= best_in_place child, :study_id, :type => :select, :collection => StudyCategory.all.collect {|u| [u.id, u.name]}
               %td
                 = link_to 'Удалить', child, :method => :delete
-                = link_to 'Изменить', edit_child_path(child)
+                = link_to 'Показать', child_path(child)
 
     #family_status.info-block
       .info-block-title Состояние семьи

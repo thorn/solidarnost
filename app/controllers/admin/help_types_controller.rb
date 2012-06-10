@@ -1,6 +1,5 @@
 class HelpTypesController < ApplicationController
-  # GET /help_types
-  # GET /help_types.json
+
   def index
     @help_types = HelpType.all
 
@@ -10,8 +9,6 @@ class HelpTypesController < ApplicationController
     end
   end
 
-  # GET /help_types/1
-  # GET /help_types/1.json
   def show
     @help_type = HelpType.find(params[:id])
 
@@ -21,8 +18,6 @@ class HelpTypesController < ApplicationController
     end
   end
 
-  # GET /help_types/new
-  # GET /help_types/new.json
   def new
     @help_type = HelpType.new
 
@@ -32,13 +27,10 @@ class HelpTypesController < ApplicationController
     end
   end
 
-  # GET /help_types/1/edit
   def edit
     @help_type = HelpType.find(params[:id])
   end
 
-  # POST /help_types
-  # POST /help_types.json
   def create
     @help_type = HelpType.new(params[:help_type])
 
@@ -53,8 +45,6 @@ class HelpTypesController < ApplicationController
     end
   end
 
-  # PUT /help_types/1
-  # PUT /help_types/1.json
   def update
     @help_type = HelpType.find(params[:id])
 
@@ -69,8 +59,6 @@ class HelpTypesController < ApplicationController
     end
   end
 
-  # DELETE /help_types/1
-  # DELETE /help_types/1.json
   def destroy
     @help_type = HelpType.find(params[:id])
     @help_type.destroy
