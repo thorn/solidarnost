@@ -1,0 +1,15 @@
+= form_for [:admin, @necessity], :html => {:class => "form-stacked"} do |f|
+  .field
+    = f.label :name, "Название"
+    = f.text_field :name
+  .field
+    = f.label :description, "Описание"
+    = f.text_area :description
+
+  .actions
+    - if params[:action] == "edit"
+      = f.submit 'Сохранить', :class => "btn primary"
+    - else
+      = f.submit "Создать", :class => "btn primary"
+    = link_to 'Отмена', admin_necessities_path, :class => "btn"
+

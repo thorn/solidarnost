@@ -20,15 +20,15 @@ class Admin::GroupOptionsController < Admin::BaseController
     @group_option = GroupOption.new(params[:group_option])
 
     if @group_option.save
-      redirect_to group_options_path, notice: 'Group option was successfully created.'
+      redirect_to admin_group_options_path, notice: 'Group option was successfully created.'
     else
-      format.html { render action: "new"
+      render action: "new"
     end
   end
 
   def update
     if @group_option.update_attributes(params[:group_option])
-      redirect_to group_options_path, notice: 'Group option was successfully updated.'
+      redirect_to admin_group_options_path, notice: 'Group option was successfully updated.'
     else
       render action: "edit"
     end
@@ -36,7 +36,7 @@ class Admin::GroupOptionsController < Admin::BaseController
 
   def destroy
     @group_option.destroy
-    redirect_to group_options_url
+    redirect_to admin_group_options_path
   end
 
   private

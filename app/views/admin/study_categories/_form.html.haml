@@ -1,0 +1,12 @@
+= form_for [:admin, @study_category], :html => {:class => "form-stacked"} do |f|
+  .field
+    = f.label :name, "Название"
+    = f.text_field :name
+
+  .actions
+    - if params[:action] == "edit"
+      = f.submit 'Сохранить', :class => "btn primary"
+    - else
+      = f.submit "Создать", :class => "btn primary"
+    = link_to 'Отмена', admin_study_categories_path, :class => "btn"
+

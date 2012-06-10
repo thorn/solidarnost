@@ -1,0 +1,9 @@
+= form_for [:admin, @help_type], :html => {:class => "form-stacked"} do |f|
+  .field
+    = f.label :name, "Название типа помощи"
+    = f.text_field :name
+  - if params[:action] == "edit"
+    = f.submit 'Сохранить', :class => "btn primary"
+  - else
+    = f.submit "Создать", :class => "btn primary"
+  = link_to 'Отмена', admin_help_types_path, :class => "btn"

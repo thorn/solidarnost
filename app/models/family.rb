@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*- 
+# -*- encoding: utf-8 -*-
 class Family < ActiveRecord::Base
   has_one :father       , :dependent => :destroy
   has_one :mother       , :dependent => :destroy
@@ -47,7 +47,7 @@ class Family < ActiveRecord::Base
 
   before_save :set_source_id
   before_update :set_source_id
-  
+
   before_save :set_priority
 
   attr_reader :user_tokens
@@ -60,7 +60,7 @@ class Family < ActiveRecord::Base
       "Город не указан"
     end
   end
-  
+
   def user_tokens=(ids)
     self.user_ids = ids
   end
@@ -68,11 +68,11 @@ class Family < ActiveRecord::Base
   def necessity_tokens=(ids)
     self.necessity_ids = ids
   end
-  
+
   def descript
     if self.description.nil? then self.description else "Нет описания" end
   end
-  
+
   def set_priority
     self.priority = ((self.home.coeff/10)*35) + ((self.resource.coeff/10)*25) + ((self.source.coeff/10)*15)
   end

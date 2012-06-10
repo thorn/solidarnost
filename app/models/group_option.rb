@@ -1,6 +1,5 @@
 class GroupOption < ActiveRecord::Base
   belongs_to :group
-  has_many :families, :dependent => :destroy
 
   validates :name, :presence => true
 

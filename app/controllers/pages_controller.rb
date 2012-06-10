@@ -19,37 +19,42 @@ class PagesController < ApplicationController
         Group.find_all_by_id(params[:model_ids]).each do |group|
           group.destroy
         end
-        redirect_to groups_path
+        redirect_to admin_groups_path
       when "Group_options"
         GroupOption.find_all_by_id(params[:model_ids]).each do |group_option|
           group_option.destroy
         end
-        redirect_to group_options_path
+        redirect_to admin_group_options_path
       when "Cities"
         City.find_all_by_id(params[:model_ids]).each do |city|
           city.destroy
         end
-        redirect_to cities_path
+        redirect_to admin_cities_path
       when "Help_types"
         HelpType.find_all_by_id(params[:model_ids]).each do |help_type|
           help_type.destroy
         end
-        redirect_to help_types_path
+        redirect_to admin_help_types_path
       when "Necessities"
         Necessity.find_all_by_id(params[:model_ids]).each do |nec|
           nec.destroy
         end
-        redirect_to necessities_path
+        redirect_to admin_necessities_path
       when "StudyCategories"
         StudyCategory.find_all_by_id(params[:model_ids]).each do |study_category|
           study_category.destroy
         end
-        redirect_to study_categories_path
+        redirect_to admin_study_categories_path
       when "Users"
         User.find_all_by_id(params[:model_ids]).each do |user|
           user.destroy
         end
         redirect_to admin_users_path
+      when "Roles"
+        Role.find_all_by_id(params[:model_ids]).each do |role|
+          role.destroy
+        end
+        redirect_to admin_roles_path
       else
         redirect_to families_path
     end

@@ -1,0 +1,26 @@
+%h1 Список опций
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Group_options")
+  %table.sortable_table
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название опции
+        %th Коэффициент
+        %th Группа
+        %th Действия
+    %tbody
+      - @group_options.each do |group_option|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", group_option.id
+          %td= group_option.name
+          %td= group_option.coeff
+          %td= group_option.group.groupName
+          %td
+            = link_to 'Удалить', [:admin, group_option], :confirm => 'Все семьи, у которых есть этот коэффициент, будут удалены!', :method => :delete
+            = link_to 'Изменить', edit_admin_group_option_path(group_option)
+  = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все семьи, у которых есть отмеченные коэффициенты, будут удалены!'

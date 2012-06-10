@@ -1,12 +1,9 @@
 class Admin::HelpTypesController < Admin::BaseController
 
-  before_filter :find_help_type, only: [:show, :edit, :update, :destroy]
+  before_filter :find_help_type, only: [:edit, :update, :destroy]
 
   def index
     @help_types = HelpType.all
-  end
-
-  def show
   end
 
   def new
@@ -20,7 +17,7 @@ class Admin::HelpTypesController < Admin::BaseController
     @help_type = HelpType.new(params[:help_type])
 
     if @help_type.save
-      redirect_to help_types_path, notice: 'Help type was successfully created.'
+      redirect_to admin_help_types_path, notice: 'Help type was successfully created.'
     else
       render action: "new"
     end
@@ -28,7 +25,7 @@ class Admin::HelpTypesController < Admin::BaseController
 
   def update
     if @help_type.update_attributes(params[:help_type])
-      redirect_to help_types_path, notice: 'Help type was successfully updated.'
+      redirect_to admin_help_types_path, notice: 'Help type was successfully updated.'
     else
       render action: "edit"
     end
@@ -36,7 +33,7 @@ class Admin::HelpTypesController < Admin::BaseController
 
   def destroy
     @help_type.destroy
-    redirect_to help_types_url
+    redirect_to admin_help_types_path
   end
 
   private

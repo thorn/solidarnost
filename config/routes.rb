@@ -1,18 +1,13 @@
 Solidarnost::Application.routes.draw do
 
-  resources :study_categories
-
   match 'statistics' => 'statistics#index', :as => 'statistics'
   match 'statistics/show' => 'statistics#show', :as => 'statistic'
-  resources :necessities
 
   get "pages/home"
 
   get "pages/about"
   match "pages/search", :as => :search, :via => [:get, :post]
 
-  resources :help_types
-  resources :roles
   resources :users_families
   resources :family_necessities, :only => [:destroy]
   resources :visits
@@ -22,11 +17,15 @@ Solidarnost::Application.routes.draw do
   namespace :admin do
     root :to => "users#index"
     resources :users
+    resources :cities
+    resources :groups
+    resources :group_options
+    resources :help_types
+    resources :necessities
+    resources :study_categories
+    resources :roles
   end
 
-  resources :cities
-  resources :group_options
-  resources :groups
   resources :children
   resources :trusties
   resources :mothers

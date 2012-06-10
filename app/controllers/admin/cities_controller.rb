@@ -18,7 +18,7 @@ class Admin::CitiesController < Admin::BaseController
     @city = City.new(params[:city])
 
     if @city.save
-      redirect_to cities_path, notice: 'City was successfully created.'
+      redirect_to admin_cities_path, notice: 'City was successfully created.'
     else
       render action: "new"
     end
@@ -26,7 +26,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def update
     if @city.update_attributes(params[:city])
-      redirect_to cities_path, notice: 'City was successfully updated.'
+      redirect_to admin_cities_path, notice: 'City was successfully updated.'
     else
       render action: "edit"
     end
@@ -34,7 +34,7 @@ class Admin::CitiesController < Admin::BaseController
 
   def destroy
     @city.destroy
-    redirect_to cities_url
+    redirect_to admin_cities_path
   end
 
   private

@@ -20,7 +20,7 @@ class Admin::NecessitiesController < Admin::BaseController
     @necessity = Necessity.new(params[:necessity])
 
     if @necessity.save
-      redirect_to necessities_path, notice: 'Necessity was successfully created.'
+      redirect_to admin_necessities_path, notice: 'Necessity was successfully created.'
     else
       render action: "new"
     end
@@ -28,7 +28,7 @@ class Admin::NecessitiesController < Admin::BaseController
 
   def update
     if @necessity.update_attributes(params[:necessity])
-      redirect_to necessities_path, notice: 'Necessity was successfully updated.'
+      redirect_to admin_necessities_path, notice: 'Necessity was successfully updated.'
     else
       render action: "edit"
     end
@@ -36,7 +36,7 @@ class Admin::NecessitiesController < Admin::BaseController
 
   def destroy
     @necessity.destroy
-    redirect_to necessities_url
+    redirect_to admin_necessities_path
   end
 
   private

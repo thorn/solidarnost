@@ -20,7 +20,7 @@ class Admin::GroupsController < Admin::BaseController
     @group = Group.new(params[:group])
 
     if @group.save
-      redirect_to groups_path, notice: 'Group was successfully created.'
+      redirect_to admin_groups_path, notice: 'Group was successfully created.'
     else
       render action: "new"
     end
@@ -28,7 +28,7 @@ class Admin::GroupsController < Admin::BaseController
 
   def update
     if @group.update_attributes(params[:group])
-      redirect_to groups_path
+      redirect_to admin_groups_path
     else
       render action: "edit"
     end
@@ -36,7 +36,7 @@ class Admin::GroupsController < Admin::BaseController
 
   def destroy
     @group.destroy
-    redirect_to groups_url
+    redirect_to admin_groups_path
   end
 
   private

@@ -1,0 +1,23 @@
+%h1 Список вещей первой необходимости
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Necessities")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название
+        %th Краткое описание
+    %tbody
+      - @necessities.each do |necessity|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", necessity.id
+          %td= necessity.name
+          %td= necessity.description
+          %td
+            = link_to 'Изменить', edit_admin_necessity_path(necessity)
+            = link_to 'Удалить', [:admin, necessity], :method => :delete
+  = submit_tag "Удалить отмеченные", :class => "btn error"

@@ -39,7 +39,7 @@ class Admin::RolesController < Admin::BaseController
     @role = Role.find(params[:id])
     @role.destroy
 
-    redirect_to roles_url
+    redirect_to admin_roles_path
   end
 
   private

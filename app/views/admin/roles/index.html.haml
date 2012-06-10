@@ -1,0 +1,24 @@
+%h1 Список ролей пользователей
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Roles")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название
+        %th Пользователей
+        %th Действия
+    %tbody
+      - @roles.each do |role|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", role.id
+          %td= role.title
+          %td= role.users.count
+          %td
+            = link_to 'Показать', [:admin, role]
+            = link_to 'Изменить', edit_admin_role_path(role)
+            = link_to 'Удалить', [:admin, role], :confirm => 'Вы уверены? Все пользователи с данной ролью будут удалены!', :method => :delete
