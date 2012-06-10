@@ -3,6 +3,7 @@ class CreateAssistances < ActiveRecord::Migration
     create_table :assistances do |t|
       t.integer :family_help_id
       t.integer :user_id
+      t.integer :visit_id
 
       t.timestamps
     end

@@ -5,7 +5,8 @@ gem 'rails', '3.1.3'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'best_in_place'
 gem 'formtastic'
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 gem 'haml-rails'
 gem 'devise'
 gem 'declarative_authorization'
@@ -14,11 +15,13 @@ gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-boots
 gem 'meta_search'
 gem 'will_paginate'
 
+group :test do
+  gem 'cucumber-rails'
+end
 group :test, :development do
   gem 'guard-spork'
   gem 'hirb'
   gem 'libnotify'
-  gem 'cucumber-rails'
   gem 'capybara'
   gem 'rspec-rails', '~> 2.5'
   gem 'autotest'

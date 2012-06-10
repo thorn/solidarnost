@@ -5,6 +5,14 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.recoverable
       t.rememberable
       t.trackable
+      t.string  :name
+      t.string  :address
+      t.string  :phone
+      t.string  :profession
+      t.text    :description
+      t.integer :city_id
+
+
 
       # t.encryptable
       # t.confirmable

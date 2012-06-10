@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   has_many :families, :through => :users_families
 
   belongs_to :city
-  scope :volunteers, User.all
 
   validates :name, :phone, :address, :presence => true
 
@@ -39,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
 private
-  
+
   def set_role
     self.user_roles.build(:role_id => Role.where(:title => "user").first.id)
   end

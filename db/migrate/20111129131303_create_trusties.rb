@@ -3,9 +3,12 @@ class CreateTrusties < ActiveRecord::Migration
     create_table :trusties do |t|
       t.string :name
       t.date :birthday
-      t.integer :health
-      t.boolean :worker
+      t.integer :health_id
       t.string :who
+      t.integer :family_id
+      t.integer :age
+      t.text :description
+      t.string :phone
 
       t.timestamps
     end

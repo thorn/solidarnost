@@ -11,27 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311135341) do
+ActiveRecord::Schema.define(:version => 20120224062330) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
     t.integer  "user_id"
+    t.integer  "visit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "visit_id"
   end
 
   create_table "children", :force => true do |t|
     t.string   "name"
     t.date     "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "family_id"
     t.integer  "health_id"
+    t.integer  "family_id"
     t.integer  "age"
     t.integer  "study_id"
     t.text     "description"
     t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cities", :force => true do |t|
@@ -45,25 +45,25 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
     t.string   "phone"
     t.integer  "city_id"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "home_id"
     t.integer  "source_id"
     t.integer  "resource_id"
     t.text     "description"
     t.integer  "priority"
     t.integer  "source_amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "family_helps", :force => true do |t|
     t.text     "description"
     t.integer  "amount"
     t.integer  "family_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "visit_id"
     t.date     "made_at"
     t.integer  "help_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "family_necessities", :force => true do |t|
@@ -76,23 +76,23 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
   create_table "fathers", :force => true do |t|
     t.string   "name"
     t.date     "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "family_id"
     t.integer  "health_id"
+    t.integer  "family_id"
     t.integer  "age"
     t.text     "description"
     t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "group_options", :force => true do |t|
     t.string   "name"
     t.integer  "coeff"
     t.integer  "group_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "amount_start"
     t.integer  "amount_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "group_options", ["group_id"], :name => "index_group_options_on_group_id"
@@ -120,13 +120,13 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
   create_table "mothers", :force => true do |t|
     t.string   "name"
     t.date     "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "family_id"
     t.integer  "health_id"
+    t.integer  "family_id"
     t.integer  "age"
     t.text     "description"
     t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "necessities", :force => true do |t|
@@ -144,22 +144,22 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
   end
 
   create_table "study_categories", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
   end
 
   create_table "trusties", :force => true do |t|
     t.string   "name"
     t.date     "birthday"
-    t.string   "who"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "family_id"
     t.integer  "health_id"
+    t.string   "who"
+    t.integer  "family_id"
     t.integer  "age"
     t.text     "description"
     t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_roles", :force => true do |t|
@@ -178,14 +178,14 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "name"
     t.string   "address"
     t.string   "phone"
     t.string   "profession"
     t.text     "description"
     t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -203,9 +203,9 @@ ActiveRecord::Schema.define(:version => 20120311135341) do
     t.text     "description"
     t.date     "visit_date"
     t.integer  "family_id"
+    t.date     "made_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.date     "made_at"
   end
 
 end

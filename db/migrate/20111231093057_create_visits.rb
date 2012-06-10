@@ -5,6 +5,7 @@ class CreateVisits < ActiveRecord::Migration
       t.text :description
       t.date :visit_date
       t.integer :family_id
+      t.date :made_at
 
       t.timestamps
     end

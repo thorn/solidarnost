@@ -3,8 +3,11 @@ class CreateFathers < ActiveRecord::Migration
     create_table :fathers do |t|
       t.string :name
       t.date :birthday
-      t.integer :health
-      t.boolean :worker
+      t.integer :health_id
+      t.integer :family_id
+      t.integer :age
+      t.text :description
+      t.string :phone
 
       t.timestamps
     end

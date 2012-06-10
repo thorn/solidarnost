@@ -4,6 +4,8 @@ class CreateGroupOptions < ActiveRecord::Migration
       t.string :name
       t.integer :coeff
       t.references :group
+      t.integer :amount_start
+      t.integer :amount_end
 
       t.timestamps
     end
