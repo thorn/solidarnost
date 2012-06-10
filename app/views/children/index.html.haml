@@ -1,0 +1,25 @@
+%h1 Список детей
+
+%table
+  %tr
+    %th ФИО
+    %th Дата рождения
+    %th Состояние здоровья
+    %th Учёба
+    %th
+    %th
+    %th
+
+  - @children.each do |child|
+    %tr
+      %td= child.name
+      %td= child.birthday
+      %td= child.health.name
+      %td= child.study
+      %td= link_to 'Показать', child
+      %td= link_to 'Редактировать', edit_child_path(child)
+      %td= link_to 'Удалить', child, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'Новый ребенок', new_child_path

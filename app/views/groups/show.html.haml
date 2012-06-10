@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Название группы:
+  = @group.groupName
+%p
+  %b Коэффициент группы:
+  = @group.groupCoeff
+
+= link_to 'Редактирование', edit_group_path(@group)
+\|
+= link_to 'Назад', groups_path

@@ -1,0 +1,62 @@
+%h3 Члены семьи
+.accordion
+  %h4
+    %a(href="#") Дети
+  %div
+    = f.label :children_name_contains, "Имя содержит"
+    = f.text_field :children_name_contains
+
+    = f.label :children_health_id_equals, "Здоровье детей"
+    = f.select :children_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
+
+    .multiparam_field
+      = f.label :children_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
+      = f.number_field :children_age_greater_than_or_equal_to, min:0
+      = f.number_field :children_age_less_than_or_equal_to, min:0
+
+    .multiparam_field
+      = label_tag "Один кормилец Сирота"
+      = check_box_tag :with_one_parent
+      = check_box_tag :without_parents
+      
+    = f.label :children_study_id_equals, "Образование"
+    = f.select :children_study_id_equals, StudyCategory.all.collect {|o| [o.name, o.id]}, :include_blank => true
+  %h4
+    %a(href="#") Отец
+  %div
+    = f.label :father_name_contains, "Имя содержит"
+    = f.text_field :father_name_contains
+
+    = f.label :father_health_id_equals, "Здоровье отца"
+    = f.select :father_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
+
+    .multiparam_field
+      = f.label :father_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
+      = f.number_field :father_age_greater_than_or_equal_to, min:0
+      = f.number_field :father_age_less_than_or_equal_to, min:0
+
+  %h4
+    %a(href="#") Мать
+  %div
+    = f.label :mother_name_contains, "Имя содержит"
+    = f.text_field :mother_name_contains
+
+    = f.label :mother_health_id_equals, "Здоровье матери"
+    = f.select :mother_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
+    .multiparam_field
+      = f.label :mother_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
+      = f.number_field :mother_age_greater_than_or_equal_to, min:0
+      = f.number_field :mother_age_less_than_or_equal_to, min:0
+
+  %h4
+    %a(href="#") Опекун
+  %div
+    = f.label :trusty_name_contains, "Имя содержит"
+    = f.text_field :trusty_name_contains
+
+    = f.label :trusty_health_id_equals, "Здоровье опекуна"
+    = f.select :trusty_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
+    .multiparam_field
+      = f.label :trusty_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
+      = f.number_field :trusty_age_greater_than_or_equal_to, min:0
+      = f.number_field :trusty_age_less_than_or_equal_to, min:0

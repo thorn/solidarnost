@@ -1,0 +1,16 @@
+%h2 Описание визита
+%h3= @visit.title
+%h3 Помощь оказана
+= @visit.made_at
+%h3 Волонтеры
+%ul.unstyled
+  - @visit.users.each do |user|
+    %li= user.name
+.span8
+  %h3 Описание
+  %p= @visit.description
+
+.buttons
+  = link_to "Редактировать", edit_visit_path(@visit), :class => "btn"
+
+  = link_to "Назад", family_path(@visit.family), :class => "btn"

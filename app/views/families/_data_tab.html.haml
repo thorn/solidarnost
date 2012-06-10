@@ -1,0 +1,124 @@
+.info-title
+  .info-name= @family.title
+  .family-coeff= link_to @family.priority, "#family_status",{ :class => "coeff_link scroll_to", :rel => "twipsy", "data-original-title" => "Приоритет семьи"}
+.family-main-info
+  .info-block
+    .info-block-title Прикрепленные волонтеры
+    .info-block-body
+      - unless @family.users.count == 0
+        - @family.users.each do |user|
+          .info
+            .info-name
+              %span= user.name
+            .info-value= link_to "Открепить", UsersFamily.where(:family_id => @family.id, :user_id => user.id).first, :method => :delete
+      - else
+        Нет прикрепленных волонтеров
+  .info-block
+    .info-block-title Контактные данные
+    .info-block-body
+      .info
+        .info-name
+          %span Город
+        .info-value
+          %a(href="#")
+            = best_in_place @family, :city_id, :type => :select, :collection => City.all.collect {|c| [c.id, c.name]}, :nil => "Нажмите чтобы изменить"
+      .info
+        .info-name
+          %span Адрес
+        .info-value
+          %a(href="#")
+            = best_in_place @family, :address, :nil => "Нажмите чтобы изменить"
+      .info
+        .info-name
+          %span Телефон
+        .info-value
+          %a(href="#")
+            = best_in_place @family, :phone, :ok_button => "Сохранить", :cancel_button => "Отмена", :nil => "Нажмите чтобы изменить"
+    .info-block
+      .info-block-title Члены семьи
+      .info-block-body
+        %table(style="width: 700px;")
+          %tr
+            %th 
+            %th ФИО
+            %th Дата рождения
+            %th Здоровье
+            %th Телефон
+            %th
+          - if @family.father
+            %tr
+              %td Отец
+              %td= best_in_place @family.father, :name
+              %td= @family.father.birthday
+              %td= best_in_place @family.father, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
+              %td= best_in_place @family.father, :phone
+              %td
+                = link_to 'Удалить', @family.father, :method => :delete
+                = link_to 'Показать', @family.father
+          - if @family.mother
+            %tr
+              %td Мать
+              %td= best_in_place @family.mother, :name
+              %td= @family.mother.birthday
+              %td= best_in_place @family.mother, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
+              %td= best_in_place @family.mother, :phone
+              %td
+                = link_to 'Удалить', @family.mother, :method => :delete
+                = link_to 'Показать', @family.mother
+          - if @family.trusty
+            %tr
+              %td Опекун
+              %td= best_in_place @family.trusty, :name
+              %td= @family.trusty.birthday
+              %td= best_in_place @family.trusty, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
+              %td= best_in_place @family.trusty, :phone
+              %td
+                = link_to 'Удалить', @family.trusty, :method => :delete
+                = link_to 'Показать', @family.trusty
+
+    .info-block
+      .info-block-title
+        Дети
+      .info-block-body
+        %table(style="width: 700px;")
+          %tr
+            %th ФИО
+            %th Дата рождения
+            %th Здоровье
+            %th Учёба
+            %th
+
+          - @family.children.each do |child|
+            %tr
+              %td= best_in_place child, :name
+              %td= child.birthday
+              %td= best_in_place child, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
+              %td= best_in_place child, :study_id, :type => :select, :collection => StudyCategory.all.collect {|u| [u.id, u.name]}
+              %td
+                = link_to 'Удалить', child, :method => :delete
+                = link_to 'Изменить', edit_child_path(child)
+
+    #family_status.info-block
+      .info-block-title Состояние семьи
+      .info-block-body
+        .info
+          .info-name
+            %span Жилищное обеспечение
+          .info-value
+            %a(href="#")
+              = best_in_place @family, :home_id, :type => :select, :collection => GroupOption.home.collect{|o| [o.id, o.name]}
+        .info
+          .info-name
+            %span Доход
+          .info-value
+            %a(href="#")
+              = best_in_place @family, :source_amount
+            руб.
+            =# best_in_place @family, :source_id, :type => :select, :collection => GroupOption.source.collect{|o| [o.id, o.name]}
+        .info
+          .info-name
+            %span Продуктовое обеспечение
+          .info-value
+            %a(href="#")
+              = best_in_place @family, :resource_id, :type => :select, :collection => GroupOption.resource.collect{|o| [o.id, o.name]}
+= render "buttons"

@@ -1,0 +1,35 @@
+%table.sortable_table
+  %thead
+    %tr
+      %th
+        %div(align="center")
+          %input#mark_all(type="checkbox")
+      %th Семья
+      %th Телефон
+      %th Город/село
+      %th Адрес
+      %th Жилье
+      %th Продовольствие
+      %th Источники дохода
+      %th Приоритет
+      %th
+  %tbody
+    - @families.each do |family|
+      - color = "green" if family.priority <= 30
+      - color = "yellow" if family.priority <= 100 and family.priority > 30
+      - color = "red" if family.priority > 100
+      %tr{:class => color}
+        %td
+          %div(align="center")
+            = check_box_tag "model_ids[]", family.id
+        %td= link_to family.title, family
+        %td= link_to family.phone, family
+        %td= link_to family.city_name, family
+        %td= link_to family.address, family
+        %td= link_to family.home.name, family
+        %td= link_to family.resource.name, family
+        %td= link_to family.source.name, family
+        %td= link_to family.priority, family
+        %td
+          = link_to 'Редактировать', edit_family_path(family)
+          = link_to 'Удалить', family, :method => :delete

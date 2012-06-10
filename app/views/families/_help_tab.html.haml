@@ -1,0 +1,32 @@
+.info-block
+  .info-block-title Помощь в ходе визитов
+  .info-block-body
+    - @family.family_helps.during_visits.each do |help|
+      .info
+        .info-name
+          %span= link_to help.made_at, help
+        .info-value
+          = link_to "Показать", help, {:rel => "popover", "data-content" => extract_help_content(help), "data-original-title" => help.made_at}
+.info-block
+  .info-block-title Помощь вне визитов
+  .info-block-body
+    - @family.family_helps.without_visit.each do |help|
+      .info
+        .info-name
+          %span
+            = link_to help.made_at, help
+        .info-value
+          = link_to "Показать", help, {:rel => "popover", "data-content" => extract_help_content(help), "data-original-title" => help.made_at}
+
+.info-block
+  .info-block-title Оказанные визиты
+  .info-block-body
+    - @family.visits.without_help.each do |visit|
+      .info
+        .info-name
+          %span
+            =link_to visit.made_at, visit
+        .info-value
+          = link_to "Показать", visit, {:rel => "popover", "data-content" => extract_help_content(visit), "data-original-title" => visit.title}
+
+= render "buttons"

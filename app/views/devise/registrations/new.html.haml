@@ -1,0 +1,22 @@
+%h2 Регистрация
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => "form-stacked"}) do |f| 
+  = devise_error_messages!
+
+  .field
+    = f.label :email, "Электронная почта"
+    = f.email_field :email
+
+  .field
+    = f.label :password, "Пароль"
+    = f.password_field :password
+
+  .field
+    = f.label :password_confirmation, "Подтверждение пароля"
+    = f.password_field :password_confirmation
+
+  = render 'info_fields', :f => f
+  .actions
+    = f.submit "Зарегистрироваться", :class => "btn primary"
+
+= render :partial => "devise/shared/links"

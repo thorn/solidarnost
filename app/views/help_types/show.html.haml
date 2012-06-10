@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @help_type.name
+
+= link_to 'Edit', edit_help_type_path(@help_type)
+\|
+= link_to 'Back', help_types_path

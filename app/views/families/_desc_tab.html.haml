@@ -1,0 +1,16 @@
+.info-block
+  .info-block-title Предметы первой необходимости
+  .info-block-body
+    - if @family.necessities.first.nil?
+      Нет предметов первой необходимости
+    - else
+      - @family.necessities.each do |necessity|
+        .info
+          .info-name
+            %span= necessity.name
+          .info-value= link_to "Убрать", @family.necessities.find(necessity.id).family_necessities.first, :method => :delete
+.info-block
+  .info-block-title Описание
+  .info-block-body
+    %p= @family.description
+= render 'buttons'

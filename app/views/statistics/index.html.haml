@@ -1,0 +1,43 @@
+.row
+  .span8
+    .row
+      .span6
+        %h3 Данные
+        %h4 Общее количество семей:
+        %h4 Общее количество волонтеров:
+        %h4 Совершено визитов:
+        %h4 Оказано помощи на сумму:
+      .span2
+        %h3 &nbsp
+        %h4= link_to @info['families_count'], statistic_path(:q => 'families_count')
+        %h4= link_to @info['volunteers_count'], statistic_path(:q => 'volunteers_count')
+        %h4= @info['visits_made']
+        %h3= @info['help_amount']
+  .span8
+    .row
+      .span6
+        %h3 Семьи
+        %h4 Нуждающиеся в срочном лечении
+        %h4 Нуждающиеся в денежном обеспечении
+        %h4 Без жилья
+        %h4 Нуждающиеся в продуктовом обеспечении
+      .span2
+        %h4 &nbsp
+        %h4= link_to @info['family_cure_need'], statistic_path(:q => 'family_cure_need')
+        %h4= link_to @info['family_source_need'], statistic_path(:q => 'family_source_need')
+        %h4= link_to @info['family_home_need'], statistic_path(:q => 'family_home_need')
+        %h4= link_to @info['family_resources_need'], statistic_path(:q => 'family_resources_need')
+
+    .row
+      .span6
+        %h3 Дети
+        %h4 Без одного родителя
+        %h4 Без матери
+        %h4 Без отца
+        %h4 Без обоих родителей
+      .span2
+        %h3 &nbsp
+        %h4= link_to @info['children_without_one_parent'], statistic_path(:q => 'children_without_one_parent')
+        %h4= link_to @info['children_without_mother'], statistic_path(:q => 'children_without_mother')
+        %h4= link_to @info['children_without_father'], statistic_path(:q => 'children_without_father')
+        %h4= link_to @info['children_without_two_parents'], statistic_path(:q => 'children_without_two_parents')

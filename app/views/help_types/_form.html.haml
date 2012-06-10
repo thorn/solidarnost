@@ -1,0 +1,15 @@
+= form_for @help_type, :html => {:class => "form-stacked"} do |f|
+  -if @help_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@help_type.errors.count, "error")} prohibited this help_type from being saved:"
+      %ul
+        - @help_type.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name, "Название типа помощи"
+    = f.text_field :name
+  - if params[:action] == "edit"
+    = f.submit 'Сохранить', :class => "btn primary"
+  - else
+    = f.submit "Создать", :class => "btn primary"
+  = link_to 'Отмена', help_types_path, :class => "btn"

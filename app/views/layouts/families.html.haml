@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title Solidarnost
+    = stylesheet_link_tag    "application"
+    <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+    <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+
+%body(style="padding-top: 60px")
+  .topbar
+    .topbar-inner
+      .container-fluid
+        = render 'layouts/navigation'
+  .container-fluid
+    .sidebar
+      .well
+        %h5 Действия
+        %ul.unstyled
+          %li
+            = link_to "Внести новую семью", new_family_path, :class => "btn primary"
+          %li
+            = link_to "Расширенный поиск", search_path, :class => "btn primary"
+          = yield :sidebar
+    .content
+      = yield

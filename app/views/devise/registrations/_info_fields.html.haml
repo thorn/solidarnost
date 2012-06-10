@@ -1,0 +1,23 @@
+.field
+  = f.label :name, "Имя"
+  = f.text_field :name
+
+.field
+  = f.label :city_id, "Город"
+  = f.select :city_id, City.all.map {|c| [c.name, c.id]}, :include_blank => true
+
+.field
+  = f.label :address, "Адрес"
+  = f.text_field :address
+
+.field
+  = f.label :phone, "Телефон"
+  = f.text_field :phone
+
+.field
+  = f.label :profession, "Профессия"
+  = f.text_field :profession
+
+.field
+  = f.label :description, "Краткая информация о себе"
+  = f.text_area :description

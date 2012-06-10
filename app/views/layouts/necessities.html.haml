@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title Solidarnost
+    = stylesheet_link_tag    "application"
+    <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
+    <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+
+%body(style="padding-top: 60px")
+  .topbar
+    .topbar-inner
+      .container-fluid
+        = render 'layouts/navigation'
+  .container-fluid
+    .sidebar
+      .well
+        %h5 Действия
+        %ul.unstyled
+          %li
+            = link_to "Новая нужная вещь", new_necessity_path, :class => "btn primary"
+          %li#delete_marked
+            = link_to "Удалить отмеченные", "#", :class => "btn error", :confirm => 'Все семьи, которым оказыались отмеченные типы помощи, будут удалены!'
+    .content
+      = yield

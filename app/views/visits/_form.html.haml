@@ -1,0 +1,24 @@
+= form_for @visit, :html => {:class => "form-stacked"} do |f|
+
+  = f.hidden_field :family_id
+  .field
+    = f.label :titile, "Краткое описание визита"
+    = f.text_field :title
+
+  .field
+    = f.label :description, "Введите описание и цель визита"
+    = f.text_area :description, :rows => 8
+
+  .field
+    = f.label :user_tokens, "Участники визита"
+    = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @visit.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+    
+  .field.date_select
+    = f.label :made_at, "Дата совершения визита"
+    = f.date_select :made_at
+
+  - if params[:action] == "edit"
+    = f.submit "Сохранить изменения", :class => "btn primary"
+  - else
+    = f.submit "Совершить визит", :class => "btn primary"
+  = link_to "Отмена", family_path(params[:family_id]), :class => "btn"

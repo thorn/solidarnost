@@ -1,0 +1,45 @@
+= content_for :sidebar do
+  %li#delete_marked
+    = link_to "Удалить отмеченные", "#", :class => "btn error", :confirm => 'Вы уверены, что хотите удалить отмеченных пользователей'
+- if params[:search]
+  %h1 Поиск по семьям
+  = content_for :sidebar do
+    %li
+      = link_to "Полный список семей", families_path, :class => "btn primary"
+- else
+  %h1 Список пользователей
+
+= form_tag delete_multiple_path, :id => "delete_multiple" do
+  %input(type="hidden" name="model" value="Users")
+  %table.sortable_table
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Имя
+        %th Телефон
+        %th Город/село
+        %th Адрес
+        %th Профессия
+        %th Почта
+        %th 
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", user.id
+          %td= link_to user.name, admin_user_path(user)
+          %td= link_to user.phone, admin_user_path(user)
+          %td= link_to user.city_name, admin_user_path(user)
+          %td= link_to user.address, admin_user_path(user)
+          %td= link_to user.profession, admin_user_path(user)
+          %td= link_to user.email, admin_user_path(user)
+          %td
+            = link_to 'Редактировать', edit_admin_user_path(user)
+            = link_to 'Удалить', "#", :method => :delete
+  = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => "Удалить отмеченных пользователей?"
+- if params[:q]
+  = link_to "Полный список семей", admin_users_path, :class => "btn info"
+  

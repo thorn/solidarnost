@@ -1,0 +1,16 @@
+%h3 Данные
+.field
+  = f.label :title_contains, "Имя семьи содержит"
+  = f.text_field :title_contains
+.field
+  = f.label :city_id_equals, "Из населенного пункта"
+  = f.select :city_id_equals, City.all.collect { |c| [c.name, c.id]}, :include_blank => true
+.field
+  = f.label :phone_contains, "Номер телефона содержит"
+  = f.text_field :phone_contains
+.field
+  = f.label :address_contains, "Адрес содержит"
+  = f.text_field :address_contains
+.field
+  = f.label :description_contains, "Описание содержит"
+  = f.text_field :description_contains

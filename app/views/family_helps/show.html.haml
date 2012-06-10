@@ -1,0 +1,21 @@
+%h2 Описание помощи
+%h3 Помощь оказана
+= @help.made_at
+%h3 Волонтеры
+%ul.unstyled
+  - @help.users.each do |user|
+    %li= user.name
+.span8
+  %h3 Описание
+  %p= @help.description
+
+%h3 Размер помощи
+= @help.amount.to_s + " руб."
+
+- if @help.visit.nil?
+  %h3 Помощь оказана без совершения визита
+
+.buttons
+  = link_to "Редактировать", edit_family_help_path(@help), :class => "btn"
+
+  = link_to "Назад", family_path(@help.family), :class => "btn"

@@ -1,0 +1,20 @@
+.fields
+  .field
+    = f.label :name, "ФИО"
+    = f.text_field :name
+  .field
+    = f.label :birthday, "Дата рождения"
+    = f.date_select :birthday, :start_year => 1910
+  .field
+    = f.label :phone, "Телефон"
+    = f.text_field :phone
+  .field
+    = f.label :description, "Описание"
+    = f.text_area :description
+  .field
+    = f.label :health_id, "Состояние здоровья"
+    = f.select :health_id, GroupOption.health.collect { |g| [g.name, g.id]}
+
+  .field
+    = f.label :who, "Кем приходится"
+    = f.text_field :who

@@ -1,0 +1,19 @@
+%p#notice= notice
+
+%p
+  %b ФИО:
+  = @father.name
+%p
+  %b Дата рождения:
+  = @father.birthday
+%p
+  %b Состояние здоровья:
+  = @father.health.name
+%p
+  %b Телефон
+  = @father.phone
+%p
+  %b Описание
+  = @father.description
+
+= link_to 'Назад', family_path(@father.family), :class => "btn"

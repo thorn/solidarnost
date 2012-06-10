@@ -1,0 +1,72 @@
+@import "partials/info";
+
+@import "compass/css3";
+
+body {
+  font: .8em Arial,Helvetica,sans-serif;
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  padding: 0 0 1em 0;
+  color: black;
+  background: white;
+}
+.field{
+  margin-bottom: 20px;
+}
+.buttons{
+  margin-top: 30px;
+}
+.date_select{
+  select{
+    width: 100px;
+  }
+}
+.btn{
+  margin-bottom: 20px;
+}
+.debug_dump{
+  margin-top: 100px;
+}
+table td{
+  padding: 3px;
+}
+textarea{
+  width: 550px;
+  height: 150px;
+}
+.multiparam_field
+{
+  display: inline;
+  input{
+    width: 50px;
+    margin-left: 20px;
+  }
+}
+
+.red{
+  a{
+    color: red;
+    font-weight: 900;
+  }
+}
+.green{
+  a{
+    color: green;
+    font-weight: 600;
+  }
+}
+.yellow{
+  a{
+    color: blue;
+    font-weight: 900;
+  }
+}
+.pagination{
+  a{
+    float: none;
+  }
+}
+#source_amounts {
+  display: none;
+}

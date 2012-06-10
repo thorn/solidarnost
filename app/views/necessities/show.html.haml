@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @necessity.name
+%p
+  %b Description:
+  = @necessity.description
+
+= link_to 'Edit', edit_necessity_path(@necessity)
+\|
+= link_to 'Back', necessities_path

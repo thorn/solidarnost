@@ -1,0 +1,77 @@
+= form_for @family , :html => {:class => "form-stacked"} do |f|
+  -if @family.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@family.errors.count, "error")} prohibited this family from being saved:"
+      %ul
+        - @family.errors.full_messages.each do |msg|
+          %li= msg
+
+  #tabs
+    %ul.tabs
+      %li.active
+        %a(href="#main_tab")Семья
+      %li
+        %a(href="#children_tab")Дети
+      %li
+        %a(href="#father_tab")Отец
+      %li
+        %a(href="#mother_tab")Мать
+      %li
+        %a(href="#trusty_tab")Опекун
+      %li
+        %a(href="#volunteers_tab")Добровольцы
+      %li
+        %a(href="#description_tab") Описание
+    .tab-content
+      #main_tab.active.tab-pane
+        .field
+          = f.label :title, "Идентификация семьи"
+          = f.text_field :title
+        .field
+          = f.label :phone, "Телефон"
+          = f.text_field :phone
+        .field
+          = f.label :city, "Город"
+          = f.collection_select(:city_id, City.all, :id, :name, :prompt => true)
+        .field
+          = f.label :address, "Адрес"
+          = f.text_field :address
+        .field
+          = f.label :home_id, "Жилищные условия"
+          = f.select :home_id, GroupOption.home.collect { |g| [g.name, g.id]}
+        .field
+          = f.label :resource_id, "Продовольственное обеспечение"
+          = f.select :resource_id, GroupOption.resource.collect { |g| [g.name, g.id]}
+        .field
+          = f.label :source_amount, "Уровень дохода"
+          = f.number_field :source_amount, min:0
+          =# f.label :source_id, "Уровень дохода"
+          =# f.select :source_id, GroupOption.source.collect { |g| [g.name, g.id]}
+      #children_tab.tab-pane
+        = f.fields_for :children do |fld|
+          = render "child_fields", :f => fld
+        = link_to_add_fields "Добавить анкету ребенка", f, :children
+      #father_tab.tab-pane
+        = f.fields_for :father do |fld|
+          = render "father_fields", :f => fld
+      #mother_tab.tab-pane
+        = f.fields_for :mother do |fld|
+          =render "mother_fields", :f => fld
+      #trusty_tab.tab-pane
+        = f.fields_for :trusty do |fld|
+          =render "trusty_fields", :f => fld
+      #volunteers_tab.tab-pane
+        = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+      #description_tab.tab-pane
+        .field
+          = f.label :necessity_tokens, "Введите нужные предметы"
+          = f.select :necessity_tokens, options_from_collection_for_select(Necessity.all, :id, :name, @family.necessities.collect {|n| n.id}), {:include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда"}
+        .field
+          = f.label :description, "Описание"
+          = f.text_area :description
+  - if params[:action] == "edit"
+    = f.submit 'Сохранить', :class => "btn primary"
+  - else
+    = f.submit "Создать", :class => "btn primary"
+  = link_to 'Отмена', families_path, :class => "btn"
+

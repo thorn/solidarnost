@@ -1,0 +1,21 @@
+%h1 Список типов помощи
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Help_types")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название
+        %th Действия
+    %tbody
+      - @help_types.each do |help_type|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", help_type.id
+          %td= link_to best_in_place(help_type, :name), "#"
+          %td
+            = link_to 'Удалить', help_type, :confirm => 'Все семьи с данного населенного пункта будут также удалены!', :method => :delete
+  = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все семьи с отмеченных населенных пунктов будут также удалены!'

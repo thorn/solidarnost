@@ -1,0 +1,21 @@
+= content_for :sidebar do
+  %li
+    = link_to "Редактировать семью", edit_family_path(@family), :class => "btn info"
+%p#notice= notice
+%ul.tabs
+  %li.active
+    %a(href="#data_tab")Данные
+  %li
+    %a(href="#help_tab")Визиты и помощь
+  %li
+    %a(href="#desc_tab")Описание
+.tab-content
+  #data_tab.active.tab-pane
+    = render 'data_tab'
+  #help_tab.tab-pane
+    = render 'help_tab'
+  #desc_tab.tab-pane
+    = render 'desc_tab'
+= link_to 'Редактировать', edit_family_path(@family), :class => "btn"
+
+= link_to 'Назад', families_path, :class => "btn"

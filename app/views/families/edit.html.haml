@@ -1,0 +1,6 @@
+%h1 Редактирование семьи
+= content_for :sidebar do
+  %li
+    = link_to "Просмотр этой семьи", @family, :class => "btn info"
+
+= render 'form'

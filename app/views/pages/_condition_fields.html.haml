@@ -1,0 +1,13 @@
+%h3 Условия      
+.field.multiparam_field
+  = f.label :priority_between, "Приоритет от и до"
+  = f.multiparameter_field :priority_between, {:field_type => :number_field, min:0}, {:field_type => :number_field, min:0}, :size => 5
+.field
+  = f.label :home_id_equals, "Жилищные условия семьи"
+  = f.select :home_id_equals, GroupOption.home.collect { |o| [o.name, o.id]}, :include_blank => true
+.field
+  = f.label :resource_id_equals, "Продуктовое обеспечение семьи"
+  = f.select :resource_id_equals, GroupOption.resource.collect { |o| [o.name, o.id]}, :include_blank => true
+.field
+  = f.label :source_id_equals, "Источники дохода семьи"
+  = f.select :source_id_equals, GroupOption.source.collect { |o| [o.name, o.id]}, :include_blank => true

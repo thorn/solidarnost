@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b ФИО:
+  = @child.name
+%p
+  %b Дата рождения:
+  = @child.birthday
+%p
+  %b Здоровье:
+  = @child.health.name
+%p
+  %b Учёба:
+  = @child.study_name
+
+= link_to 'Редактировать', edit_child_path(@child)
+\|
+= link_to 'Назад', children_path

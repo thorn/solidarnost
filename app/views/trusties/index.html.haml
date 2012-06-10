@@ -1,0 +1,26 @@
+%h1 Listing trusties
+
+%table
+  %tr
+    %th Name
+    %th Birthday
+    %th Health
+    %th Worker
+    %th Who
+    %th
+    %th
+    %th
+
+  - @trusties.each do |trusty|
+    %tr
+      %td= trusty.name
+      %td= trusty.birthday
+      %td= trusty.health.name
+      %td= trusty.who
+      %td= link_to 'Show', trusty
+      %td= link_to 'Edit', edit_trusty_path(trusty)
+      %td= link_to 'Destroy', trusty, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Trusty', new_trusty_path

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Название опции:
+  = @group_option.name
+%p
+  %b Коэффициент опции:
+  = @group_option.coeff
+%p
+  %b Группа опционов:
+  = @group_option.group.groupName
+
+= link_to 'Редактирование', edit_group_option_path(@group_option)
+\|
+= link_to 'Назад', group_options_path

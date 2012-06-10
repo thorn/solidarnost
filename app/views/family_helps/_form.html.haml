@@ -1,0 +1,26 @@
+= form_for @help, :html => {:class => "form-stacked"} do |f|
+  = f.hidden_field :family_id
+  .field
+    = f.label :description, "Введите описание помощи"
+    = f.text_area :description, :rows => 8, :cols => 120
+  .field
+    = f.label :user_tokens, "Люди, оказывающие помощь"
+    = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @help.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+  - if params[:action] != "edit"
+    .field
+      = f.label :during_visit, "Помощь осуществляется в ходе визита"
+      = f.check_box :during_visit
+  .field.date_select
+    = f.label :made_at, "Дата проведения помощи"
+    = f.date_select :made_at
+  .field
+    = f.label :help_type_id, "Тип помощи"
+    = f.select :help_type_id, HelpType.all.collect{|h| [h.name, h.id]}
+  .field
+    = f.label :amount, "Введите размер предполагаемой помощи в рублях"
+    = f.number_field :amount, min:0
+  - if params[:action] == "edit"
+    = f.submit "Сохранить изменения", :class => "btn primary"
+  - else
+    = f.submit "Оказать помощь", :class => "btn primary"
+  = link_to "Отмена", family_path(@help.family), :class => "btn"

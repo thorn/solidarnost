@@ -1,0 +1,42 @@
+%h1
+  Редактирование пользователя
+  = @user.name
+= form_for [:admin,@user], :html => {:class => "form-stacked"} do |f|
+  -if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name, "Имя"
+    = f.text_field :name
+
+  .field
+    = f.label :city_id, "Город"
+    = f.select :city_id, City.all.map {|c| [c.name, c.id]}, :include_blank => true
+
+  .field
+    = f.label :address, "Адрес"
+    = f.text_field :address
+
+  .field
+    = f.label :phone, "Телефон"
+    = f.text_field :phone
+
+  .field
+    = f.label :profession, "Профессия"
+    = f.text_field :profession
+
+  .field
+    = f.label :description, "Краткая информация о себе"
+    = f.text_area :description
+
+  .actions
+    - if params[:action] == "edit"
+      = f.submit 'Сохранить', :class => "btn primary"
+    - else
+      = f.submit "Создать", :class => "btn primary"
+    = link_to 'Отмена', admin_users_path, :class => "btn"
+
