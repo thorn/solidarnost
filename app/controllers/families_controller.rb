@@ -26,7 +26,7 @@ class FamiliesController < ApplicationController
     @family.build_mother
     @family.build_father
     @family.build_trusty
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @family }

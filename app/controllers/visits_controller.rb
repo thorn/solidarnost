@@ -1,20 +1,11 @@
 class VisitsController < ApplicationController
+  before_filter :find_visit, only: [:show, :update, :edit, :destroy]
+
   def index
     @visits = Visit.all
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @visits }
-    end
   end
 
   def show
-    @visit = Visit.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @visit }
-    end
   end
 
   def new
@@ -26,45 +17,35 @@ class VisitsController < ApplicationController
   end
 
   def edit
-    @visit = Visit.find(params[:id])
   end
 
   def create
     @visit = Visit.new(params[:visit])
 
-    respond_to do |format|
-      if @visit.save
-        format.html { redirect_to family_path(@visit.family), notice: 'Visit was successfully created.' }
-        format.json { render json: @visit, status: :created, location: @visit }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @visit.errors, status: :unprocessable_entity }
-      end
+    if @visit.save
+      redirect_to family_path(@visit.family), notice: 'Visit was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   def update
-    @visit = Visit.find(params[:id])
-
-    respond_to do |format|
-      if @visit.update_attributes(params[:visit])
-        format.html { redirect_to family_path(@visit.family), notice: 'Visit was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @visit.errors, status: :unprocessable_entity }
-      end
+    if @visit.update_attributes(params[:visit])
+      redirect_to family_path(@visit.family), notice: 'Visit was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   def destroy
-    @visit = Visit.find(params[:id])
     @family = @visit.family
     @visit.destroy
-
-    respond_to do |format|
-      format.html { redirect_to @family }
-      format.json { head :ok }
-    end
+    redirect_to @family
   end
+
+  private
+
+    def find_visit
+      @visit = Visit.find(params[:id])
+    end
 end

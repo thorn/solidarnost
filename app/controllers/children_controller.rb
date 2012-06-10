@@ -12,7 +12,7 @@ class ChildrenController < ApplicationController
     @child = Child.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @child }
     end
   end
@@ -21,7 +21,7 @@ class ChildrenController < ApplicationController
     @child = Child.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @child }
     end
   end

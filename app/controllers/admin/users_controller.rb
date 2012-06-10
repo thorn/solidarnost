@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path
     else
       render :edit
-    end    
+    end
   end
 
 private
