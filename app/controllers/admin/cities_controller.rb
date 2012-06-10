@@ -1,4 +1,4 @@
-class CitiesController < ApplicationController
+class Admin::CitiesController < Admin::BaseController
 
   def index
     @cities = City.all

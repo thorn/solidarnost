@@ -1,4 +1,4 @@
-class StudyCategoriesController < ApplicationController
+class Admin::StudyCategoriesController < Admin::BaseController
   before_filter :find_category, only: [:show, :edit, :update, :destroy]
   def index
     @study_categories = StudyCategory.all

@@ -1,4 +1,4 @@
-class HelpTypesController < ApplicationController
+class Admin::HelpTypesController < Admin::BaseController
 
   before_filter :find_help_type, only: [:show, :edit, :update, :destroy]
 

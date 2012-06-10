@@ -1,4 +1,4 @@
-class GroupsController < ApplicationController
+class Admin::GroupsController < Admin::BaseController
 
   before_filter :find_group, only: [:show, :edit, :update, :destroy]
 

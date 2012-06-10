@@ -1,4 +1,4 @@
-class NecessitiesController < ApplicationController
+class Admin::NecessitiesController < Admin::BaseController
 
   before_filter :find_necessity, only: [:show, :edit, :update, :destroy]
 

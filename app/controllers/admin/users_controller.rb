@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseController
   respond_to :html, :json
   before_filter :find_user, :only => [:show, :edit, :update]
   def index

@@ -1,6 +1,6 @@
 class FamiliesController < ApplicationController
   respond_to :html, :json
-  #filter_resource_access :additional_collection => {:delete_multiple => :new }
+
   def index
     @q = Family.search(params[:search])
     @families = @q.paginate(:page => params[:page], :per_page => 30)

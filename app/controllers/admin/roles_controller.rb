@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class Admin::RolesController < Admin::BaseController
 
   before_filter :find_role, only: [:show, :edit, :update, :destroy]
 

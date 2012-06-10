@@ -1,4 +1,4 @@
-class GroupOptionsController < ApplicationController
+class Admin::GroupOptionsController < Admin::BaseController
 
   before_filter :find_group_option, only: [:show, :edit, :update, :destroy]
 

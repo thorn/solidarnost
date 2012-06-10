@@ -1,4 +1,4 @@
-class FamilyNecessitiesController < ApplicationController
+class Admin::FamilyNecessitiesController < Admin::BaseController
   def destroy
     @nec = FamilyNecessity.find(params[:id])
     @f = @nec.family

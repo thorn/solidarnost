@@ -1,20 +1,12 @@
 class FamilyHelpsController < ApplicationController
+
+  before_filter :find_help, only: [:edit, :update, :destroy]
+
   def index
     @helps = FamilyHelp.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @helps }
-    end
   end
 
   def show
-    @help = FamilyHelp.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @help }
-    end
   end
 
   def new
@@ -26,44 +18,33 @@ class FamilyHelpsController < ApplicationController
   end
 
   def edit
-    @help = FamilyHelp.find(params[:id])
   end
 
   def create
     @help = FamilyHelp.new(params[:family_help])
 
-    respond_to do |format|
-      if @help.save
-        format.html { redirect_to family_path(@help.family), notice: 'FamilyHelp was successfully created.' }
-        format.json { render json: @help, status: :created, location: @help }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @help.errors, status: :unprocessable_entity }
-      end
+    if @help.save
+      redirect_to family_path(@help.family), notice: 'FamilyHelp was successfully created.'
+    else
+      render action: "new"
     end
   end
 
   def update
-    @help = FamilyHelp.find(params[:id])
-
-    respond_to do |format|
-      if @help.update_attributes(params[:family_help])
-        format.html { redirect_to family_path(@help.family), notice: 'FamilyHelp was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @help.errors, status: :unprocessable_entity }
-      end
+    if @help.update_attributes(params[:family_help])
+      redirect_to family_path(@help.family), notice: 'FamilyHelp was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   def destroy
-    @help = FamilyHelp.find(params[:id])
     @help.destroy
-
-    respond_to do |format|
-      format.html { redirect_to family_helps_path }
-      format.json { head :ok }
-    end
+    redirect_to family_helps_path
   end
+
+  private
+    def find_help
+      @help = FamilyHelp.find(params[:id])
+    end
 end
