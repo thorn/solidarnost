@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
-before_filter :set_current_user
-#filter_access_to :all
+  before_filter :set_current_user
+
+  filter_access_to :all
+
   protect_from_forgery
 
 protected

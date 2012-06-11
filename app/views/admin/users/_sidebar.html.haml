@@ -1,0 +1,7 @@
+- if user_signed_in?
+  %li= link_to "Выйти", destroy_user_session_path, :method => :delete, :class => "btn info"
+  %li= link_to "Изменить свой профиль", edit_user_registration_path, :class => "btn info"
+- else
+  %li= link_to "Войти", new_user_session_path, :class => "btn info"
+  %li= link_to "Зарегистрироваться", new_user_registration_path, :class => "btn info"
+= yield :sidebar
