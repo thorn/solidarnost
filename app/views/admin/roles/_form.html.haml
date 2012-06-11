@@ -7,8 +7,8 @@
           %li= msg
 
   .field
-    = f.label :title, "Название роли"
-    = f.text_field :title
+    = f.label :name, "Название роли"
+    = f.text_field :name
   .field
     = f.label :user_tokens, "Пользователи, принадлежащие данной роли  "
     = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @role.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }

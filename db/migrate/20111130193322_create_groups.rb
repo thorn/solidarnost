@@ -1,8 +1,7 @@
 class CreateGroups < ActiveRecord::Migration
   def change
     create_table :groups do |t|
-      t.string :groupName
-      t.integer :groupCoeff
+      t.string :name
 
       t.timestamps
     end

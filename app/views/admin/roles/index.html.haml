@@ -16,7 +16,7 @@
           %td
             %div(align="center")
               = check_box_tag "model_ids[]", role.id
-          %td= role.title
+          %td= role.name
           %td= role.users.count
           %td
             = link_to 'Показать', [:admin, role]

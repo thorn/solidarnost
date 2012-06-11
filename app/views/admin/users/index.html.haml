@@ -23,7 +23,7 @@
         %th Адрес
         %th Профессия
         %th Почта
-        %th 
+        %th
     %tbody
       - @users.each do |user|
         %tr
@@ -42,4 +42,4 @@
   = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => "Удалить отмеченных пользователей?"
 - if params[:q]
   = link_to "Полный список семей", admin_users_path, :class => "btn info"
-  
+

@@ -15,7 +15,7 @@
           %td
             %div(align="center")
               = check_box_tag "model_ids[]", group.id
-          %td= group.groupName
+          %td= group.name
           %td
             = link_to 'Удалить', [:admin, group], :confirm => 'Все коэффициенты, принадлежащие этой группе, а также все семьи, у которых есть удяляемые коэффициенты, будут удалены!', :method => :delete
   = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все коэффициенты, принадлежащие отмеченным группам, а также все семьи, у которых есть удяляемые коэффициенты, будут удалены!'

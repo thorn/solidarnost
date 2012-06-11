@@ -1,5 +1,5 @@
 %p#notice= notice
-%h1= @role.title
+%h1= @role.name
 %h3 Пользователи:
 - @role.users.each do |user|
   = link_to user.name, admin_user_path(user)

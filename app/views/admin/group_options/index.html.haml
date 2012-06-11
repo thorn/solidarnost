@@ -19,7 +19,7 @@
               = check_box_tag "model_ids[]", group_option.id
           %td= group_option.name
           %td= group_option.coeff
-          %td= group_option.group.groupName
+          %td= group_option.group.name
           %td
             = link_to 'Удалить', [:admin, group_option], :confirm => 'Все семьи, у которых есть этот коэффициент, будут удалены!', :method => :delete
             = link_to 'Изменить', edit_admin_group_option_path(group_option)

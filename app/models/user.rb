@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   before_create :set_role
 
   def role_symbols
-    (roles || []).map {|r| r.title.to_sym}
+    (roles || []).map {|r| r.name.to_sym}
   end
 
   def city_name
@@ -40,6 +40,6 @@ class User < ActiveRecord::Base
 private
 
   def set_role
-    self.user_roles.build(:role_id => Role.where(:title => "user").first.id)
+    self.user_roles.build(:role_id => Role.find_by_name("user").id)
   end
 end

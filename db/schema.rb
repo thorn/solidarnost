@@ -98,8 +98,7 @@ ActiveRecord::Schema.define(:version => 20120224062330) do
   add_index "group_options", ["group_id"], :name => "index_group_options_on_group_id"
 
   create_table "groups", :force => true do |t|
-    t.string   "groupName"
-    t.integer  "groupCoeff"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -137,8 +136,7 @@ ActiveRecord::Schema.define(:version => 20120224062330) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string   "title"
-    t.integer  "user_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
