@@ -20,7 +20,7 @@ class Admin::RolesController < Admin::BaseController
     @role = Role.new(params[:role])
 
     if @role.save
-      redirect_to @role, notice: 'Role was successfully created.'
+      redirect_to admin_roles_path, notice: 'Role was successfully created.'
     else
       render action: "new"
     end
@@ -29,7 +29,7 @@ class Admin::RolesController < Admin::BaseController
   def update
 
     if @role.update_attributes(params[:role])
-      redirect_to @role, notice: 'Role was successfully updated.'
+      redirect_to admin_roles_path, notice: 'Role was successfully updated.'
     else
       render action: "edit"
     end
