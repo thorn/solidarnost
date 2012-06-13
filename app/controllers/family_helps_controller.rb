@@ -1,6 +1,6 @@
 class FamilyHelpsController < ApplicationController
 
-  before_filter :find_help, only: [:edit, :update, :destroy]
+  before_filter :find_help, only: [:edit, :update, :destroy, :show]
 
   def index
     @helps = FamilyHelp.all

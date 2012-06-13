@@ -4,7 +4,7 @@ class FamilyHelp < ActiveRecord::Base
   belongs_to :family
   belongs_to :visit
   belongs_to :help_type
-  
+
   has_many :help_users, :dependent => :destroy
   has_many :users, :through => :help_users
 
