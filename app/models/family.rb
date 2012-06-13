@@ -82,7 +82,7 @@ class Family < ActiveRecord::Base
   end
 
   def set_source_id
-    m_per_member = source_amount / member_count
+    m_per_member = whole_money / member_count
     for option in GroupOption.source do
       if m_per_member >= option.amount_start and m_per_member <= option.amount_end
         self.source_id = option.id
@@ -99,5 +99,9 @@ class Family < ActiveRecord::Base
     c_c = self.children.count
     res = f_c + m_c + t_c + c_c
     if res == 0 then 1 else res end
+  end
+
+  def whole_money
+    source_amount || 0
   end
 end
