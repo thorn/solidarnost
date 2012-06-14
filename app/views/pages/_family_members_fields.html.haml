@@ -18,7 +18,7 @@
       = label_tag "Один кормилец Сирота"
       = check_box_tag :with_one_parent
       = check_box_tag :without_parents
-      
+
     = f.label :children_study_id_equals, "Образование"
     = f.select :children_study_id_equals, StudyCategory.all.collect {|o| [o.name, o.id]}, :include_blank => true
   %h4

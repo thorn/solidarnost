@@ -16,7 +16,7 @@ describe FamiliesController do
           post :create, :family => @attr
         end.should change(Family, :count).by(1)
       end
-      
+
     end
 
     describe "failure" do

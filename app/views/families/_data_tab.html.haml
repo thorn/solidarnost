@@ -1,5 +1,5 @@
 .info-title
-  .info-name= @family.title
+  .info-name= "#{@family.title} (№ #{@family.id})"
   .family-coeff= link_to @family.priority, "#family_status",{ :class => "coeff_link scroll_to", :rel => "twipsy", "data-original-title" => "Приоритет семьи"}
 .family-main-info
   .info-block
