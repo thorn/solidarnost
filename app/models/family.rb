@@ -39,8 +39,8 @@ class Family < ActiveRecord::Base
   has_many :users_families
   has_many :users, through: :users_families
 
-  has_many :family_coeffs
-  has_many :group_options, through: :family_coeffs
+  has_many :coefficients, as: :coefficientable
+  has_many :group_options, through: :coefficients
   has_many :groups, through: :group_options
 
   belongs_to :city

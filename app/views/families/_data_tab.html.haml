@@ -48,7 +48,7 @@
           - if @family.father
             %tr
               %td Отец
-              %td= best_in_place @family.father, :name
+              %td= @family.father.name
               %td= @family.father.birthday
               %td= best_in_place @family.father, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
               %td= best_in_place @family.father, :phone

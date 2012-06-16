@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616144332) do
+ActiveRecord::Schema.define(:version => 20120616184032) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(:version => 20120616144332) do
     t.datetime "updated_at"
   end
 
+  create_table "coefficients", :force => true do |t|
+    t.integer  "coefficientable_id"
+    t.string   "coefficientable_type"
+    t.integer  "group_option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "families", :force => true do |t|
     t.string   "title"
     t.string   "phone"
@@ -54,16 +62,6 @@ ActiveRecord::Schema.define(:version => 20120616144332) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "family_coeffs", :force => true do |t|
-    t.integer  "family_id"
-    t.integer  "group_option_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "family_coeffs", ["family_id"], :name => "index_family_coeffs_on_family_id"
-  add_index "family_coeffs", ["group_option_id"], :name => "index_family_coeffs_on_group_option_id"
 
   create_table "family_helps", :force => true do |t|
     t.text     "description"
