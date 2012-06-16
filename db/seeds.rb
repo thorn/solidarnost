@@ -19,9 +19,15 @@ admin = User.create(email: "admin@example.com", password: "password", name: "adm
 admin.role_ids = [Role.find_by_name("admin").id]
 
 puts "Creating groups"
-groups = ["source", "resource", "home", "health"]
-groups.each do |name|
-  Group.create(name: name)
+Group.destroy_all
+groups = [{name: "source",   coeff: 15,  for_people: false},
+          {name: "resource", coeff: 25,  for_people: false},
+          {name: "home",     coeff: 35,  for_people: false},
+          {name: "health",   coeff: 100, for_people: true },
+          {name: "study",    coeff: 100, for_people: true }]
+
+groups.each do |attr|
+  Group.create(attr)
 end
 
 puts "Creating group options"

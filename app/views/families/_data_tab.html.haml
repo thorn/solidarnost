@@ -101,24 +101,10 @@
     #family_status.info-block
       .info-block-title Состояние семьи
       .info-block-body
-        .info
-          .info-name
-            %span Жилищное обеспечение
-          .info-value
-            %a(href="#")
-              = best_in_place @family, :home_id, :type => :select, :collection => GroupOption.home.collect{|o| [o.id, o.name]}
-        .info
-          .info-name
-            %span Доход
-          .info-value
-            %a(href="#")
-              = best_in_place @family, :source_amount
-            руб.
-            =# best_in_place @family, :source_id, :type => :select, :collection => GroupOption.source.collect{|o| [o.id, o.name]}
-        .info
-          .info-name
-            %span Продуктовое обеспечение
-          .info-value
-            %a(href="#")
-              = best_in_place @family, :resource_id, :type => :select, :collection => GroupOption.resource.collect{|o| [o.id, o.name]}
+        - @family.group_options.each do |go|
+          .info
+            .info-name
+              %span= go.group.name
+            .info-value
+              = go.name
 = render "buttons"

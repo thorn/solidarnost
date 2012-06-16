@@ -7,11 +7,14 @@
           %li= msg
 
   .field
-    = f.label "Название группы"
+    = f.label :name, "Название группы"
     = f.text_field :name
-  / .field
-  /   = f.label "Коэффициент группы"
-  /   = f.number_field :groupCoeff
+  .field
+    = f.label :coeff, "Значимость"
+    = f.number_field :coeff
+  .field
+    = f.label :for_people, "Для людей?"
+    = f.check_box :for_people
   .actions
     - if params[:action] == 'edit'
       = f.submit 'Сохранить', :class => "btn primary"

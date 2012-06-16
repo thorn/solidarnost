@@ -8,10 +8,8 @@
       %th Телефон
       %th Город/село
       %th Адрес
-      %th Жилье
-      %th Продовольствие
-      %th Источники дохода
-      %th Приоритет
+      - @groups.each do |gr|
+        %th= gr.name
       %th
   %tbody
     - @families.each do |family|
@@ -26,10 +24,8 @@
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
-        %td= link_to family.home.name, family
-        %td= link_to family.resource.name, family
-        %td= link_to family.source.name, family
-        %td= link_to family.priority, family
+        - family.group_options.each do |gr|
+          %td= link_to gr.name, family
         %td
           = link_to 'Редактировать', edit_family_path(family)
           = link_to 'Удалить', family, :method => :delete

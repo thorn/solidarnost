@@ -4,6 +4,7 @@ class FamiliesController < ApplicationController
   def index
     @q = Family.search(params[:search])
     @families = @q.paginate(:page => params[:page], :per_page => 30)
+    @groups = Group.for_families
 
     respond_to do |format|
       format.html
@@ -43,6 +44,7 @@ class FamiliesController < ApplicationController
 
   def create
     @family = Family.new(params[:family])
+    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
 
     respond_to do |format|
       if @family.save
@@ -57,6 +59,7 @@ class FamiliesController < ApplicationController
 
   def update
     @family = Family.find(params[:id])
+    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
 
     respond_to do |format|
       if @family.update_attributes(params[:family])

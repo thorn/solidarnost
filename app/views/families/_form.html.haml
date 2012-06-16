@@ -36,17 +36,11 @@
         .field
           = f.label :address, "Адрес"
           = f.text_field :address
-        .field
-          = f.label :home_id, "Жилищные условия"
-          = f.select :home_id, GroupOption.home.collect { |g| [g.name, g.id]}
-        .field
-          = f.label :resource_id, "Продовольственное обеспечение"
-          = f.select :resource_id, GroupOption.resource.collect { |g| [g.name, g.id]}
-        .field
-          = f.label :source_amount, "Уровень дохода"
-          = f.number_field :source_amount, min:0
-          =# f.label :source_id, "Уровень дохода"
-          =# f.select :source_id, GroupOption.source.collect { |g| [g.name, g.id]}
+        - Group.for_families.each do |gr|
+          .field
+            = f.label gr.name
+            = select_tag "group_option_ids[]", options_for_select(gr.group_options.collect{|o| [o.name, o.id]})
+
       #children_tab.tab-pane
         = f.fields_for :children do |fld|
           = render "child_fields", :f => fld

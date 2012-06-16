@@ -8,6 +8,8 @@
           %div(align="center")
             %input#mark_all(type="checkbox")
         %th Название группы
+        %th Важность группы
+        %th Для людей?
         %th Действия
     %tbody
       - @groups.each do |group|
@@ -16,6 +18,9 @@
             %div(align="center")
               = check_box_tag "model_ids[]", group.id
           %td= group.name
+          %td= group.coeff
+          %td= group.for_people? ? "Да" : "Нет"
           %td
             = link_to 'Удалить', [:admin, group], :confirm => 'Все коэффициенты, принадлежащие этой группе, а также все семьи, у которых есть удяляемые коэффициенты, будут удалены!', :method => :delete
+            = link_to "Изменить", edit_admin_group_path(group)
   = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все коэффициенты, принадлежащие отмеченным группам, а также все семьи, у которых есть удяляемые коэффициенты, будут удалены!'

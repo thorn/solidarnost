@@ -72,6 +72,7 @@ class PagesController < ApplicationController
     end
 
     @families  = @search.all
+    @groups = Group.for_families
 
     respond_with @users
   end
