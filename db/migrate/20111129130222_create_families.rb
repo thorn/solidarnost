@@ -11,6 +11,10 @@ class CreateFamilies < ActiveRecord::Migration
       t.text    :description
       t.integer :priority
       t.integer :source_amount
+      t.date    :debt_time
+      t.integer :debt_amount
+      t.integer :credit_time
+      t.integer :credit_amount
 
       t.timestamps
     end

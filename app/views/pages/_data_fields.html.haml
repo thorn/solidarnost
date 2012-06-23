@@ -1,5 +1,8 @@
 %h3 Данные
 .field
+  = f.label :id_equals, "Номер семьи равен"
+  = f.number_field :id_equals
+.field
   = f.label :title_contains, "Имя семьи содержит"
   = f.text_field :title_contains
 .field

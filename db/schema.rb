@@ -61,6 +61,10 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
     t.text     "description"
     t.integer  "priority"
     t.integer  "source_amount"
+    t.date     "debt_time"
+    t.integer  "debt_amount"
+    t.integer  "credit_time"
+    t.integer  "credit_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
