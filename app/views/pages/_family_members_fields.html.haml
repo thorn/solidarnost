@@ -3,8 +3,12 @@
   %h4
     %a(href="#") Дети
   %div
-    = f.label :children_name_contains, "Имя содержит"
-    = f.text_field :children_name_contains
+    = f.label :children_first_name_contains, "Имя содержит"
+    = f.text_field :children_first_name_contains
+    = f.label :children_second_name_contains, "Фамилия содержит"
+    = f.text_field :children_second_name_contains
+    = f.label :children_last_name_contains, "Отчество содержит"
+    = f.text_field :children_last_name_contains
 
     = f.label :children_health_id_equals, "Здоровье детей"
     = f.select :children_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -24,8 +28,12 @@
   %h4
     %a(href="#") Отец
   %div
-    = f.label :father_name_contains, "Имя содержит"
-    = f.text_field :father_name_contains
+    = f.label :children_first_name_contains, "Имя содержит"
+    = f.text_field :children_first_name_contains
+    = f.label :children_second_name_contains, "Фамилия содержит"
+    = f.text_field :children_second_name_contains
+    = f.label :children_last_name_contains, "Отчество содержит"
+    = f.text_field :children_last_name_contains
 
     = f.label :father_health_id_equals, "Здоровье отца"
     = f.select :father_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -38,8 +46,12 @@
   %h4
     %a(href="#") Мать
   %div
-    = f.label :mother_name_contains, "Имя содержит"
-    = f.text_field :mother_name_contains
+    = f.label :children_first_name_contains, "Имя содержит"
+    = f.text_field :children_first_name_contains
+    = f.label :children_second_name_contains, "Фамилия содержит"
+    = f.text_field :children_second_name_contains
+    = f.label :children_last_name_contains, "Отчество содержит"
+    = f.text_field :children_last_name_contains
 
     = f.label :mother_health_id_equals, "Здоровье матери"
     = f.select :mother_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -51,8 +63,12 @@
   %h4
     %a(href="#") Опекун
   %div
-    = f.label :trusty_name_contains, "Имя содержит"
-    = f.text_field :trusty_name_contains
+    = f.label :children_first_name_contains, "Имя содержит"
+    = f.text_field :children_first_name_contains
+    = f.label :children_second_name_contains, "Фамилия содержит"
+    = f.text_field :children_second_name_contains
+    = f.label :children_last_name_contains, "Отчество содержит"
+    = f.text_field :children_last_name_contains
 
     = f.label :trusty_health_id_equals, "Здоровье опекуна"
     = f.select :trusty_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
