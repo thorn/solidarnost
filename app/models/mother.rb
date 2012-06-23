@@ -8,4 +8,8 @@ class Mother < ActiveRecord::Base
     days_from_birth = (Date.today - self.birthday).to_i
     self.age = (days_from_birth / 365.25).to_i
   end
+
+  def name
+    first_name + last_name
+  end
 end

@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
   end
 
   create_table "children", :force => true do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
     t.date     "birthday"
     t.integer  "health_id"
     t.integer  "family_id"
@@ -82,7 +84,9 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
   end
 
   create_table "fathers", :force => true do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
     t.date     "birthday"
     t.integer  "health_id"
     t.integer  "family_id"
@@ -127,7 +131,9 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
   end
 
   create_table "mothers", :force => true do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
     t.date     "birthday"
     t.integer  "health_id"
     t.integer  "family_id"
@@ -158,7 +164,9 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
   end
 
   create_table "trusties", :force => true do |t|
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
     t.date     "birthday"
     t.integer  "health_id"
     t.string   "who"

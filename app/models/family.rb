@@ -49,10 +49,10 @@ class Family < ActiveRecord::Base
   belongs_to :resource, :class_name => "GroupOption"
   belongs_to :source,   :class_name => "GroupOption"
 
-  accepts_nested_attributes_for :father  , allow_destroy: true, reject_if: lambda { |a| a[:name].blank? }
-  accepts_nested_attributes_for :mother  , allow_destroy: true, reject_if: lambda { |a| a[:name].blank? }
-  accepts_nested_attributes_for :trusty  , allow_destroy: true, reject_if: lambda { |a| a[:name].blank? }
-  accepts_nested_attributes_for :children, allow_destroy: true, reject_if: lambda { |a| a[:name].blank? }
+  accepts_nested_attributes_for :father  , allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
+  accepts_nested_attributes_for :mother  , allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
+  accepts_nested_attributes_for :trusty  , allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
+  accepts_nested_attributes_for :children, allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
 
   attr_reader :user_tokens
   attr_reader :necessity_tokens

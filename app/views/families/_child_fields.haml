@@ -1,7 +1,11 @@
 .fields
   .field
-    = f.label :name, "ФИО"
-    = f.text_field :name
+    = f.label :name, "Имя"
+    = f.text_field :first_name
+    = f.label :name, "Фамилия"
+    = f.text_field :second_name
+    = f.label :name, "Отчество"
+    = f.text_field :last_name
   .field
     = f.label :birthday, "Дата рождения"
     = f.date_select :birthday, :start_year => 1970

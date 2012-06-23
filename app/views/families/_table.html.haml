@@ -4,6 +4,7 @@
       %th
         %div(align="center")
           %input#mark_all(type="checkbox")
+      %th ID
       %th Семья
       %th Телефон
       %th Город/село
@@ -20,6 +21,7 @@
         %td
           %div(align="center")
             = check_box_tag "model_ids[]", family.id
+        %td= link_to family.id, family
         %td= link_to family.title, family
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
