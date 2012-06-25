@@ -97,4 +97,6 @@ $(function(){
       select.options[0].selected = true;
     });
   });
+
+  $('.date_select').datepicker();
 });

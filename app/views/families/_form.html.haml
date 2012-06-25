@@ -45,13 +45,13 @@
           = f.number_field :debt_amount
         .field
           = f.label :debt_time, "Срок долга"
-          = f.date_select :debt_time
+          = f.text_field :debt_time, class: "date_select"
         .field
           = f.label :credit_amount, "Размер кредита"
           = f.number_field :credit_amount
         .field
           = f.label :credit_time, "Срок кредита"
-          = f.date_select :credit_time
+          = f.text_field :credit_time, class: "date_select"
       #children_tab.tab-pane
         = f.fields_for :children do |fld|
           = render "child_fields", :f => fld

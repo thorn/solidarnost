@@ -98,6 +98,25 @@
                 = link_to 'Удалить', child, :method => :delete
                 = link_to 'Показать', child_path(child)
 
+  .info-block
+    .info-block-title Долги
+    .info-block-body
+      .info
+        .info-name
+          %span Долг
+        .info-value= @family.debt_amount
+      .info
+        .info-name
+          %span Срок долга
+        .info-value= @family.debt_time
+      .info
+        .info-name
+          %span Кредит
+        .info-value= @family.credit_amount
+      .info
+        .info-name
+          %span Срок кредита
+        .info-value= @family.credit_time
     #family_status.info-block
       .info-block-title Состояние семьи
       .info-block-body
