@@ -26,9 +26,9 @@
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
-        - family.group_options.each do |gr|
-          - if !gr.group.for_people?
-            %td= link_to gr.name, family
+        - @groups.each do |gr|
+          - if @go = family.group_options.find_by_group_id(gr.id)
+            %td= link_to @go.name, family
         %td
           = link_to 'Редактировать', edit_family_path(family)
           = link_to 'Удалить', family, :method => :delete
