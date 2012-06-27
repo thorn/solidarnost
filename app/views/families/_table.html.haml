@@ -11,7 +11,7 @@
       %th Адрес
       - @groups.each do |gr|
         %th= gr.name
-      %th
+      %th Действия
   %tbody
     - @families.each do |family|
       - color = "green" if family.priority <= 30
@@ -27,7 +27,8 @@
         %td= link_to family.city_name, family
         %td= link_to family.address, family
         - family.group_options.each do |gr|
-          %td= link_to gr.name, family
+          - if !gr.group.for_people?
+            %td= link_to gr.name, family
         %td
           = link_to 'Редактировать', edit_family_path(family)
           = link_to 'Удалить', family, :method => :delete

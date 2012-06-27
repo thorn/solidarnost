@@ -39,7 +39,7 @@
         - Group.for_families.each do |gr|
           .field
             = f.label gr.name
-            = select_tag "group_option_ids[]", group_options_for_select(gr, @family)#gr.group_options.collect{|o| [o.name, o.id]}#options_for_select(gr.group_options.collect{|o| [o.name, o.id]})
+            = select_tag "group_option_ids[]", group_options_for_select(gr, @family)
         .field
           = f.label :debt_amount, "Размер долга"
           = f.number_field :debt_amount
