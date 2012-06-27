@@ -15,13 +15,13 @@
   .field
     = f.label :group_id, "Группа, к которой принадлежит коэффициент"
     = f.collection_select(:group_id, Group.all, :id, :name)
-  - if @group_option.group_id == Group.find_by_name("Денежное довольствие").id
-    .field
-      = f.label :amount_start, "Начало интервала"
-      = f.number_field :amount_start
-    .field
-      = f.label :amount_end, "Конец интервала"
-      = f.number_field :amount_end
+  / - if @group_option.group_id == Group.find_by_name("Денежное довольствие").id
+  /   .field
+  /     = f.label :amount_start, "Начало интервала"
+  /     = f.number_field :amount_start
+  /   .field
+  /     = f.label :amount_end, "Конец интервала"
+  /     = f.number_field :amount_end
   .actions
     = f.submit 'Сохранить', :class => "btn primary"
     = link_to 'Назад к списку коэффициентов', admin_group_options_path, :class => "btn"
