@@ -38,7 +38,7 @@
           %td= link_to user.email, admin_user_path(user)
           %td
             = link_to 'Редактировать', edit_admin_user_path(user)
-            = link_to 'Удалить', "#", :method => :delete
+            = link_to 'Удалить', admin_user_path(user), :method => :delete
   = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => "Удалить отмеченных пользователей?"
 - if params[:q]
   = link_to "Полный список семей", admin_users_path, :class => "btn info"
