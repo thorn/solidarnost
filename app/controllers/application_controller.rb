@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_filter :authenticate_user!
   before_filter :set_current_user
 
   filter_access_to :all
