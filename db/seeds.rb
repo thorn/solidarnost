@@ -20,11 +20,32 @@ admin.role_ids = [Role.find_by_name("admin").id]
 
 puts "Creating groups"
 Group.destroy_all
-groups = [{name: "source",   coeff: 15,  for_people: false},
-          {name: "resource", coeff: 25,  for_people: false},
-          {name: "home",     coeff: 35,  for_people: false},
-          {name: "health",   coeff: 100, for_people: true },
-          {name: "study",    coeff: 100, for_people: true }]
+groups = [
+          {name: "Ремонт", coeff: 10, for_people: false, important: false},
+          {name: "Печь", coeff: 15, for_people: false, important: false},
+          {name: "Холодильник", coeff: 15, for_people: false, important: false},
+          {name: "Мебель", coeff: 10, for_people: false, important: false},
+          {name: "Телевизор", coeff: 4, for_people: false, important: false},
+          {name: "Пашня/огород", coeff: 10, for_people: false, important: false},
+          {name: "Скот", coeff: 10, for_people: false, important: false},
+          {name: "Вода", coeff: 15, for_people: false, important: false},
+          {name: "Канализация", coeff: 15, for_people: false, important: false},
+          {name: "Кухня", coeff: 15, for_people: false, important: false},
+          {name: "Ванная", coeff: 15, for_people: false, important: false},
+          {name: "Туалет", coeff: 15, for_people: false, important: false},
+          {name: "Морозильник", coeff: 4, for_people: false, important: false},
+          {name: "Медицина", coeff: 15, for_people: false, important: false},
+          {name: "Привычки", coeff: 3, for_people: false, important: false},
+          {name: "DVD проигрыватель", coeff: 4, for_people: false, important: false},
+          {name: "health", coeff: 15, for_people: true, important: false},
+          {name: "Питание", coeff: 30, for_people: false, important: false},
+          {name: "Жилье", coeff: 25, for_people: false, important: false},
+          {name: "Автомобиль", coeff: 4, for_people: false, important: false},
+          {name: "Медицинская проблема", coeff: 0, for_people: false, important: false},
+          {name: "Жилищная проблема", coeff: 0, for_people: false, important: false},
+          {name: "Юридическая проблема", coeff: 0, for_people: false, important: false},
+          {name: "Общая проблема", coeff: 0, for_people: false, important: false}
+        ]
 
 groups.each do |attr|
   Group.create(attr)
@@ -33,22 +54,73 @@ end
 puts "Creating group options"
 GroupOption.destroy_all
 group_options = [
-  {name: "Здоров",                           coeff: 0 , group_id: Group.find_by_name("health").id   },
-  {name: "Инвалид (не требует лечения)",     coeff: 14, group_id: Group.find_by_name("health").id   },
-  {name: "Нуждается в поддержании здоровья", coeff: 21, group_id: Group.find_by_name("health").id   },
-  {name: "Нуждается в срочном лечении",      coeff: 35, group_id: Group.find_by_name("health").id   },
-  {name: "Достаточное",                      coeff: 0 , group_id: Group.find_by_name("resource").id },
-  {name: "Недостаточное",                    coeff: 12, group_id: Group.find_by_name("resource").id },
-  {name: "Недостаточно еды",                 coeff: 18, group_id: Group.find_by_name("resource").id },
-  {name: "Отсутствует (очень плохое)",       coeff: 30, group_id: Group.find_by_name("resource").id },
-  {name: "Собственное",                      coeff: 0 , group_id: Group.find_by_name("home").id     },
-  {name: "Съемное жилье",                    coeff: 10, group_id: Group.find_by_name("home").id     },
-  {name: "Приют",                            coeff: 15, group_id: Group.find_by_name("home").id     },
-  {name: "Негде жить",                       coeff: 25, group_id: Group.find_by_name("home").id     },
-  {name: "Выше минимума",                    coeff: 0 , group_id: Group.find_by_name("source").id, amount_start: 8000, amount_end: 10000},
-  {name: "Минимум",                          coeff: 4 , group_id: Group.find_by_name("source").id, amount_start: 4000, amount_end: 8000 },
-  {name: "Ниже минимума",                    coeff: 6 , group_id: Group.find_by_name("source").id, amount_start: 0, amount_end: 4000 },
-  {name: "Отсутствуют",                      coeff: 10, group_id: Group.find_by_name("source").id, amount_start: 0, amount_end: 0}
+  {name: "0", coeff: 0, group_id: Group.find_by_name("DVD проигрыватель").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("DVD проигрыватель").id},
+  {name: "2", coeff: 120, group_id: Group.find_by_name("DVD проигрыватель").id},
+  {name: "Здоров", coeff: 60, group_id: Group.find_by_name("health").id},
+  {name: "Болеет", coeff: 40, group_id: Group.find_by_name("health").id},
+  {name: "Нуждается в срочном лечении", coeff: 0, group_id: Group.find_by_name("health").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Автомобиль").id},
+  {name: "1", coeff: 70, group_id: Group.find_by_name("Автомобиль").id},
+  {name: "2", coeff: 140, group_id: Group.find_by_name("Автомобиль").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Ванная").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Ванная").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Ванная").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Вода").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Вода").id},
+  {name: "2", coeff: 60, group_id: Group.find_by_name("Вода").id},
+  {name: "Есть", coeff: 0, group_id: Group.find_by_name("Жилищная проблема").id},
+  {name: "Нет", coeff: 0, group_id: Group.find_by_name("Жилищная проблема").id},
+  {name: "Свое", coeff: 100, group_id: Group.find_by_name("Жилье").id},
+  {name: "Приют", coeff: 30, group_id: Group.find_by_name("Жилье").id},
+  {name: "Арендует", coeff: 70, group_id: Group.find_by_name("Жилье").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Канализация").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Канализация").id},
+  {name: "2", coeff: 60, group_id: Group.find_by_name("Канализация").id},
+  {name: "2", coeff: 80, group_id: Group.find_by_name("Кухня").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Кухня").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Кухня").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Мебель").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Мебель").id},
+  {name: "2", coeff: 120, group_id: Group.find_by_name("Мебель").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Медицина").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Медицина").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Медицина").id},
+  {name: "Есть", coeff: 0, group_id: Group.find_by_name("Медицинская проблема").id},
+  {name: "Нет", coeff: 0, group_id: Group.find_by_name("Медицинская проблема").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Морозильник").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Морозильник").id},
+  {name: "2", coeff: 120, group_id: Group.find_by_name("Морозильник").id},
+  {name: "Есть", coeff: 0, group_id: Group.find_by_name("Общая проблема").id},
+  {name: "Нет", coeff: 0, group_id: Group.find_by_name("Общая проблема").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Пашня/огород").id},
+  {name: "0", coeff: 10, group_id: Group.find_by_name("Пашня/огород").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Пашня/огород").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Печь").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Печь").id},
+  {name: "2", coeff: 100, group_id: Group.find_by_name("Печь").id},
+  {name: "Достаточное", coeff: 100, group_id: Group.find_by_name("Питание").id},
+  {name: "Не достаточное", coeff: 0, group_id: Group.find_by_name("Питание").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Привычки").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Привычки").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Привычки").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Ремонт").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Ремонт").id},
+  {name: "2", coeff: 120, group_id: Group.find_by_name("Ремонт").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Скот").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Скот").id},
+  {name: "0", coeff: 10, group_id: Group.find_by_name("Скот").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Телевизор").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Телевизор").id},
+  {name: "2", coeff: 100, group_id: Group.find_by_name("Телевизор").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Туалет").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Туалет").id},
+  {name: "2", coeff: 70, group_id: Group.find_by_name("Туалет").id},
+  {name: "1", coeff: 40, group_id: Group.find_by_name("Холодильник").id},
+  {name: "0", coeff: 0, group_id: Group.find_by_name("Холодильник").id},
+  {name: "2", coeff: 120, group_id: Group.find_by_name("Холодильник").id},
+  {name: "Есть", coeff: 0, group_id: Group.find_by_name("Юридическая проблема").id},
+  {name: "Нет", coeff: 0, group_id: Group.find_by_name("Юридическая проблема").id}
 ]
 group_options.each do |attr|
   GroupOption.create(attr)
@@ -70,7 +142,7 @@ end
 
 puts "Creating cities"
 City.destroy_all
-cities = ["Хасавюрт", "Махачкала", "Дербент", "Кизилюрт", "Кизляр", "Избербаш", "Каспийск", "Дагестанские огни"]
+cities = ["Хасавюрт", "Махачкала", "Дербент", "Кизилюрт", "Кизляр", "Избербаш", "Каспийск", "Дагестанские огни", "4-й поселок", "Агачаул", "Альбурикент", "Анжи базар", "Вокзал", "Караман", "Восточный", "Ипподром", "Киргу", "Космос", "Красноармейск", "Кривая балка", "п. Кяхулай", "Ленинкент", "Тарки", "Научный городок", "5-й поселок", "1-я Махачкала", "Центр", "Семендер", "Старая автостанция", "Сепараторный", "Троллейбусное кольцо", "п. Турали", "п. Тюбе", "Узбекгородок", "Учхоз", "п. Хушет", "Центральная мечеть", "п. Шамхал", "Южная автостанция", "МЖС"]
 cities.each do |name|
   City.create(name: name)
 end
