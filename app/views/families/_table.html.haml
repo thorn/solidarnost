@@ -9,7 +9,7 @@
       %th Телефон
       %th Город/село
       %th Адрес
-      - @groups.each do |gr|
+      - @groups.visible.each do |gr|
         %th= gr.name
       %th Действия
   %tbody
@@ -26,7 +26,7 @@
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
-        - @groups.each do |gr|
+        - @groups.visible.each do |gr|
           - if @go = family.group_options.find_by_group_id(gr.id)
             %td= link_to @go.name, family
         %td
