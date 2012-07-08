@@ -6,7 +6,16 @@ authorization do
   end
 
   role :operator do
-    has_permission_on [:admin_groups], to: :manage
+    has_permission_on [:families,
+                       :fathers,
+                       :mothers,
+                       :children,
+                       :trusties,
+                       :pages,
+                       :users_families,
+                       :statistics
+                      ], to: [:create, :read, :additional]
+    has_permission_on :devise_sessions, to: :manage
   end
 
   role :volunteer do
@@ -40,8 +49,9 @@ authorization do
 end
 
 privileges do
+  privilege :superman, :includes => [:manage, :delete_multiple, :additional]
   privilege :manage, :includes => [:create, :read, :update, :delete]
-  privilege :superman, :includes => [:create, :read, :update, :delete, :delete_multiple, :home, :about, :search]
+  privilege :additional, includes: [:home, :about, :search]
   privilege :read, :includes => [:index, :show]
   privilege :create, :includes => :new
   privilege :update, :includes => :edit
