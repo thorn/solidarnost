@@ -9,9 +9,9 @@
       %th Телефон
       %th Город/село
       %th Адрес
-      - @groups.each do |gr|
+      - @groups.visible.each do |gr|
         %th= gr.name
-      %th
+      %th Действия
   %tbody
     - @families.each do |family|
       - color = "green" if family.priority <= 30
@@ -26,8 +26,9 @@
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
-        - family.group_options.each do |gr|
-          %td= link_to gr.name, family
+        - @groups.visible.each do |gr|
+          - if @go = family.group_options.find_by_group_id(gr.id)
+            %td= link_to @go.name, family
         %td
           = link_to 'Редактировать', edit_family_path(family)
           = link_to 'Удалить', family, :method => :delete

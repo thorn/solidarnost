@@ -23,4 +23,16 @@ module ApplicationHelper
     help_content.join
   end
 
+  def group_options_for_select(gr, family)
+    res = gr.group_options.inject("") do |res, go|
+      if family.group_options.include?(go)
+        res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
+      else
+        res << "<option value=\"#{go.id}\">#{go.name}"
+      end
+      res << "</option>"
+    end
+    res.html_safe
+  end
+
 end

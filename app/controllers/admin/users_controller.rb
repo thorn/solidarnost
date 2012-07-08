@@ -1,9 +1,13 @@
 class Admin::UsersController < Admin::BaseController
   respond_to :html, :json
-  before_filter :find_user, :only => [:show, :edit, :update]
+  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
   def index
-    @users = User.all
+    @users = User.scoped
     respond_with @users
+  end
+
+  def new
+    @user = User.new
   end
 
   def show
@@ -13,11 +17,26 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
+    puts params[:user]
     if @user.update_attributes(params[:user])
       redirect_to admin_users_path
     else
       render :edit
     end
+  end
+
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      redirect_to admin_users_path
+    else
+      render :new
+    end
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path
   end
 
 private

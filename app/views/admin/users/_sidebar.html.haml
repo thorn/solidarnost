@@ -4,4 +4,5 @@
 - else
   %li= link_to "Войти", new_user_session_path, :class => "btn info"
   %li= link_to "Зарегистрироваться", new_user_registration_path, :class => "btn info"
+%li= link_to "Новый пользователь", new_admin_user_path, class: "btn info"
 = yield :sidebar

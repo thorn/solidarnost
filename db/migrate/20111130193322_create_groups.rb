@@ -4,6 +4,7 @@ class CreateGroups < ActiveRecord::Migration
       t.string  :name
       t.integer :coeff, default: 0
       t.boolean :for_people, default: false
+      t.boolean :important, default: true
 
       t.timestamps
     end

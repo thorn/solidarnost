@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
     t.string   "name"
     t.integer  "coeff",      :default => 0
     t.boolean  "for_people", :default => false
+    t.boolean  "important",  :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
