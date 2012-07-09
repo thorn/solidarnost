@@ -13,7 +13,9 @@ authorization do
                        :trusties,
                        :pages,
                        :users_families,
-                       :statistics
+                       :statistics,
+                       :family_helps,
+                       :visits
                       ], to: [:create, :read, :additional]
     has_permission_on :devise_sessions, to: :manage
   end

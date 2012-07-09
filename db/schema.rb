@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120616184032) do
+ActiveRecord::Schema.define(:version => 20120709091252) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -158,6 +158,17 @@ ActiveRecord::Schema.define(:version => 20120616184032) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "settings", :force => true do |t|
+    t.integer  "start"
+    t.integer  "end"
+    t.text     "value"
+    t.integer  "amount"
+    t.date     "start_at"
+    t.date     "end_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
