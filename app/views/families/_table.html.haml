@@ -25,11 +25,11 @@
         %td
           %div(align="center")
             = check_box_tag "model_ids[]", family.id
+        %td= link_to family.id, family
         - if name
           %td= link_to priority.name, family
         -else
           %td= link_to family.priority, family
-        %td= link_to family.id, family
         %td= link_to family.title, family
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
