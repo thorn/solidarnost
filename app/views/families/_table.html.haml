@@ -5,6 +5,7 @@
         %div(align="center")
           %input#mark_all(type="checkbox")
       %th ID
+      %th Приоритет
       %th Семья
       %th Телефон
       %th Город/село
@@ -13,14 +14,21 @@
         %th= gr.name
       %th Действия
   %tbody
+    - priorities = Setting.priority
     - @families.each do |family|
-      - color = "green" if family.priority <= 30
-      - color = "yellow" if family.priority <= 100 and family.priority > 30
-      - color = "red" if family.priority > 100
+      - for priority in priorities do
+        - if family.priority > priority.start and family.priority <= priority.end
+          - color = priority.value
+          - name = priority.name
+          - break
       %tr{:class => color}
         %td
           %div(align="center")
             = check_box_tag "model_ids[]", family.id
+        - if name
+          %td= link_to priority.name, family
+        -else
+          %td= link_to family.priority, family
         %td= link_to family.id, family
         %td= link_to family.title, family
         %td= link_to family.phone, family

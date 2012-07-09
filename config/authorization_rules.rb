@@ -44,7 +44,8 @@ authorization do
                         :admin_group_options,
                         :admin_help_types,
                         :admin_necessities,
-                        :admin_study_categories
+                        :admin_study_categories,
+                        :admin_settings
                       ], :to => :superman
   end
 

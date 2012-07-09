@@ -163,6 +163,8 @@ ActiveRecord::Schema.define(:version => 20120709091252) do
   end
 
   create_table "settings", :force => true do |t|
+    t.string   "group_name"
+    t.string   "name"
     t.integer  "start"
     t.integer  "end"
     t.text     "value"

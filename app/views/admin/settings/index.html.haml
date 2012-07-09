@@ -1,0 +1,35 @@
+%h1 Список настроек
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Settings")
+  %table.sortable_table(style="width: 900px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Группа
+        %th Название
+        %th Начало
+        %th Конец
+        %th Значение(txt)
+        %th Значение(int)
+        %th Начало(date)
+        %th Конец(date)
+        %th Действия
+    %tbody
+      - @settings.each do |setting|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", setting.id
+          %td= setting.group_name
+          %td= setting.name
+          %td= setting.start
+          %td= setting.end
+          %td= setting.value
+          %td= setting.amount
+          %td= setting.start_at
+          %td= setting.end_at
+          %td
+            = link_to 'Изменить', edit_admin_setting_path(setting)
+            = link_to 'Удалить', [:admin, setting], :confirm => 'Вы уверены? Удаление настроек крайне опасно', :method => :delete

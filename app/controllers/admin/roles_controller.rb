@@ -17,6 +17,14 @@ class Admin::RolesController < Admin::BaseController
   def edit
   end
 
+  def update
+    if @role.update_attributes(params[:role])
+      redirect_to admin_roles_path, notice: 'Роль была успешно изменена.'
+    else
+      render action: "edit"
+    end
+  end
+
   def create
     @role = Role.new(params[:role])
 
@@ -27,19 +35,8 @@ class Admin::RolesController < Admin::BaseController
     end
   end
 
-  def update
-
-    if @role.update_attributes(params[:role])
-      redirect_to admin_roles_path, notice: 'Роль была успешно изменена.'
-    else
-      render action: "edit"
-    end
-  end
-
   def destroy
-    @role = Role.find(params[:id])
     @role.destroy
-
     redirect_to admin_roles_path
   end
 

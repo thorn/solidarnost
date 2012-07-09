@@ -55,6 +55,11 @@ class PagesController < ApplicationController
           role.destroy
         end
         redirect_to admin_roles_path
+      when "Settings"
+        Settings.find_all_by_id(params[:model_ids]).each do |setting|
+          setting.destroy
+        end
+        redirect_to admin_settings_path
       else
         redirect_to families_path
     end
