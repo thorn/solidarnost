@@ -11,7 +11,7 @@
     = f.text_field :name
   .field
     = f.label :coeff, "Значение"
-    = f.number_field :coeff, min:0
+    = f.number_field :coeff, min:-1000
   .field
     = f.label :group_id, "Группа, к которой принадлежит коэффициент"
     = f.collection_select(:group_id, Group.all, :id, :name)
