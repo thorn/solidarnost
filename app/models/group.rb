@@ -3,4 +3,5 @@ class Group < ActiveRecord::Base
   scope :for_families, where(for_people: false)
   scope :for_people,   where(for_people: true)
   scope :visible,      where(important: true)
+  belongs_to :setting
 end

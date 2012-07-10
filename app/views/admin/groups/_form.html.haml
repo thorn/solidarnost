@@ -18,6 +18,9 @@
   .field
     = f.label :important, "Отображать на главной?"
     = f.check_box :important
+  .field
+    = f.label :setting_id, "Расположение на странице 'номер строки:номер столбца:позиция в ячейке:съест столбцов:съест строк'"
+    = f.select :setting_id, Setting.layout.map{|s| ["#{s.name}:#{s.value}:#{s.amount}:#{s.start}:#{s.end}", s.id]}
   .actions
     - if params[:action] == 'edit'
       = f.submit 'Сохранить', :class => "btn primary"

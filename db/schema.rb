@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709091252) do
+ActiveRecord::Schema.define(:version => 20120710122327) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20120709091252) do
     t.boolean  "important",  :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "setting_id"
   end
 
   create_table "help_types", :force => true do |t|

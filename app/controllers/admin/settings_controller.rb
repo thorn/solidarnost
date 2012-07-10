@@ -36,6 +36,7 @@ class Admin::SettingsController < Admin::BaseController
 
   def destroy
     @setting.destroy
+    redirect_to admin_settings_path
   end
 
   def find_setting
