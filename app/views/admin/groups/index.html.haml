@@ -1,7 +1,7 @@
 %h1 Список групп
 = form_tag delete_multiple_path, :id => "delete_multiple" do
   %input(type="hidden" name="model" value="Groups")
-  %table.sortable_table(style="width:800px;")
+  %table.sortable_table(style="width:900px;")
     %thead
       %tr
         %th
@@ -11,6 +11,7 @@
         %th Важность группы
         %th Для людей?
         %th Отображать на главной?
+        %th Настройка
         %th Действия
     %tbody
       - @groups.each do |group|
@@ -21,6 +22,10 @@
           %td= group.name
           %td= group.coeff
           %td= group.for_people? ? "Да" : "Нет"
+          - if group.setting
+            %td= "#{group.setting.name}:#{group.setting.value}:#{group.setting.amount}:#{group.setting.start}:#{group.setting.end}"
+          - else
+            %td Нет настройки
           %td= group.important? ? "Да" : "Нет"
           %td
             = link_to 'Удалить', [:admin, group], :confirm => 'Все коэффициенты, принадлежащие этой группе, а также все семьи, у которых есть удяляемые коэффициенты, будут удалены!', :method => :delete

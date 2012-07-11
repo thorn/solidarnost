@@ -104,4 +104,5 @@ class Family < ActiveRecord::Base
   # def whole_money
   #   source_amount || 0
   # end
+
 end

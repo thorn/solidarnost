@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 module ApplicationHelper
 
   def link_to_remove_fields(name, f)
@@ -35,4 +36,25 @@ module ApplicationHelper
     res.html_safe
   end
 
+  def render_table(layout, row_count, family)
+    res = ""
+    for i in (0..row_count) do
+      res << "<tr>"
+      layout.where("name = '#{i.to_s}'").order(:name, :value).each do |cell|
+        if cell.group
+          res << "<td colspan=#{cell.start} rowspan=#{cell.end}>
+          <div class=\"field\">
+            <label>#{cell.group.name}</label>
+            <select name=\"group_options_ids[]\" id=\"group_options_ids[]\">
+              #{group_options_for_select(cell.group, family)}
+            </select>
+          </div>
+          </td>"
+          #{cell.name}:#{cell.value}:#{cell.amount}:#{cell.start}:#{cell.end}
+        end
+      end
+      res << "</tr>"
+    end
+    res
+  end
 end

@@ -146,3 +146,18 @@ cities = ["Хасавюрт", "Махачкала", "Дербент", "Кизи�
 cities.each do |name|
   City.create(name: name)
 end
+
+puts "Creating settings"
+Setting.delete_all
+settings = [
+{group_name: "Приоритет"  , name: 2, start: 0, end: 1000, value: "red",  value: 1},
+{group_name: "layout"     , name: 1, start: 1, end: 3,    value: 1,      value: 1, amount: 1},
+{group_name: "layout"     , name: 1, start: 1, end: 3,    value: 2,      value: 1, amount: 1},
+{group_name: "layout"     , name: 1, start: 1, end: 1,    value: 3,      value: 1, amount: 1},
+{group_name: "layout"     , name: 2, start: 1, end: 1,    value: 1,      value: 1, amount: 1},
+{group_name: "layout"     , name: 3, start: 1, end: 1,    value: 1,      value: 1, amount: 1},
+{group_name: "layout"     , name: 4, start: 1, end: 1,    value: 2,      value: 1, amount: 1},
+{group_name: "layout"     , name: 4, start: 2, end: 1,    value: 1,      value: 1, amount: 1}]
+for setting in settings do
+  Setting.create(setting)
+end

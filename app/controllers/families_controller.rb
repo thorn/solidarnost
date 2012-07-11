@@ -1,24 +1,15 @@
 class FamiliesController < ApplicationController
   respond_to :html, :json
+  before_filter :find_family, only: [:show, :edit, :update, :destroy]
+  before_filter :make_layout, only: [:edit, :new]
 
   def index
     @q = Family.search(params[:search])
     @families = @q.paginate(:page => params[:page], :per_page => 30)
     @groups = Group.for_families
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @families }
-    end
   end
 
   def show
-    @family = Family.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render :json => @family}
-    end
   end
 
   def new
@@ -27,15 +18,9 @@ class FamiliesController < ApplicationController
     @family.build_mother
     @family.build_father
     @family.build_trusty
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @family }
-    end
   end
 
   def edit
-    @family = Family.find(params[:id])
     @family.children.build
     @family.build_mother if @family.mother.nil?
     @family.build_father if @family.father.nil?
@@ -58,7 +43,6 @@ class FamiliesController < ApplicationController
   end
 
   def update
-    @family = Family.find(params[:id])
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
 
     respond_to do |format|
@@ -73,13 +57,24 @@ class FamiliesController < ApplicationController
   end
 
   def destroy
-    @family = Family.find(params[:id])
     @family.destroy
 
     respond_to do |format|
       format.html { redirect_to families_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def find_family
+    @family = Family.find(params[:id])
+  end
+
+  def make_layout
+    # @layout = Setting.layout.select("name as row, value as column, amount as position, start as colspan, settings.end as rowspan").order(:name, :value, :amount)
+    @layout = Setting.layout
+    @row_count = @layout.select('DISTINCT(name)').count
   end
 
 end
