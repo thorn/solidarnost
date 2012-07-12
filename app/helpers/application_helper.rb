@@ -39,21 +39,23 @@ module ApplicationHelper
   def render_table(layout, row_count, family)
     res = ""
     for i in (0..row_count) do
-      res << "<tr>"
-      layout.where("name = '#{i.to_s}'").order(:name, :value).each do |cell|
-        if cell.group
-          res << "<td colspan=#{cell.start} rowspan=#{cell.end}>
+      layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
+      res << "<tr>" if layouts.count > 0
+      layouts.each do |cell|
+        res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
+        cell.groups.order(:position).each do |group|
+          res << "
           <div class=\"field\">
-            <label>#{cell.group.name}</label>
+            <label>#{group.name}</label>
             <select name=\"group_options_ids[]\" id=\"group_options_ids[]\">
-              #{group_options_for_select(cell.group, family)}
+              #{group_options_for_select(group, family)}
             </select>
-          </div>
-          </td>"
-          #{cell.name}:#{cell.value}:#{cell.amount}:#{cell.start}:#{cell.end}
+          </div>"
+          #{cell.name}:#{cell.value}:#{cell.start}:#{cell.end}
         end
+        res << "</td>" if cell.groups.count > 0
       end
-      res << "</tr>"
+      res << "</tr>" if layouts.count > 0
     end
     res
   end

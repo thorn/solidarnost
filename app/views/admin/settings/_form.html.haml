@@ -1,3 +1,5 @@
+%strong
+  Номер строки | номер столбца | позиция в списке | столбцов съест | строк съест
 = form_for [:admin, @setting] do |f|
   -if @setting.errors.any?
     #error_explanation
@@ -10,20 +12,17 @@
     = f.label :group_name, "Имя группы"
     = f.text_field :group_name
   .field
-    = f.label :name, "Название"
+    = f.label :name, "Название (номер строки)"
     = f.text_field :name
   .field
-    = f.label :start, "Начало"
+    = f.label :start, "Начало (столбцов съест)"
     = f.number_field :start
   .field
-    = f.label :end, "Конец"
+    = f.label :end, "Конец (строк съест)"
     = f.number_field :end
   .field
-    = f.label :value, "Значение(txt)"
+    = f.label :value, "Значение(txt)(номер столбца)"
     = f.text_field :value
-  .field
-    = f.label :amount, "Значение(int)"
-    = f.number_field :amount
   .field
     = f.label :start_at, "Начало(date)"
     = f.date_select :start_at
