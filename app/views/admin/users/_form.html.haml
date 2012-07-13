@@ -1,6 +1,4 @@
-%h1
-  Редактирование пользователя
-  = @user.name
+%h1= "Редактирование пользователя #{@user.name}"
 = form_for [:admin,@user], :html => {:class => "form-stacked"} do |f|
   -if @user.errors.any?
     #error_explanation
@@ -12,10 +10,12 @@
   .field
     = f.label :name, "Имя"
     = f.text_field :name
-
+  .field
+    = f.label :fund_id, "Фонд"
+    = f.select :fund_id, Fund.all.map {|f| [f.name, f.id] }, include_blank: true
   .field
     = f.label :city_id, "Город"
-    = f.select :city_id, City.all.map {|c| [c.name, c.id]}, :include_blank => true
+    = f.select :city_id, City.all.map {|c| [c.name, c.id] }, include_blank: true
   .field
     = f.label :email, "Почта"
     = f.text_field :email

@@ -1,5 +1,7 @@
 class Admin::CitiesController < Admin::BaseController
 
+before_filter :find_city, only: [:show, :edit, :update, :destroy]
+
   def index
     @cities = City.all
   end

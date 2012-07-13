@@ -45,7 +45,8 @@ authorization do
                         :admin_help_types,
                         :admin_necessities,
                         :admin_study_categories,
-                        :admin_settings
+                        :admin_settings,
+                        :admin_funds
                       ], :to => :superman
   end
 

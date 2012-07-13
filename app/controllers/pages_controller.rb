@@ -60,6 +60,11 @@ class PagesController < ApplicationController
           setting.destroy
         end
         redirect_to admin_settings_path
+      when "Funds"
+        Fund.find_all_by_id(params[:model_ids]).each do |fund|
+          fund.destroy
+        end
+        redirect_to admin_funds_path
       else
         redirect_to families_path
     end

@@ -11,6 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :profession
       t.text    :description
       t.integer :city_id
+      t.integer :fund_id
 
 
 

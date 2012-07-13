@@ -24,6 +24,7 @@ Solidarnost::Application.routes.draw do
     resources :necessities
     resources :study_categories
     resources :roles
+    resources :funds
     resources :settings
   end
 

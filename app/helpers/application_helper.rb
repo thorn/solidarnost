@@ -16,7 +16,9 @@ module ApplicationHelper
   def extract_help_content(help)
     help_content = []
     help.users.each do |user|
-      help_content.push content_tag(:div, user.name)
+      fund_name = user.fund ? " Фонд: #{user.fund.name}" : ""
+      user_info = "#{user.name} #{fund_name}"
+      help_content.push content_tag(:div, user_info)
     end
     help_content.push "<br />"
     help_content.push content_tag(:p, help.description)

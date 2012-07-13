@@ -23,7 +23,8 @@
         %th Адрес
         %th Профессия
         %th Почта
-        %th
+        %th Фонд
+        %th Действия
     %tbody
       - @users.each do |user|
         %tr
@@ -36,6 +37,10 @@
           %td= link_to user.address, admin_user_path(user)
           %td= link_to user.profession, admin_user_path(user)
           %td= link_to user.email, admin_user_path(user)
+          - if user.fund
+            %td= link_to user.fund.name, admin_user_path(user)
+          - else
+            %td Нет
           %td
             = link_to 'Редактировать', edit_admin_user_path(user)
             = link_to 'Удалить', admin_user_path(user), :method => :delete

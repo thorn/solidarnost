@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -14,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :families, :through => :users_families
 
   belongs_to :city
+  belongs_to :fund
 
   validates :name, :phone, :address, :presence => true
 
@@ -37,6 +39,13 @@ class User < ActiveRecord::Base
       :methods => [:name])
   end
 
+  def user_info
+    if fund
+      "#{name} фонд: #{fund.name}"
+    else
+      name
+    end
+  end
 private
 
   def set_role

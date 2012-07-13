@@ -1,0 +1,15 @@
+= form_for [:admin, @fund], :html => {:class => "form-stacked"} do |f|
+  -if @fund.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@fund.errors.count, "error")} prohibited this fund from being saved:"
+      %ul
+        - @fund.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name, "Название города"
+    = f.text_field :name
+  - if params[:action] == "edit"
+    = f.submit 'Сохранить', :class => "btn primary"
+  - else
+    = f.submit "Создать", :class => "btn primary"
+  = link_to 'Отмена', admin_funds_path, :class => "btn"

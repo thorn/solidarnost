@@ -9,7 +9,7 @@
         - @family.users.each do |user|
           .info
             .info-name
-              %span= user.name
+              %span= user.user_info
             .info-value= link_to "Открепить", UsersFamily.where(:family_id => @family.id, :user_id => user.id).first, :method => :delete
       - else
         Нет прикрепленных волонтеров

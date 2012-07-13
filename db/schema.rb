@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120712100554) do
+ActiveRecord::Schema.define(:version => 20120713120251) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -46,6 +46,13 @@ ActiveRecord::Schema.define(:version => 20120712100554) do
     t.integer  "coefficientable_id"
     t.string   "coefficientable_type"
     t.integer  "group_option_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dictionaries", :force => true do |t|
+    t.string   "name"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -118,15 +125,9 @@ ActiveRecord::Schema.define(:version => 20120712100554) do
     t.integer  "coeff",      :default => 0
     t.boolean  "for_people", :default => false
     t.boolean  "important",  :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "setting_id"
     t.integer  "position"
     t.boolean  "hidden"
-  end
-
-  create_table "help_types", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -159,12 +160,6 @@ ActiveRecord::Schema.define(:version => 20120712100554) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "settings", :force => true do |t|
     t.string   "group_name"
     t.string   "name"
@@ -174,12 +169,6 @@ ActiveRecord::Schema.define(:version => 20120712100554) do
     t.integer  "amount"
     t.date     "start_at"
     t.date     "end_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "study_categories", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -221,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20120712100554) do
     t.string   "profession"
     t.text     "description"
     t.integer  "city_id"
+    t.integer  "fund_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
