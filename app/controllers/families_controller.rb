@@ -1,7 +1,7 @@
 class FamiliesController < ApplicationController
   respond_to :html, :json
   before_filter :find_family, only: [:show, :edit, :update, :destroy]
-  before_filter :make_layout, only: [:edit, :new]
+  before_filter :make_layout, only: [:edit, :new, :show]
 
   def index
     @q = Family.search(params[:search])

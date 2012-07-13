@@ -53,6 +53,11 @@
                 = f.label :credit_time, "Срок кредита"
                 = f.text_field :credit_time, class: "date_select"
           = raw(render_table @layout, @row_count, @family)
+          - if permitted_to? :edit, :families
+            %tr
+              %td
+                - Group.for_admin.each do |g|
+                  = raw(render_select(g, @family))
       #children_tab.tab-pane
         = f.fields_for :children do |fld|
           = render "child_fields", :f => fld

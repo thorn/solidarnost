@@ -7,7 +7,7 @@
   .info-block-body{
     .info{
       .info-name{
-        width: 600px;
+        width: 300px;
         @include inline-block;
         background: url(/assets/images/info_dot.gif) repeat-x 100% .9em;
         padding: 0 10px 0 0;
@@ -27,7 +27,7 @@
 .info-title{
   font-size: 188%;
   .info-name{
-    width: 300px;      
+    width: 300px;
     @include inline-block;
   }
   .family-coeff{
@@ -35,5 +35,5 @@
       @include inline-block;
     }
     @include inline-block;
-  }  
+  }
 }

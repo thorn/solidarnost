@@ -120,10 +120,23 @@
     #family_status.info-block
       .info-block-title Состояние семьи
       .info-block-body
-        - @family.group_options.each do |go|
-          .info
-            .info-name
-              %span= go.group.name
-            .info-value
-              = go.name
+        %table.group_options_table(style="width: 1000px;")
+          / - Group.for_show.each do |g|
+          = raw(render_table @layout, @row_count, @family, false)
+        / - @family.group_options.where(group_id: Group.for_show.map(&:id)).each do |go|
+        /   .info
+        /     .info-name
+        /       %span= go.group.name
+        /     .info-value
+        /       = go.name
+    - if permitted_to? :edit, :families
+      #family_status.info-block
+        .info-block-title
+        .info-block-body
+          - @family.group_options.where(group_id: Group.for_admin.map(&:id)).each do |go|
+            .info
+              .info-name
+                %span= go.group.name
+              .info-value
+                = go.name
 = render "buttons"

@@ -36,27 +36,49 @@ module ApplicationHelper
     res.html_safe
   end
 
-  def render_table(layout, row_count, family)
+  def render_table(layout, row_count, family, edit = true)
     res = ""
-    for i in (0..row_count) do
+    puts "#{row_count}____________________________________________________-"
+    row_count.to_i.times do |i|
       layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
       res << "<tr>" if layouts.count > 0
       layouts.each do |cell|
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
-        cell.groups.order(:position).each do |group|
-          res << "
-          <div class=\"field\">
-            <label>#{group.name}</label>
-            <select name=\"group_options_ids[]\" id=\"group_options_ids[]\">
-              #{group_options_for_select(group, family)}
-            </select>
-          </div>"
+        cell.groups.for_show.order(:position).each do |group|
+          if edit
+            res << render_select(group, family)
+          else
+            res << render_cell(group, family)
+          end
           #{cell.name}:#{cell.value}:#{cell.start}:#{cell.end}
         end
-        res << "</td>" if cell.groups.count > 0
+        res << "</td>" if cell.groups.for_show.count > 0
       end
       res << "</tr>" if layouts.count > 0
     end
     res
+  end
+
+  def render_select(group, family)
+    "<div class=\"field\">
+        <label>#{group.name}</label>
+        <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
+          #{group_options_for_select(group, family)}
+        </select>
+    </div>"
+  end
+
+  def render_cell(group, family)
+    if family.groups.include?(group)
+      "<div class=\"info\">
+        <div class=\"info-name\">
+          <span>#{group.name}</span>
+        </div>
+        <div class=\"info-value\">
+          #{family.group_options.where(group_id: group.id).first.name}
+        </div>
+      </div>
+      "
+    end
   end
 end
