@@ -41,7 +41,7 @@ module ApplicationHelper
   def render_table(layout, row_count, family, edit = true)
     res = ""
     puts "#{row_count}____________________________________________________-"
-    row_count.to_i.times do |i|
+    for i in (1..row_count.to_i)
       layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
       res << "<tr>" if layouts.count > 0
       layouts.each do |cell|

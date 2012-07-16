@@ -7,7 +7,7 @@ class CreateGroups < ActiveRecord::Migration
       t.boolean :important, default: true
       t.integer :setting_id
       t.integer :position
-      t.boolean :hidden
+      t.boolean :hidden, default: false
 
       t.timestamps
     end
