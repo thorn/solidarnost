@@ -19,7 +19,7 @@ before_filter :find_fund, only: [:show, :edit, :update, :destroy]
     @fund = Fund.new(params[:fund])
 
     if @fund.save
-      redirect_to admin_funds_path, notice: 'City was successfully created.'
+      redirect_to admin_funds_path, notice: 'Fund was successfully created.'
     else
       render action: "new"
     end
@@ -27,7 +27,7 @@ before_filter :find_fund, only: [:show, :edit, :update, :destroy]
 
   def update
     if @fund.update_attributes(params[:fund])
-      redirect_to admin_funds_path, notice: 'City was successfully updated.'
+      redirect_to admin_funds_path, notice: 'Fund was successfully updated.'
     else
       render action: "edit"
     end

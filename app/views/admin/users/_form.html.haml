@@ -45,7 +45,7 @@
       = f.password_field :password_confirmation
   .field
     = f.label :role_ids, "Роль"
-    = f.select :role_ids, options_from_collection_for_select(Role.scoped, :id, :name), {:include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда"}
+    = f.select :role_ids, Role.scoped.map{|r| [r.name, r.id]}, {:include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда"}
   .actions
     - if params[:action] == "edit"
       = f.submit 'Сохранить', :class => "btn primary"
