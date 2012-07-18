@@ -1,7 +1,7 @@
-%table.sortable_table
+%table.sortable_table.family_table
   %thead
     %tr
-      %th
+      %th.noprint
         %div(align="center")
           %input#mark_all(type="checkbox")
       %th ID
@@ -10,9 +10,10 @@
       %th Телефон
       %th Город/село
       %th Адрес
+      %th.no_show Подпись
       - @groups.visible.each do |gr|
-        %th= gr.name
-      %th Действия
+        %th.noprint= gr.name
+      %th.noprint Действия
   %tbody
     - priorities = Setting.priority
     - @families.each do |family|
@@ -22,7 +23,7 @@
           - name = priority.name
           - break
       %tr{:class => color}
-        %td
+        %td.noprint
           %div(align="center")
             = check_box_tag "model_ids[]", family.id
         %td= link_to family.id, family
@@ -34,9 +35,10 @@
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
+        %td.no_show= raw("&nbsp ")
         - @groups.visible.each do |gr|
           - if @go = family.group_options.find_by_group_id(gr.id)
-            %td= link_to @go.name, family
-        %td
+            %td.noprint= link_to @go.name, family
+        %td.noprint
           = link_to 'Редактировать', edit_family_path(family)
           = link_to 'Удалить', family, :method => :delete

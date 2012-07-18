@@ -99,4 +99,5 @@ $(function(){
   });
 
   $('.date_select').datepicker();
+  $('.print').on('click', function(){window.print(); return false;});
 });

@@ -1,0 +1,28 @@
+.topbar{
+  display: none;
+}
+.sidebar{
+  display: none;
+}
+body{
+  background-color: white;
+  font-size: 12pt;
+  margin-left: 10%;
+}
+.noprint{
+  display: none;
+}
+a{
+  text-decoration: none;
+  color: black;
+  &:active{
+    color: black;
+  }
+}
+table{
+  border-collapse: collapse;
+}
+table td, th{
+  border: 1px solid black;
+  padding: 5px;
+}
