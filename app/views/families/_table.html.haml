@@ -7,6 +7,7 @@
       %th ID
       %th Приоритет
       %th Семья
+      %th.no_show Людей
       %th Телефон
       %th Город/село
       %th Адрес
@@ -32,6 +33,7 @@
         -else
           %td= link_to family.priority, family
         %td= link_to family.title, family
+        %td.no_show= family.member_count
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family

@@ -92,14 +92,14 @@ class Family < ActiveRecord::Base
   #   self.source_id = GroupOption.source.first.id
   # end
 
-  # def member_count
-  #   f_c = if self.father then 1 else 0 end
-  #   m_c = if self.mother then 1 else 0 end
-  #   t_c = if self.trusty then 1 else 0 end
-  #   c_c = self.children.count
-  #   res = f_c + m_c + t_c + c_c
-  #   if res == 0 then 1 else res end
-  # end
+  def member_count
+    f_c = if self.father then 1 else 0 end
+    m_c = if self.mother then 1 else 0 end
+    t_c = if self.trusty then 1 else 0 end
+    c_c = self.children.count
+    res = f_c + m_c + t_c + c_c
+    # if res == 0 then 1 else res end
+  end
 
   # def whole_money
   #   source_amount || 0
