@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class FamiliesController < ApplicationController
   respond_to :html, :json
   before_filter :find_family, only: [:show, :edit, :update, :destroy]
@@ -30,9 +31,9 @@ class FamiliesController < ApplicationController
   def create
     @family = Family.new(params[:family])
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
-
     respond_to do |format|
       if @family.save
+        @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today)
         format.html { redirect_to families_path, notice: 'Family was successfully created.' }
         format.json { render json: @family, status: :created, location: @family }
       else
