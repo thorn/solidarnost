@@ -1,4 +1,4 @@
-= form_for @family , :html => {:class => "form-stacked"} do |f|
+= simple_form_for @family , :html => {:class => "form-stacked"} do |f|
   -if @family.errors.any?
     #error_explanation
       %h2= "#{pluralize(@family.errors.count, "error")} prohibited this family from being saved:"
@@ -58,19 +58,23 @@
               %td
                 - Group.for_admin.each do |g|
                   = raw(render_select(g, @family))
+        .row
+          = f.fields_for :attachments do |af|
+            = render 'attachment_fields', f: af
+          = link_to_add_fields "Добавить файл", f, :attachments
       #children_tab.tab-pane
         = f.fields_for :children do |fld|
-          = render "child_fields", :f => fld
+          = render "child_fields", f: fld
         = link_to_add_fields "Добавить анкету ребенка", f, :children
       #father_tab.tab-pane
         = f.fields_for :father do |fld|
-          = render "father_fields", :f => fld
+          = render "father_fields", f: fld
       #mother_tab.tab-pane
         = f.fields_for :mother do |fld|
-          =render "mother_fields", :f => fld
+          =render "mother_fields", f: fld
       #trusty_tab.tab-pane
         = f.fields_for :trusty do |fld|
-          =render "trusty_fields", :f => fld
+          =render "trusty_fields", f: fld
       #volunteers_tab.tab-pane
         = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
       #description_tab.tab-pane

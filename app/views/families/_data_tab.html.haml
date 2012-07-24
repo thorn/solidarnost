@@ -139,4 +139,12 @@
                 %span= go.group.name
               .info-value
                 = go.name
+  .info-block
+    .info-block-title Файлы
+    .info-block-body
+      - @family.attachments.each do |a|
+        .info
+          .info-name
+            %span= link_to File.basename(a.file.path), a.file_url
+          .info-value= link_to a.description, a.file_url
 = render "buttons"

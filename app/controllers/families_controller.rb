@@ -72,7 +72,6 @@ class FamiliesController < ApplicationController
   end
 
   def make_layout
-    # @layout = Setting.layout.select("name as row, value as column, amount as position, start as colspan, settings.end as rowspan").order(:name, :value, :amount)
     @layout = Setting.layout
     @row_count = @layout.select('DISTINCT(name)').count
   end

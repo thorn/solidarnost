@@ -14,7 +14,8 @@ gem "compass"
 gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'meta_search'
 gem 'will_paginate'
-
+gem 'carrierwave','>= 0.5.3'
+gem 'simple_form'
 group :test do
   gem 'cucumber-rails'
 end

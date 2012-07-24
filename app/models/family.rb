@@ -43,6 +43,9 @@ class Family < ActiveRecord::Base
   has_many :group_options, through: :coefficients
   has_many :groups, through: :group_options
 
+  has_many :attachments, as: :attachable
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+
   belongs_to :city
 
   belongs_to :home,     :class_name => "GroupOption"

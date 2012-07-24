@@ -1,0 +1,9 @@
+.fields
+  .field
+    = f.label :description, "Описание"
+    = f.text_field :description
+  .field
+    = f.label :file, "Выберите файл"
+    = f.file_field :file
+  .field
+    = link_to_remove_fields "Удалить файл", f
