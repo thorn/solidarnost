@@ -1,6 +1,6 @@
 %h1.noprint Расширенный поиск по семьям
 
-= form_for @search, :url => search_path, :html => {:method => :get, :class => "form-stacked noprint"} do |f|
+= form_for @search, :url => search_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
   .row
     .span5
       = render 'pages/data_fields', :f => f
