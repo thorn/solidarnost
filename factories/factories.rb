@@ -11,6 +11,12 @@ FactoryGirl.define do
     association :group, factory: :group
   end
 
+  factory :news do
+    title "News title"
+    text "news text"
+    status 0
+  end
+
   sequence :email do |n|
     "person#{n}@example.com"
   end

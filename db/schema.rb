@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724061403) do
+ActiveRecord::Schema.define(:version => 20120727081804) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -167,6 +167,15 @@ ActiveRecord::Schema.define(:version => 20120724061403) do
   create_table "necessities", :force => true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "news", :force => true do |t|
+    t.text     "text"
+    t.string   "title"
+    t.integer  "news_type"
+    t.integer  "status",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
