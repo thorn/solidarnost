@@ -7,6 +7,9 @@
     = f.label :name, "Отчество"
     = f.text_field :last_name
   .field
+    = f.label :sex, "Пол"
+    = f.select :sex, [['Женский', 0],['Мужской', 1]]
+  .field
     = f.label :birthday, "Дата рождения"
     = f.date_select :birthday, :start_year => 1970
   .field

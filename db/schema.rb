@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727081804) do
+ActiveRecord::Schema.define(:version => 20120728212635) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120727081804) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sex"
   end
 
   create_table "cities", :force => true do |t|
@@ -127,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20120727081804) do
     t.integer  "amount_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "problem",      :default => false
   end
 
   add_index "group_options", ["group_id"], :name => "index_group_options_on_group_id"
@@ -138,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20120727081804) do
     t.boolean  "important",  :default => true
     t.integer  "setting_id"
     t.integer  "position"
-    t.boolean  "hidden"
+    t.boolean  "hidden",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

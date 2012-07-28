@@ -9,6 +9,8 @@
     = f.text_field :children_second_name_contains
     = f.label :children_last_name_contains, "Отчество содержит"
     = f.text_field :children_last_name_contains
+    = f.label :children_sex_equals, "Пол"
+    = f.select :children_sex_equals, [['Женский', 0],['Мужской', 1]], include_blank: true
 
     = f.label :children_health_id_equals, "Здоровье детей"
     = f.select :children_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
