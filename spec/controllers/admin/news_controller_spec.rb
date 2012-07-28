@@ -8,9 +8,7 @@ describe Admin::NewsController do
     end
 
     it "should mark appropriate as read" do
-      get :mark_as_read, ids: [@news1.id, @news2.id]
-      @news1.reload
-      @news1.status.should == 1
+      expect{get :mark_as_read, to_read: @news1.id}.to change{@news1}
     end
   end
 end

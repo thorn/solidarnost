@@ -27,9 +27,7 @@ Solidarnost::Application.routes.draw do
     resources :funds
     resources :settings
     resources :news do
-      collection do
-        get :mark_as_read
-      end
+      get :mark_as_read, on: :collection
     end
   end
 

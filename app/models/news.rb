@@ -3,7 +3,7 @@ class News < ActiveRecord::Base
     status == 1
   end
 
-  def read=(val=true)
-    update_attribute(status: 1) if val
+  def mark_as_read
+    update_attribute(:status, 1)
   end
 end
