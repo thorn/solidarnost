@@ -6,7 +6,7 @@ class Visit < ActiveRecord::Base
 
   has_many :assistances
   has_many :users, :through => :assistances
-  
+
   attr_reader :user_tokens
 
   def user_tokens=(ids)

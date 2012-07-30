@@ -3,7 +3,7 @@ require "date"
 class Child < ActiveRecord::Base
   belongs_to :family
 
-  # belongs_to :health,   :class_name => "GroupOption"
+  belongs_to :health,   :class_name => "GroupOption"
   belongs_to :study, :class_name => "StudyCategory", :foreign_key => "study_id"
   has_many :coefficients, as: :coefficientable
   has_many :group_options, through: :coefficients

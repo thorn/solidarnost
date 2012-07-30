@@ -24,6 +24,7 @@ class FamilyHelpsController < ApplicationController
     @help = FamilyHelp.new(params[:family_help])
 
     if @help.save
+      News.create_about @help
       redirect_to family_path(@help.family), notice: 'FamilyHelp was successfully created.'
     else
       render action: "new"

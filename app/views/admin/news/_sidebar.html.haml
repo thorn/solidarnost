@@ -1,0 +1,8 @@
+%li= link_to "Опубликовать новость", new_admin_news_path, :class => "btn primary"
+%li#read_marked= link_to "Прочитать", "#", :class => "btn error", :confirm => 'Все отмеченные новости будут перемещены в архив'
+%li= link_to "Активные #{@info[:active]}", admin_news_index_path
+%li= link_to "Семьи #{@info[:families]}", admin_news_index_path(filter: "families")
+%li= link_to "Визиты #{@info[:visits]}", admin_news_index_path(filter: "visits")
+%li= link_to "Помощь #{@info[:helps]}", admin_news_index_path(filter: "helps")
+%li= link_to "Архив #{@info[:archived]}", admin_news_index_path(filter: "archived")
+%li= link_to "Служебные #{@info[:info]}", admin_news_index_path(filter: "info")

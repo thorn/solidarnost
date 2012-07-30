@@ -23,6 +23,7 @@ class VisitsController < ApplicationController
     @visit = Visit.new(params[:visit])
 
     if @visit.save
+      News.create_about @visit
       redirect_to family_path(@visit.family), notice: 'Visit was successfully created.'
     else
       render action: "new"

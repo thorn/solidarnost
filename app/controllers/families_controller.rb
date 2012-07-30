@@ -30,9 +30,10 @@ class FamiliesController < ApplicationController
 
   def create
     @family = Family.new(params[:family])
-    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
+    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     respond_to do |format|
       if @family.save
+        News.create_about @family
         @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today)
         format.html { redirect_to families_path, notice: 'Family was successfully created.' }
         format.json { render json: @family, status: :created, location: @family }

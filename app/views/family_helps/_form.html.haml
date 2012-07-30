@@ -10,9 +10,9 @@
     .field
       = f.label :during_visit, "Помощь осуществляется в ходе визита"
       = f.check_box :during_visit
-  .field.date_select
+  .field
     = f.label :made_at, "Дата проведения помощи"
-    = f.date_select :made_at
+    = f.text_field :made_at, class: "date_select", value: Date.today
   .field
     = f.label :help_type_id, "Тип помощи"
     = f.select :help_type_id, HelpType.all.collect{|h| [h.name, h.id]}

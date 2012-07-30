@@ -75,9 +75,9 @@ class PagesController < ApplicationController
     case params[:model]
       when "News"
         News.find_all_by_id(params[:model_ids]).each do |news|
-          news.read = true
+          news.read!
         end
-        redirect_to admin_news_path
+        redirect_to admin_news_index_path
     end
   end
 
