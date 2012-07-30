@@ -70,10 +70,21 @@ $(function(){
     $("#delete_multiple").submit();
     return false;
   })
-  $("#delete_multiple").keypress(function (ev) {
+  $("#delete_multiple, #read_multiple").keypress(function (ev) {
     if(ev.keyCode === 13){
       return false;
     }
+  });
+
+  $("#read_marked a").click(function(ev){
+    var confirm_text = $("#read_marked a").attr("data-confirm");
+    if(confirm_text){
+      if (!confirm(confirm_text)){
+        return false;
+      }
+    }
+    $("#read_multiple").submit();
+    return false;
   });
 
   $('.family-search-button').click(function () {

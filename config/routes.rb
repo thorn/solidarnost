@@ -27,7 +27,7 @@ Solidarnost::Application.routes.draw do
     resources :funds
     resources :settings
     resources :news do
-      collection do
+      member do
         get :mark_as_read
       end
     end
@@ -40,6 +40,7 @@ Solidarnost::Application.routes.draw do
   resources :families
 
   match '/delete_multiple' => "pages#delete_multiple", :as => :delete_multiple
+  match '/read_multiple'   => "pages#read_multiple",   :as => :read_multiple
 
   root :to => 'families#index'
 

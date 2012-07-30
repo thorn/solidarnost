@@ -4,6 +4,6 @@ class News < ActiveRecord::Base
   end
 
   def read=(val=true)
-    update_attribute(status: 1) if val
+    update_attribute(:status, 1) if val
   end
 end

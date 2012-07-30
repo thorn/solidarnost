@@ -1,0 +1,18 @@
+%h1 Новости
+= form_tag read_multiple_path, :id =>"read_multiple" do
+  %input(type="hidden" name="model" value="News")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название
+    %tbody
+      - @news.each do |news|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", news.id
+          %td= news.title
+  = submit_tag "Отметить прочитанными", :class => "btn error", :confirm => 'Новости будут помечены прочитанными!'

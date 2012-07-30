@@ -71,6 +71,16 @@ class PagesController < ApplicationController
 
   end
 
+  def read_multiple
+    case params[:model]
+      when "News"
+        News.find_all_by_id(params[:model_ids]).each do |news|
+          news.read = true
+        end
+        redirect_to admin_news_path
+    end
+  end
+
   def search
     if params[:with_one_parent]
       @ids = Family.with_one_parent.map {|f| f.id}

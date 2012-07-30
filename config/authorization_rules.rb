@@ -46,14 +46,15 @@ authorization do
                         :admin_necessities,
                         :admin_study_categories,
                         :admin_settings,
-                        :admin_funds
+                        :admin_funds,
+                        :admin_news
                       ], :to => :superman
   end
 
 end
 
 privileges do
-  privilege :superman, :includes => [:manage, :delete_multiple, :additional]
+  privilege :superman, :includes => [:manage, :delete_multiple, :read_multiple, :additional]
   privilege :manage, :includes => [:create, :read, :update, :delete]
   privilege :additional, includes: [:home, :about, :search]
   privilege :read, :includes => [:index, :show]
