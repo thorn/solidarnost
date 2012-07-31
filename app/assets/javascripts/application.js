@@ -8,8 +8,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require jquery.tablesorter
-//= require my_best_in_place
-//= require my_jquery.purr
 //= require twitter/bootstrap
 //= require bootstrap/bootstrap-tabs
 //= require bootstrap/bootstrap-buttons

@@ -1,3 +1,13 @@
 .row
-  %h1= @news.title
-  = raw(@news.text)
+  .span12
+    %h1= raw(@news.title)
+    = raw(@news.text)
+.row
+  .span12
+    - if permitted_to? :mark_as_read, :admin_news
+      - if @news.read?
+        = link_to "Пометить непрочтенной", mark_as_read_admin_news_path(@news), class: "btn btn-primary"
+      - else
+        = link_to "Пометить прочтенной", mark_as_read_admin_news_path(@news), class: "btn btn-primary"
+.row
+  .span12= link_to "Удалить", admin_news_path(@news), method: :delete, class: "btn btn-primary" if permitted_to? :delete, :admin_news

@@ -44,28 +44,28 @@
               %td Отец
               %td= @family.father.name
               %td= @family.father.birthday
-              %td= best_in_place @family.father, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
-              %td= best_in_place @family.father, :phone
+              %td= @family.father.health.name if @family.father.health
+              %td= @family.father.phone
               %td
                 = link_to 'Удалить', @family.father, :method => :delete
                 = link_to 'Показать', @family.father
           - if @family.mother
             %tr
               %td Мать
-              %td= best_in_place @family.mother, :name
+              %td= @family.mother.name
               %td= @family.mother.birthday
-              %td= best_in_place @family.mother, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
-              %td= best_in_place @family.mother, :phone
+              %td= @family.mother.health.name if @family.mother.health
+              %td= @family.mother.phone
               %td
                 = link_to 'Удалить', @family.mother, :method => :delete
                 = link_to 'Показать', @family.mother
           - if @family.trusty
             %tr
               %td Опекун
-              %td= best_in_place @family.trusty, :name
+              %td= @family.trusty.name
               %td= @family.trusty.birthday
-              %td= best_in_place @family.trusty, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
-              %td= best_in_place @family.trusty, :phone
+              %td= @family.trusty.health.name if @family.trusty.health
+              %td= @family.trusty.phone
               %td
                 = link_to 'Удалить', @family.trusty, :method => :delete
                 = link_to 'Показать', @family.trusty
@@ -84,10 +84,10 @@
 
           - @family.children.each do |child|
             %tr
-              %td= best_in_place child, :name
+              %td= child.name
               %td= child.birthday
-              %td= best_in_place child, :health_id, :type => :select, :collection => GroupOption.health.collect {|u| [u.id, u.name]}
-              %td= best_in_place child, :study_id, :type => :select, :collection => StudyCategory.all.collect {|u| [u.id, u.name]}
+              %td= child.health.name if child.health
+              %td= child.study.name if child.study
               %td
                 = link_to 'Удалить', child, :method => :delete
                 = link_to 'Показать', child_path(child)

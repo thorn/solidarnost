@@ -4,12 +4,13 @@ class News < ActiveRecord::Base
   include ActionView::Helpers
   attr_accessible :news_type, :status, :text, :title
 
-  scope :active, -> {where(status: 0)}
+  scope :active,   -> {where(status: 0)}
   scope :archived, -> {where(status: 1)}
   scope :families, -> {where(news_type: 0)}
-  scope :visits, -> {where(news_type: 1)}
-  scope :helps, -> {where(news_type: 2)}
-  scope :info, -> {where(news_type: 3)}
+  scope :visits,   -> {where(news_type: 1)}
+  scope :helps,    -> {where(news_type: 2)}
+  scope :info,     -> {where(news_type: 3)}
+
   def read?
     status == 1
   end

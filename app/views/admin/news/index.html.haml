@@ -1,14 +1,13 @@
 %h1= @header
 = form_tag read_multiple_path, :id =>"read_multiple" do
   %input(type="hidden" name="model" value="News")
-  %table.sortable_table(style="width: 600px;")
+  %table.sortable_table
     %thead
       %tr
         %th
           %div(align="center")
             %input#mark_all(type="checkbox")
         %th Название
-        %th Статус
         %th Тип
         %th Действия
     %tbody
@@ -18,7 +17,6 @@
             %div(align="center")
               = check_box_tag "model_ids[]", news.id
           %td= news.title
-          %td= news.status
           %td= news.news_type
           %td
             = link_to (news.read? ? "Отметить непрочтенной" : "Отметить прочтенной"), mark_as_read_admin_news_path(news)
