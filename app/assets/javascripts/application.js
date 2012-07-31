@@ -38,7 +38,6 @@ $(function(){
   $("a[rel=twipsy]").twipsy({placement: "right"});
   $(".dropdown").dropdown();
   $(".sortable_table").tablesorter({headers: {0: { sorter: false} } });
-  $(".best_in_place").best_in_place();
 
   jQuery("a.scroll_to").click(function () {
       elementClick = jQuery(this).attr("href")

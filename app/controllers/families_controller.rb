@@ -31,51 +31,38 @@ class FamiliesController < ApplicationController
   def create
     @family = Family.new(params[:family])
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
-    respond_to do |format|
-      if @family.save
-        News.create_about @family
-        @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today)
-        format.html { redirect_to families_path, notice: 'Family was successfully created.' }
-        format.json { render json: @family, status: :created, location: @family }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @family.errors, status: :unprocessable_entity }
-      end
+    if @family.save
+      News.create_about @family
+      @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today)
+      redirect_to families_path, notice: 'Family was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
-
-    respond_to do |format|
-      if @family.update_attributes(params[:family])
-        format.html { redirect_to @family, notice: 'Family was successfully updated.' }
-        format.json { respond_with_bip(@family) }
-      else
-        format.html { render action: "edit" }
-        format.json { respond_with_bip(@family)}
-      end
+    if @family.update_attributes(params[:family])
+      redirect_to @family, notice: 'Family was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @family.destroy
-
-    respond_to do |format|
-      format.html { redirect_to families_url }
-      format.json { head :ok }
-    end
+    redirect_to families_url
   end
 
   private
 
-  def find_family
-    @family = Family.find(params[:id])
-  end
+    def find_family
+      @family = Family.find(params[:id])
+    end
 
-  def make_layout
-    @layout = Setting.layout
-    @row_count = @layout.select('DISTINCT(name)').count
-  end
+    def make_layout
+      @layout = Setting.layout
+      @row_count = @layout.select('DISTINCT(name)').count
+    end
 
 end

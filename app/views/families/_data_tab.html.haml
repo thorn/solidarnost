@@ -19,21 +19,15 @@
       .info
         .info-name
           %span Город
-        .info-value
-          %a(href="#")
-            = best_in_place @family, :city_id, :type => :select, :collection => City.all.collect {|c| [c.id, c.name]}, :nil => "Нажмите чтобы изменить"
+        .info-value= @family.city.name if @family.city
       .info
         .info-name
           %span Адрес
-        .info-value
-          %a(href="#")
-            = best_in_place @family, :address, :nil => "Нажмите чтобы изменить"
+        .info-value=@family.address
       .info
         .info-name
           %span Телефон
-        .info-value
-          %a(href="#")
-            = best_in_place @family, :phone, :ok_button => "Сохранить", :cancel_button => "Отмена", :nil => "Нажмите чтобы изменить"
+        .info-value=@family.phone
     .info-block
       .info-block-title Члены семьи
       .info-block-body

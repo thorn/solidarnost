@@ -1,7 +1,8 @@
 #-*- encoding: utf-8 -*-
 class Admin::NewsController < Admin::BaseController
 
-  before_filter :gather_info, only: [:index, :new]
+  before_filter :find_news, only: [:mark_as_read, :destroy, :show]
+  before_filter :gather_info, only: [:index, :new, :show]
   def index
     case params[:filter]
       when "archived"
@@ -25,8 +26,10 @@ class Admin::NewsController < Admin::BaseController
       end
   end
 
+  def show
+  end
+
   def mark_as_read
-    @news = News.find(params[:id])
     if @news and @news.read?
       @news.unread!
     else
@@ -46,7 +49,7 @@ class Admin::NewsController < Admin::BaseController
   end
 
   def destroy
-    @news = News.find(params[:id]).destroy
+    @news.destroy
     redirect_to admin_news_index_path
   end
 
@@ -60,6 +63,10 @@ class Admin::NewsController < Admin::BaseController
         active: News.active.count,
         info: News.active.info.count
       }
+    end
+
+    def find_news
+      @news = News.find(params[:id])
     end
 
 end
