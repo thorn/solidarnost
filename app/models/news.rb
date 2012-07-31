@@ -23,6 +23,17 @@ class News < ActiveRecord::Base
     update_attribute(:status, 0)
   end
 
+  def self.get_info
+    {
+      archived: News.archived.count,
+      families: News.active.families.count,
+      visits: News.active.visits.count,
+      helps: News.active.helps.count,
+      active: News.active.count,
+      info: News.active.info.count
+    }
+  end
+
   def self.create_about(object)
     if object.class == Family
       attributes = {title: "Создана семья #{object.title}", text: "Ссылка: <a href='/families/#{object.id}'>#{object.title}</a>", news_type: 0 }

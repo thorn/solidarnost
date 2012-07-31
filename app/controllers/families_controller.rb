@@ -3,6 +3,7 @@ class FamiliesController < ApplicationController
   respond_to :html, :json
   before_filter :find_family, only: [:show, :edit, :update, :destroy]
   before_filter :make_layout, only: [:edit, :new, :show]
+  before_filter :gather_news_info, only: [:index, :edit, :new, :show]
 
   def index
     @q = Family.search(params[:search])
@@ -63,6 +64,10 @@ class FamiliesController < ApplicationController
     def make_layout
       @layout = Setting.layout
       @row_count = @layout.select('DISTINCT(name)').count
+    end
+
+    def gather_news_info
+      @info = News.get_info
     end
 
 end

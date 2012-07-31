@@ -55,14 +55,7 @@ class Admin::NewsController < Admin::BaseController
 
   private
     def gather_info
-      @info = {
-        archived: News.archived.count,
-        families: News.active.families.count,
-        visits: News.active.visits.count,
-        helps: News.active.helps.count,
-        active: News.active.count,
-        info: News.active.info.count
-      }
+      @info = News.get_info
     end
 
     def find_news

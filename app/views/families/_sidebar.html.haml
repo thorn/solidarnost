@@ -2,3 +2,12 @@
 %li= link_to "Расширенный поиск", search_path, :class => "btn primary"
 %li= link_to "Распечатать страницу", "#", class: "print noprint btn info"
 = yield :sidebar
+- if permitted_to? :create, :admin_news
+  %h3 Новости
+  %li= link_to "Опубликовать новость", new_admin_news_path, :class => "btn primary"
+  %li= link_to "Активные #{@info[:active]}", admin_news_index_path
+  %li= link_to "Семьи #{@info[:families]}", admin_news_index_path(filter: "families")
+  %li= link_to "Визиты #{@info[:visits]}", admin_news_index_path(filter: "visits")
+  %li= link_to "Помощь #{@info[:helps]}", admin_news_index_path(filter: "helps")
+  %li= link_to "Архив #{@info[:archived]}", admin_news_index_path(filter: "archived")
+  %li= link_to "Служебные #{@info[:info]}", admin_news_index_path(filter: "info")
