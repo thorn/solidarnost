@@ -1,4 +1,4 @@
-= form_for @search, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
+= form_for @search, url: search_visits_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
     = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {:class => "select_multiple", :multiple => false, 'data-placeholder' => "Нажмите сюда" }

@@ -1,10 +1,12 @@
-= form_for @search, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
+= form_for @search, url: search_family_helps_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
     = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {:class => "select_multiple", :multiple => false, 'data-placeholder' => "Нажмите сюда" }
   .multiparam_field
     = f.label :amount_greater_than_or_equal_to, "Размер помощи"
+    От
     = f.number_field :amount_greater_than_or_equal_to, min:0
+    До
     = f.number_field :amount_less_than_or_equal_to, min:0
   .multiparam_field
     = f.label :made_at_greater_than_or_equal_to, "Помощь оказана"
@@ -16,12 +18,10 @@
   .actions
     = f.submit "Поиск", :class => "btn primary"
     %input{:type => "reset", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
-  .actions
-    = f.submit "Поиск", :class => "btn primary"
-    %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
 
 = form_tag delete_multiple_path, :id => "delete_multiple" do
   = render 'table'
   = submit_tag "Удалить отмеченные", :class => "btn error noprint"
 - if params[:q]
   = link_to "Полный список семей", families_path, :class => "btn info noprint"
+
