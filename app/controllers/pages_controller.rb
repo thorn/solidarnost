@@ -80,28 +80,4 @@ class PagesController < ApplicationController
     end
   end
 
-  def search
-    if params[:with_one_parent]
-      @ids = Family.with_one_parent.map {|f| f.id}
-      @search = Family.where(:id => @ids).search(params[:search])
-      @families  = @search.all
-    elsif params[:without_parents]
-      @search = Family.with_children.without_father.without_mother.search(params[:search])
-      @families  = @search.all
-    elsif params[:family_helps]
-      @search = FamilyHelp.search(params[:search])
-      @family_helps = @search.all
-    elsif params[:visits]
-      @search = Visit.search(params[:search])
-      @visits = @search.all
-    else
-      @search = Family.search(params[:search])
-      @families  = @search.all
-    end
-
-    @groups = Group.for_families
-
-    respond_with @users
-  end
-
 end

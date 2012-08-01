@@ -44,6 +44,11 @@ class VisitsController < ApplicationController
     redirect_to @family
   end
 
+  def search
+    @search = Visit.search(params[:search])
+    @visits = @search.all
+  end
+
   private
 
     def find_visit

@@ -6,12 +6,22 @@ Solidarnost::Application.routes.draw do
   get "pages/home"
 
   get "pages/about"
-  match "pages/search", :as => :search, :via => [:get, :post]
+
+  resources :families do
+    post :search, on: :collection
+    get  :search, on: :collection
+  end
+  resources :visits do
+    post :search, on: :collection
+    get  :search, on: :collection
+  end
+  resources :family_helps do
+    post :search, on: :collection
+    get  :search, on: :collection
+  end
 
   resources :users_families
   resources :family_necessities, :only => [:destroy]
-  resources :visits
-  resources :family_helps
   devise_for :users
 
   namespace :admin do
@@ -37,7 +47,6 @@ Solidarnost::Application.routes.draw do
   resources :trusties
   resources :mothers
   resources :fathers
-  resources :families
 
   match '/delete_multiple' => "pages#delete_multiple", :as => :delete_multiple
   match '/read_multiple'   => "pages#read_multiple",   :as => :read_multiple

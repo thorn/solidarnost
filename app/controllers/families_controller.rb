@@ -3,7 +3,7 @@ class FamiliesController < ApplicationController
   respond_to :html, :json
   before_filter :find_family, only: [:show, :edit, :update, :destroy]
   before_filter :make_layout, only: [:edit, :new, :show]
-  before_filter :gather_news_info, only: [:index, :edit, :new, :show]
+  before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
 
   def index
     @q = Family.search(params[:search])
@@ -53,6 +53,19 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     redirect_to families_url
+  end
+
+  def search
+    if params[:with_one_parent]
+      @ids = Family.with_one_parent.map {|f| f.id}
+      @search = Family.where(:id => @ids).search(params[:search])
+    elsif params[:without_parents]
+      @search = Family.with_children.without_father.without_mother.search(params[:search])
+    else
+      @search = Family.search(params[:search])
+    end
+    @families  = @search.all
+    @groups = Group.for_families
   end
 
   private

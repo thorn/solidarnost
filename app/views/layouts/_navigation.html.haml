@@ -7,7 +7,7 @@
         = text_field_tag 'search_title_contains', nil, :placeholder => "Поиск по семьям...", :name => 'search[title_contains]'
         %a.family-search-button.add-on.active(href="#" style="background-image: url('/assets/search.png')")
       = hidden_field_tag 'commit', 'search'
-  %li= link_to "Расширенный поиск", search_path
+  %li= link_to "Расширенный поиск", search_families_path
   %li= link_to "Статистика", statistics_path
   %li.dropdown(data-dropdown="dropdown")
     %a.dropdown-toggle(href="#") Управление

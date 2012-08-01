@@ -20,6 +20,11 @@ class FamilyHelpsController < ApplicationController
   def edit
   end
 
+  def search
+    @search = FamilyHelp.search(params[:search])
+    @family_helps = @search.all
+  end
+
   def create
     @help = FamilyHelp.new(params[:family_help])
 
