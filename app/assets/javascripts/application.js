@@ -32,7 +32,7 @@ $(function(){
 
   $(".tabs").tabs()
   $('.accordion').accordion();
-  $('.select_multiple').chosen();
+  $('.select_multiple').chosen({allow_single_deselect:true});
   $("a[rel=twipsy]").twipsy({placement: "right"});
   $(".dropdown").dropdown();
   $(".sortable_table").tablesorter({headers: {0: { sorter: false} } });

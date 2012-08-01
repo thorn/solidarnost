@@ -1,0 +1,10 @@
+.row
+  .span5
+    = render 'pages/family_data_fields', :f => f
+  .span5
+    = render 'pages/family_condition_fields', :f => f
+  .span5
+    = render 'pages/family_members_fields', :f => f
+.actions
+  = f.submit "Поиск", :class => "btn primary"
+  %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}

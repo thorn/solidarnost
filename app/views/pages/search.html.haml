@@ -1,20 +1,17 @@
 %h1.noprint Расширенный поиск по семьям
 
 = form_for @search, :url => search_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
-  .row
-    .span5
-      = render 'pages/data_fields', :f => f
-    .span5
-      = render 'pages/condition_fields', :f => f
-    .span5
-      = render 'pages/family_members_fields', :f => f
-  .actions
-    = f.submit "Поиск", :class => "btn primary"
-    %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
-
-
-= form_tag delete_multiple_path, :id => "delete_multiple" do
-  = render 'families/table'
-  = submit_tag "Удалить отмеченные", :class => "btn error noprint"
-- if params[:q]
-  = link_to "Полный список семей", families_path, :class => "btn info noprint"
+  - if params[:family_helps]
+    = render 'family_help_search', f: f
+  - elsif params[:visits]
+    = render 'visits_search', f: f
+  - else
+    = render 'family_search', f: f
+- if @families
+  = form_tag delete_multiple_path, :id => "delete_multiple" do
+    = render 'families/table'
+    = submit_tag "Удалить отмеченные", :class => "btn error noprint"
+  - if params[:q]
+    = link_to "Полный список семей", families_path, :class => "btn info noprint"
+- elsif @visist
+- elsif @family_helps
