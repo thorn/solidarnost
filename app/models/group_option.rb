@@ -1,5 +1,7 @@
 class GroupOption < ActiveRecord::Base
   belongs_to :group
+  has_many :family_coeffs
+  has_many :families, through: :family_coeffs
 
   validates :name, :presence => true
 
