@@ -12,6 +12,7 @@
         %th Семья
         %th Приоритет
         %th Размер
+        %th Тип
         %th Дата
         %th Действия
     %tbody
@@ -23,6 +24,7 @@
           %td= link_to "#{help.family.id} #{help.family.title}", help.family
           %td= link_to help.family.priority, help.family
           %td= link_to (help.amount || 0), help
+          %td= link_to help.help_type.nil? ? "Нет" : help.help_type.name
           %td= link_to help.made_at, help
           %td
             = link_to 'Показать', help
