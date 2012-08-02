@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "date"
 class Child < ActiveRecord::Base
-  belongs_to :family
+  belongs_to :family, counter_cache: :children_counter
 
   belongs_to :health,   :class_name => "GroupOption"
   belongs_to :study, :class_name => "StudyCategory", :foreign_key => "study_id"

@@ -17,3 +17,7 @@
 .field
   = f.label :description_contains, "Описание содержит"
   = f.text_field :description_contains
+.multiparam_field
+  = f.label :children_counter_greater_than_or_equal_to, "Детей в семье"
+  = f.number_field :children_counter_greater_than_or_equal_to, min: 0
+  = f.number_field :children_counter_less_than_or_equal_to, min: 0
