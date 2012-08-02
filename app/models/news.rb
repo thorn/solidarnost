@@ -36,11 +36,11 @@ class News < ActiveRecord::Base
 
   def self.create_about(object)
     if object.class == Family
-      attributes = {title: "Создана семья #{object.title}", text: "Ссылка: <a href='/families/#{object.id}'>#{object.title}</a>", news_type: 0 }
+      attributes = {title: "Создана <a href='/families/#{object.family.id}'>семья #{object.family.id} - #{object.family.title} c приоритетом #{object.family.priority}", text: "Ссылка: <a href='/families/#{object.id}'>#{object.title}</a>", news_type: 0 }
     elsif object.class == Visit
-      attributes = {title: "Совершен визит в семью <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.name} c приоритетом #{object.family.priority} в #{object.created_at}" , text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 1 }
+      attributes = {title: "Совершен визит в семью <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.title} c приоритетом #{object.family.priority} в #{object.created_at}" , text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 1 }
     elsif object.class == FamilyHelp
-      attributes = {title: "Оказана помощь семье <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.name}</a> c приоритетом #{object.family.priority} в размере #{object.amount}", text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 2 }
+      attributes = {title: "Оказана помощь семье <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.title}</a> c приоритетом #{object.family.priority} в размере #{object.amount}", text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 2 }
     end
 
     News.create!(attributes)
