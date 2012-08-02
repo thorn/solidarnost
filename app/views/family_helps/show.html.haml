@@ -10,7 +10,7 @@
   %p= @help.description
 
 %h3 Размер помощи
-= @help.amount.to_s + " руб."
+= (@help.amount || 0).to_s + " руб."
 
 - if @help.visit.nil?
   %h3 Помощь оказана без совершения визита

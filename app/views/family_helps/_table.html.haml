@@ -3,7 +3,7 @@
   %small= "Всего оказано на #{@whole_amount} руб."
 = form_tag delete_multiple_path, :id =>"delete_multiple" do
   %input(type="hidden" name="model" value="FamilyHelps")
-  %table.sortable_table(style="width: 600px;")
+  %table.sortable_table
     %thead
       %tr
         %th
@@ -22,7 +22,7 @@
               = check_box_tag "model_ids[]", help.id
           %td= link_to "#{help.family.id} #{help.family.title}", help.family
           %td= link_to help.family.priority, help.family
-          %td= link_to help.amount, help
+          %td= link_to (help.amount || 0), help
           %td= link_to help.made_at, help
           %td
             = link_to 'Показать', help
