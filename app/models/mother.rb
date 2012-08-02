@@ -1,5 +1,5 @@
 class Mother < ActiveRecord::Base
-  belongs_to :family
+  belongs_to :family, counter_cache: :member_counter
   belongs_to :health, :class_name => "GroupOption"
 
   before_save :set_age
