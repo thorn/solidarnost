@@ -22,7 +22,8 @@ class FamilyHelpsController < ApplicationController
 
   def search
     @search = FamilyHelp.search(params[:search])
-    @family_helps = @search.all
+    @family_helps = @search.page(params[:page]).per_page(100)
+    @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount}
   end
 
   def create
@@ -45,8 +46,8 @@ class FamilyHelpsController < ApplicationController
   end
 
   def destroy
-    @help.destroy
-    redirect_to family_helps_path
+    family = @help.destroy.family
+    redirect_to family_path(family)
   end
 
   private

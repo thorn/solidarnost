@@ -1,2 +1,30 @@
-- @visits.each do |v|
-  = v.description
+%h1
+  Найденные визиты
+  %small= "Всего совершено #{@whole_visits} визитов."
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Visits")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Семья
+        %th Приоритет
+        %th Дата
+        %th Действия
+    %tbody
+      - @visits.each do |visit|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", visit.id
+          %td= link_to "#{visit.family.id} #{visit.family.title}", visit.family
+          %td= link_to visit.family.priority, visit.family
+          %td= link_to visit.made_at, visit
+          %td
+            = link_to 'Показать', visit
+            = link_to 'Удалить', visit, method: :delete
+.row
+  .span12
+    = will_paginate @visits

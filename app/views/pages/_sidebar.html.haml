@@ -1,6 +1,6 @@
 %li= link_to "Новый расшир. поиск", search_families_path, :class => "btn primary"
-%li= link_to "Поиск по помощи", search_family_helps_path(family_helps: true), :class => "btn primary"
-%li= link_to "Поиск по визитам", search_visits_path(visits: true), :class => "btn primary"
+%li= link_to "Поиск по помощи", search_family_helps_path, :class => "btn primary"
+%li= link_to "Поиск по визитам", search_visits_path, :class => "btn primary"
 %li= link_to "Назад к списку семей", families_path, :class => "btn info"
 %li= link_to "Распечатать страницу", "#", class: "print noprint btn info"
 %li#delete_marked= link_to "Удалить отмеченные", "#", :class => "btn error", :confirm => 'Вы уверены, что хотите удалить отмеченные семьи?'

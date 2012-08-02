@@ -46,7 +46,8 @@ class VisitsController < ApplicationController
 
   def search
     @search = Visit.search(params[:search])
-    @visits = @search.all
+    @visits = @search.page(params[:page]).per_page(100)
+    @whole_visits = @search.all.length
   end
 
   private

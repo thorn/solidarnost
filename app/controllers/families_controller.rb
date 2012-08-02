@@ -64,7 +64,8 @@ class FamiliesController < ApplicationController
     else
       @search = Family.search(params[:search])
     end
-    @families  = @search.all
+    @families  = @search.page(params[:page]).per_page(100)
+    @whole_families = @search.all.length
     @groups = Group.for_families
   end
 

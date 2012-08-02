@@ -65,6 +65,17 @@ class PagesController < ApplicationController
           fund.destroy
         end
         redirect_to admin_funds_path
+      when "FamilyHelps"
+        FamilyHelp.find_all_by_id(params[:model_ids]).each do |help|
+          help.destroy
+        end
+        redirect_to search_family_helps_path
+      when "Visits"
+        Visit.find_all_by_id(params[:model_ids]).each do |visit|
+          visit.destroy
+        end
+        redirect_to search_visits_path
+
       else
         redirect_to families_path
     end
