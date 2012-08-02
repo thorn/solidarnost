@@ -5,7 +5,7 @@
 - Group.for_families.each do |gr|
   .field
     = f.label gr.name
-    %select{id: "search_group_options_id_in[]", name: "search[group_options_id_in][]"}
+    %select{id: "group_options_id_in[]", name: "group_options_id_in[]"}
       %option
       - gr.group_options.each do |go|
         %option{value: go.id}= go.name

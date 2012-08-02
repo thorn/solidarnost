@@ -56,14 +56,16 @@ class FamiliesController < ApplicationController
   end
 
   def search
+    go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
+    object_to_search = go_ids.nil? ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
     if params[:with_one_parent]
-      @ids = Family.with_one_parent.map {|f| f.id}
-      @search = Family.where(:id => @ids).search(params[:search])
+      @search = object_to_search.with_one_parent.search(params[:search])
     elsif params[:without_parents]
-      @search = Family.with_children.without_father.without_mother.search(params[:search])
+      @search = object_to_search.with_children.without_father.without_mother.search(params[:search])
     else
-      @search = Family.search(params[:search])
+      @search = object_to_search.search(params[:search])
     end
+
     @families  = @search.page(params[:page]).per_page(100)
     @whole_families = @search.all.length
     @groups = Group.for_families
