@@ -23,7 +23,7 @@ class FamilyHelpsController < ApplicationController
   def search
     @search = FamilyHelp.search(params[:search])
     @family_helps = @search.page(params[:page]).per_page(100)
-    @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount}
+    @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount || 0}
   end
 
   def create
