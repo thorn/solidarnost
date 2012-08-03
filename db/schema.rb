@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803072749) do
+ActiveRecord::Schema.define(:version => 20120803075644) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(:version => 20120803072749) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "problem",      :default => false
+    t.boolean  "trouble"
   end
 
   add_index "group_options", ["group_id"], :name => "index_group_options_on_group_id"
