@@ -18,6 +18,12 @@
   .field
     = f.label :help_type_id_equals, "Тип помощи"
     = f.select :help_type_id_equals, HelpType.scoped.collect{|ht| [ht.name, ht.id]}, include_blank: true
+  .field
+    = f.label :users_id_equals, "Пользователь"
+    = f.select :users_id_equals, User.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
+  .field
+    = f.label :funds_id_equals, "Пользователь"
+    = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .actions
     = f.submit "Поиск", :class => "btn primary"
     %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
