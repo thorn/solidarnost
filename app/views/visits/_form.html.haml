@@ -14,6 +14,10 @@
     = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @visit.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
 
   .field
+    = f.label :fund_tokens, "Фонды"
+    = f.select :fund_tokens, options_from_collection_for_select(Fund.all, :id, :name, @visit.funds.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+
+  .field
     = f.label :made_at, "Дата совершения визита"
     = f.text_field :made_at, class: "date_select"
 

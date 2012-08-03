@@ -5,6 +5,9 @@ class FamilyHelp < ActiveRecord::Base
   belongs_to :visit
   belongs_to :help_type
 
+  has_many :family_help_funds
+  has_many :funds, through: :family_help_funds
+
   has_many :help_users, :dependent => :destroy
   has_many :users, :through => :help_users
 
@@ -12,6 +15,12 @@ class FamilyHelp < ActiveRecord::Base
 
   def user_tokens=(ids)
     self.user_ids = ids
+  end
+
+  attr_reader :fund_tokens
+
+  def fund_tokens=(ids)
+    self.fund_ids = ids
   end
 
   scope :during_visits, where("visit_id IS NOT ?", nil)

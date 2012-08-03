@@ -6,6 +6,10 @@
 %ul.unstyled
   - @visit.users.each do |user|
     %li= user.name
+%h3 Фонды
+%ul.unstyled
+  - @visit.funds.each do |fund|
+    %li= fund.name
 .span8
   %h3 Описание
   %p= @visit.description

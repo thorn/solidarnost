@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802130208) do
+ActiveRecord::Schema.define(:version => 20120803072749) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -90,6 +90,13 @@ ActiveRecord::Schema.define(:version => 20120802130208) do
     t.integer  "member_counter",   :default => 0
     t.integer  "mother_counter",   :default => 0
     t.integer  "father_counter",   :default => 0
+  end
+
+  create_table "family_help_funds", :force => true do |t|
+    t.integer  "family_help_id"
+    t.integer  "fund_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "family_helps", :force => true do |t|
@@ -247,6 +254,13 @@ ActiveRecord::Schema.define(:version => 20120802130208) do
   create_table "users_families", :force => true do |t|
     t.integer  "user_id"
     t.integer  "family_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "visit_funds", :force => true do |t|
+    t.integer  "fund_id"
+    t.integer  "visit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

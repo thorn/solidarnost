@@ -5,6 +5,10 @@
 %ul.unstyled
   - @help.users.each do |user|
     %li= user.name
+%h3 Фонды
+%ul.unstyled
+  - @help.funds.each do |fund|
+    %li= fund.name
 .span8
   %h3 Описание
   %p= @help.description

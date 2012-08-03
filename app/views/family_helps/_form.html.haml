@@ -6,6 +6,10 @@
   .field
     = f.label :user_tokens, "Люди, оказывающие помощь"
     = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @help.users.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+  .field
+    = f.label :fund_tokens, "Фонды"
+    = f.select :fund_tokens, options_from_collection_for_select(Fund.all, :id, :name, @help.funds.collect {|u| u.id}), { :include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда" }
+
   - if params[:action] != "edit"
     .field
       = f.label :during_visit, "Помощь осуществляется в ходе визита"
