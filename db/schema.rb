@@ -86,8 +86,10 @@ ActiveRecord::Schema.define(:version => 20120802130208) do
     t.integer  "credit_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "children_counter"
-    t.integer  "member_counter"
+    t.integer  "children_counter", :default => 0
+    t.integer  "member_counter",   :default => 0
+    t.integer  "mother_counter",   :default => 0
+    t.integer  "father_counter",   :default => 0
   end
 
   create_table "family_helps", :force => true do |t|

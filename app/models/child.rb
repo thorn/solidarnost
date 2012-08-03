@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 require "date"
 class Child < ActiveRecord::Base
-  belongs_to :family, counter_cache: :children_counter
+  belongs_to :family, counter_cache: :member_counter
 
   belongs_to :health,   :class_name => "GroupOption"
   belongs_to :study, :class_name => "StudyCategory", :foreign_key => "study_id"
@@ -9,6 +9,16 @@ class Child < ActiveRecord::Base
   has_many :group_options, through: :coefficients
   before_save :set_age
 
+  before_create :increment_counter
+  before_destroy :decrement_counter
+
+  def increment_counter
+    family.update_attribute(:children_counter, family.children_counter.to_i + 1)
+  end
+
+  def decrement_counter
+    family.update_attribute(:children_counter, family.children_counter.to_i - 1)
+  end
 
   def study_name
     if self.study

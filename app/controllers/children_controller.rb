@@ -6,8 +6,8 @@ class ChildrenController < ApplicationController
 
 
   def destroy
-    @child.destroy
-    redirect_to children_url
+    @family = @child.destroy.family
+    redirect_to family_path(@family)
   end
 
   def find_child
