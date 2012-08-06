@@ -6,8 +6,8 @@ class FamiliesController < ApplicationController
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
 
   def index
-    @q = Family.search(params[:search])
-    @families = @q.paginate(:page => params[:page], :per_page => 30)
+    @search = Family.search(params[:search])
+    @families = @search.page(params[:page]).per_page(100)
     @groups = Group.for_families
   end
 

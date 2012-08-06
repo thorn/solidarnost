@@ -1,5 +1,6 @@
 %li= link_to "Внести новую семью", new_family_path, :class => "btn primary"
 %li= link_to "Расширенный поиск", search_families_path, :class => "btn primary"
+%li= link_to "Распечатать страницу", "#", class: "print noprint btn info"
 = yield :sidebar
 - if permitted_to? :create, :admin_news
   %h3 Новости

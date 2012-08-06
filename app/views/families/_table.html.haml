@@ -1,16 +1,16 @@
-%table.sortable_table.family_table
+%table.family_table.sortable_family_table
   %thead
     %tr
       %th.noprint
         %div(align="center")
           %input#mark_all(type="checkbox")
-      %th ID
-      %th Приоритет
-      %th Семья
+      %th= sort_link @search, :id
+      %th= sort_link @search, :priority, "Приоритет"
+      %th= sort_link @search, :title, "Семья"
       %th.no_show Людей
-      %th Телефон
-      %th Город/село
-      %th Адрес
+      %th= sort_link @search, :telephone, "Телефон"
+      %th= sort_link @search, :city_name, "Город/село"
+      %th= sort_link @search, :address, "Адрес"
       %th.no_show Подпись
       - @groups.visible.each do |gr|
         %th.noprint= gr.name
