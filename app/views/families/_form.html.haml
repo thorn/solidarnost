@@ -27,6 +27,7 @@
         %table
           %tr
             %td
+              = f.hidden_field :status, value: (params[:persisted] == "false" ? 0 : 1)
               .field
                 = f.label :title, "Идентификация семьи"
                 = f.text_field :title

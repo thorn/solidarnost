@@ -7,7 +7,7 @@
   = f.text_field :title_contains
 .field
   = f.label :city_id_equals, "Из населенного пункта"
-  = f.select :city_id_equals, City.all.collect { |c| [c.name, c.id]}, :include_blank => true
+  = f.select :city_id_equals, City.all.collect { |c| [c.name, c.id]}, include_blank: true
 .field
   = f.label :phone_contains, "Номер телефона содержит"
   = f.text_field :phone_contains
@@ -17,6 +17,9 @@
 .field
   = f.label :description_contains, "Описание содержит"
   = f.text_field :description_contains
+.field
+  = f.label :status_equals, "Подтвержденность"
+  = f.select :status_equals, [["Заполненная", 1], ["Не заполненная", 0]], include_blank: true
 .multiparam_field
   = f.label :children_counter_greater_than_or_equal_to, "Детей в семье"
   = f.number_field :children_counter_greater_than_or_equal_to, min: 0

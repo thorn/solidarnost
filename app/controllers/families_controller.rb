@@ -4,9 +4,9 @@ class FamiliesController < ApplicationController
   before_filter :find_family, only: [:show, :edit, :update, :destroy]
   before_filter :make_layout, only: [:edit, :new, :show]
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
-
+  filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
   def index
-    @search = Family.search(params[:search])
+    @search = Family.order(:id).search(params[:search])
     @families = @search.page(params[:page]).per_page(100)
     @groups = Group.for_families
   end
@@ -15,7 +15,7 @@ class FamiliesController < ApplicationController
   end
 
   def new
-    @family = Family.new
+    @family = Family.new(status: Family::PERSISTED)
     @family.children.build
     @family.build_mother
     @family.build_father
@@ -43,7 +43,7 @@ class FamiliesController < ApplicationController
 
   def update
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
-    if @family.update_attributes(params[:family])
+    if @family.update_attributes(params[:family].merge(status: Family::PERSISTED))
       redirect_to @family, notice: 'Family was successfully updated.'
     else
       render :edit
@@ -60,15 +60,16 @@ class FamiliesController < ApplicationController
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
 
     if params[:with_one_parent]
-      @search = object_to_search.where("children_counter > ? AND (mother_counter = ? OR father_counter = ?)", 0, 0, 0).search(params[:search])
+      @search = object_to_search.order(:id).where("children_counter > ? AND (mother_counter = ? OR father_counter = ?)", 0, 0, 0).search(params[:search])
     elsif params[:without_parents]
-      @search = object_to_search.where("children_counter > ? AND (mother_counter = ? AND father_counter = ?)", 0, 0, 0).search(params[:search])
+      @search = object_to_search.order(:id).where("children_counter > ? AND (mother_counter = ? AND father_counter = ?)", 0, 0, 0).search(params[:search])
     else
-      @search = object_to_search.search(params[:search])
+      @search = object_to_search.order(:id).search(params[:search])
     end
 
     @families  = @search.page(params[:page]).per_page(100)
     @whole_families = @search.all.length
+    @whole_people = @search.all.map(&:member_counter).compact.sum
     @groups = Group.for_families
   end
 

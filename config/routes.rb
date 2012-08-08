@@ -8,8 +8,9 @@ Solidarnost::Application.routes.draw do
   get "pages/about"
 
   resources :families do
-    post :search, on: :collection
-    get  :search, on: :collection
+    collection do
+      match :search
+    end
   end
   resources :visits do
     post :search, on: :collection

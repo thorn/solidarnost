@@ -4,6 +4,9 @@ class Family < ActiveRecord::Base
   #before_create :set_source_id
   #before_update :set_source_id
 
+  NOT_PERSISTED = 0
+  PERSISTED = 1
+
   scope :with_children, lambda{
     joins(:children).
     where("children.family_id IS NOT ?", nil)

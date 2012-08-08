@@ -17,6 +17,9 @@ authorization do
                        :family_helps,
                        :visits
                       ], to: [:create, :read, :additional]
+    has_permission_on :families, to: [:edit, :update] do
+      if_attribute :status => is {0}
+    end
     has_permission_on :devise_sessions, to: :manage
   end
 

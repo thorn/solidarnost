@@ -4,7 +4,7 @@
       %th.noprint
         %div(align="center")
           %input#mark_all(type="checkbox")
-      %th= sort_link @search, :id
+      %th= sort_link @search, :id, "ID"
       %th= sort_link @search, :priority, "Приоритет"
       %th= sort_link @search, :title, "Семья"
       %th.no_show Людей
@@ -23,6 +23,8 @@
           - color = priority.value
           - name = priority.name
           - break
+      - if family.status == Family::NOT_PERSISTED
+        - color = 'gray'
       %tr{:class => color}
         %td.noprint
           %div(align="center")
@@ -33,7 +35,7 @@
         -else
           %td= link_to family.priority, family
         %td= link_to family.title, family
-        %td.no_show= family.member_count
+        %td.no_show= family.member_counter
         %td= link_to family.phone, family
         %td= link_to family.city_name, family
         %td= link_to family.address, family
