@@ -48,9 +48,9 @@ module ApplicationHelper
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
         cell.groups.for_show.order(:position).each do |group|
           if edit
-            res << render_select(group, family)
+            res << render_select(group, family) || ""
           else
-            res << render_cell(group, family)
+            res << render_cell(group, family) || ""
           end
           #{cell.name}:#{cell.value}:#{cell.start}:#{cell.end}
         end
