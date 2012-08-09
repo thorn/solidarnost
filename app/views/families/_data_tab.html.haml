@@ -114,7 +114,7 @@
     #family_status.info-block
       .info-block-title Состояние семьи
       .info-block-body
-        %table.group_options_table(style="width: 1000px;")
+        %table.group_options_table
           = raw(render_table @layout, @row_count, @family, false)
     - if permitted_to? :edit, :families
       #family_status.info-block
