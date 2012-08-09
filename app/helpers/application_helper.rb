@@ -48,9 +48,9 @@ module ApplicationHelper
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
         cell.groups.for_show.order(:position).each do |group|
           if edit
-            res << render_select(group, family) || ""
+            res << render_select(group, family)
           else
-            res << render_cell(group, family) || ""
+            res << render_cell(group, family)
           end
           #{cell.name}:#{cell.value}:#{cell.start}:#{cell.end}
         end
@@ -62,12 +62,16 @@ module ApplicationHelper
   end
 
   def render_select(group, family)
-    "<div class=\"field\">
-        <label>#{group.name}</label>
-        <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
-          #{group_options_for_select(group, family)}
-        </select>
-    </div>"
+    if family.groups.include?(group)
+      "<div class=\"field\">
+          <label>#{group.name}</label>
+          <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
+            #{group_options_for_select(group, family)}
+          </select>
+      </div>"
+    else
+      ""
+    end
   end
 
   def render_cell(group, family)
@@ -81,6 +85,8 @@ module ApplicationHelper
         </div>
       </div>
       "
+    else
+      ""
     end
   end
 end
