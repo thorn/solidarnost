@@ -40,7 +40,6 @@ before_filter :find_city, only: [:show, :edit, :update, :destroy]
     children = city.children.order(:name).map{|c| {name: c.name, id: c.id}}
     last = children.length.zero? ? true: false
     response = {cities: children, last: last}
-
     respond_to do |format|
       if city
         format.json {render json: response.to_json}
