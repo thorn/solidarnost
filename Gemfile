@@ -16,6 +16,7 @@ gem 'will_paginate'
 gem 'carrierwave','>= 0.5.3'
 gem 'simple_form'
 gem 'ancestry'
+
 group :test do
   gem 'cucumber-rails'
 end

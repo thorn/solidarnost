@@ -15,7 +15,7 @@
 //= require bootstrap/bootstrap-popover
 //= require bootstrap/bootstrap-dropdown
 //= require chosen.jquery.min
-//= require search
+//= require step_select
 //= require_tree .
 //= require_self
 

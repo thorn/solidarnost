@@ -35,8 +35,13 @@
                 = f.label :phone, "Телефон"
                 = f.text_field :phone
               .field
-                = f.label :city, "Город"
-                = f.collection_select(:city_id, City.all, :id, :name, :prompt => true)
+                = f.label :city_select, "Выбор города"
+                Россия
+                %br
+                Дагестан
+                .city_select
+                  .step_select
+                    = city_edit(f)
               .field
                 = f.label :address, "Адрес"
                 = f.text_field :address

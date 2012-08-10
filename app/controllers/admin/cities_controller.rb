@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class Admin::CitiesController < Admin::BaseController
 
 before_filter :find_city, only: [:show, :edit, :update, :destroy]
@@ -31,6 +32,21 @@ before_filter :find_city, only: [:show, :edit, :update, :destroy]
       redirect_to admin_cities_path, notice: 'City was successfully updated.'
     else
       render action: "edit"
+    end
+  end
+
+  def get_new
+    city = City.find_by_id(params[:id])
+    children = city.children.order(:name).map{|c| {name: c.name, id: c.id}}
+    last = children.length.zero? ? true: false
+    response = {cities: children, last: last}
+
+    respond_to do |format|
+      if city
+        format.json {render json: response.to_json}
+      else
+        format.json {render json: {error: "Нет такого горда"}}
+      end
     end
   end
 

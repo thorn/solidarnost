@@ -28,7 +28,9 @@ Solidarnost::Application.routes.draw do
   namespace :admin do
     root :to => "users#index"
     resources :users
-    resources :cities
+    resources :cities do
+      get :get_new, on: :collection
+    end
     resources :groups
     resources :group_options
     resources :help_types

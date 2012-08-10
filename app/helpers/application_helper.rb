@@ -89,4 +89,36 @@ module ApplicationHelper
       ""
     end
   end
+
+  def city_edit(form)
+    if c = form.object.city
+      parents = []
+      while (c = c.parent) and (c.name != "Респ Дагестан")
+        parents << c
+      end
+      parents.reverse!
+      parents << form.object.city
+
+      res = ""
+      parents.each do |city|
+        res << render_city_select(city, form)
+        res << '<div class="nested_select">'
+      end
+      parents.length.times {res << "</div>"}
+
+      return raw(res)
+    else
+      res = form.select :city_id, options_for_select(City.roots.first.children.first.children.order(:name).map{|c| [c.name, c.id]})
+      res << content_tag(:div, "", class: "nested_select")
+    end
+  end
+
+  def recursive_rendering(cities)
+
+  end
+
+  def render_city_select(city, form)
+    (form.select :city_id, options_for_select(city.siblings.order(:name).map{|c| [c.name, c.id]}))
+  end
+
 end

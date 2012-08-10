@@ -42,7 +42,7 @@ end
 
 class City < ActiveRecord::Base
   attr_accessible :parent_id, :ancestry, :name, :aoguid
-  has_ancestry #primary_key_format: /^[\d,\w]{8}-[\d,\w]{4}-[\d,\w]{4}-[\d,\w]{4}-[\d,\w]{12}$/i
+  has_ancestry
   has_many  :families, :dependent => :destroy
   include Parser
 
