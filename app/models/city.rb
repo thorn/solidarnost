@@ -53,7 +53,7 @@ class City < ActiveRecord::Base
 
   def name
     insert = (prefix && prefix.length > 3) ? "#{prefix}." : prefix
-    "#{id} #{insert} #{super}"
+    "#{insert} #{super}"
   end
 
   # def parent_id=(parent_id)

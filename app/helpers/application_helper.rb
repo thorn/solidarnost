@@ -112,7 +112,7 @@ module ApplicationHelper
 
   def get_parents(city)
     parents = [city]
-    while (city = city.parent) and (city.name != "Респ Дагестан")
+    while (city = city.parent) and (city.name != "Дагестан")
       parents << city
     end
     parents.reverse!
