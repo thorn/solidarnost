@@ -8,6 +8,8 @@
   .field
     = f.label :name, "Название города"
     = f.text_field :name
+    = f.label :ancestry, "Наследование"
+    = f.text_field :ancestry
   - if params[:action] == "edit"
     = f.submit 'Сохранить', :class => "btn primary"
   - else

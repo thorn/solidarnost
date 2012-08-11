@@ -50,6 +50,10 @@ class City < ActiveRecord::Base
     s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
   end
 
+  def name
+    "#{id} #{super}"
+  end
+
   # def parent_id=(parent_id)
   #   return false unless parent_id
   #   parent = City.find_by_id(parent_id)

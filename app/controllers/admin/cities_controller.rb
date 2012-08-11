@@ -4,7 +4,7 @@ class Admin::CitiesController < Admin::BaseController
 before_filter :find_city, only: [:show, :edit, :update, :destroy]
 
   def index
-    @cities = City.all
+    @cities = City.scoped.order(:id).page(params[:page]).per_page(100)
   end
 
   def show

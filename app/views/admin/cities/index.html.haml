@@ -20,3 +20,4 @@
             = link_to 'Удалить', [:admin, city], :confirm => 'Все семьи с данного населенного пункта будут также удалены!', :method => :delete
             = link_to 'Изменить', edit_admin_city_path(city)
   = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все семьи с отмеченных населенных пунктов будут также удалены!'
+= will_paginate @cities
