@@ -29,9 +29,10 @@ module Parser
     end
 
     def create_city(el, parent_id = nil)
-      name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
+      # name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
       attr = {
-        name:       name,
+        prefix:     el[:SHORTNAME],
+        name:       el[:OFFNAME],
         aoguid:     el[:AOGUID],
         parent_id:  parent_id
       }
@@ -41,7 +42,7 @@ module Parser
 end
 
 class City < ActiveRecord::Base
-  attr_accessible :parent_id, :ancestry, :name, :aoguid
+  attr_accessible :parent_id, :ancestry, :name, :aoguid, :prefix
   has_ancestry
   has_many  :families, :dependent => :destroy
   include Parser
@@ -51,7 +52,8 @@ class City < ActiveRecord::Base
   end
 
   def name
-    "#{id} #{super}"
+    insert = (prefix && prefix.length > 3) ? "#{prefix}." : prefix
+    "#{id} #{insert} #{super}"
   end
 
   # def parent_id=(parent_id)

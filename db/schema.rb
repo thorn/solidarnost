@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120810052653) do
     t.datetime "updated_at"
     t.string   "ancestry"
     t.string   "aoguid"
+    t.string   "prefix"
   end
 
   create_table "coefficients", :force => true do |t|
