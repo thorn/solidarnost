@@ -43,7 +43,8 @@ module ApplicationHelper
     puts "#{row_count}____________________________________________________-"
     for i in (1..row_count.to_i)
       layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
-      res << "<tr>" if layouts.count > 0
+      puts "#{layouts.to_yaml}____________________________________________________-"
+      res << "<tr>" if layouts.length > 0
       layouts.each do |cell|
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
         cell.groups.for_show.order(:position).each do |group|
@@ -56,22 +57,18 @@ module ApplicationHelper
         end
         res << "</td>" if cell.groups.for_show.count > 0
       end
-      res << "</tr>" if layouts.count > 0
+      res << "</tr>" if layouts.length > 0
     end
     res
   end
 
   def render_select(group, family)
-    if family.groups.include?(group)
-      "<div class=\"field\">
-          <label>#{group.name}</label>
-          <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
-            #{group_options_for_select(group, family)}
-          </select>
-      </div>"
-    else
-      ""
-    end
+    "<div class=\"field\">
+        <label>#{group.name}</label>
+        <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
+          #{group_options_for_select(group, family)}
+        </select>
+    </div>"
   end
 
   def render_cell(group, family)
