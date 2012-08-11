@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20120810052653) do
     t.boolean  "important",  :default => true
     t.integer  "setting_id"
     t.integer  "position"
-    t.boolean  "hidden"
+    t.boolean  "hidden",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

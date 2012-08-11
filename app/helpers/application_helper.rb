@@ -91,34 +91,40 @@ module ApplicationHelper
   end
 
   def city_edit(form)
-    if c = form.object.city
-      parents = []
-      while (c = c.parent) and (c.name != "Респ Дагестан")
-        parents << c
-      end
-      parents.reverse!
-      parents << form.object.city
+    if form.object.class == MetaSearch::Searches::Family
+      res = render_city_select(City.roots.first.children.first.children.first, form, true, true)
+      res << content_tag(:div, "", class: "nested_select")
+    elsif c = form.object.city
+      parents = get_parents(c)
 
-      res = ""
-      parents.each do |city|
-        res << render_city_select(city, form)
+      res = parents.inject("") do |res, city|
+        res << render_city_select(city, form, false, true)
         res << '<div class="nested_select">'
       end
       parents.length.times {res << "</div>"}
 
       return raw(res)
     else
-      res = form.select :city_id, options_for_select(City.roots.first.children.first.children.order(:name).map{|c| [c.name, c.id]})
+      res = render_city_select(City.roots.first.children.first.children.first, form, false, true)
       res << content_tag(:div, "", class: "nested_select")
     end
   end
 
-  def recursive_rendering(cities)
-
+  def get_parents(city)
+    parents = [city]
+    while (city = city.parent) and (city.name != "Респ Дагестан")
+      parents << city
+    end
+    parents.reverse!
   end
 
-  def render_city_select(city, form)
-    (form.select :city_id, options_for_select(city.siblings.order(:name).map{|c| [c.name, c.id]}))
+  def render_city_select(city, form, search = false, blank = false)
+    options = city.siblings.order(:name).inject("") do |res, el|
+      selected = ((city == el) and !search) ? 'selected="selected"' : ''
+      res << "<option #{selected} value=\"#{el.id}\">#{el.name}</option>"
+    end
+    field_name = search ? :city_id_in : :city_id
+    form.select field_name, options, include_blank: blank
   end
 
 end

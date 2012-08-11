@@ -72,5 +72,6 @@ class City < ActiveRecord::Base
         child.update_attribute(:parent_id, city_copy.id) if child.children.length.zero?
       end
     end
+    falsee
   end
 end

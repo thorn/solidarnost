@@ -42,7 +42,7 @@ class FamiliesController < ApplicationController
   end
 
   def update
-    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i}
+    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_options_ids]
     if @family.update_attributes(params[:family].merge(status: Family::PERSISTED))
       redirect_to @family, notice: 'Family was successfully updated.'
     else
@@ -56,6 +56,10 @@ class FamiliesController < ApplicationController
   end
 
   def search
+    if params[:search] && params[:search][:city_id_in]
+      city = City.find(params[:search][:city_id_in])
+      params[:search][:city_id_in] = city.subtree.map(&:id) if city
+    end
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
 
