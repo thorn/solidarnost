@@ -92,20 +92,20 @@ module ApplicationHelper
 
   def city_edit(form)
     if form.object.class == MetaSearch::Searches::Family
-      res = render_city_select(City.roots.first.children.first.children.first, form, true, true)
+      res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true)
       res << content_tag(:div, "", class: "nested_select")
     elsif c = form.object.city
       parents = get_parents(c)
 
       res = parents.inject("") do |res, city|
-        res << render_city_select(city, form, false, true)
+        res << render_city_select(city, form, false, true, false)
         res << '<div class="nested_select">'
       end
       parents.length.times {res << "</div>"}
 
       return raw(res)
     else
-      res = render_city_select(City.roots.first.children.first.children.first, form, false, true)
+      res = render_city_select(City.roots.first.children.first.children.first, form, false, true, true)
       res << content_tag(:div, "", class: "nested_select")
     end
   end
@@ -118,9 +118,9 @@ module ApplicationHelper
     parents.reverse!
   end
 
-  def render_city_select(city, form, search = false, blank = false)
+  def render_city_select(city, form, search = false, blank = false, no_select = false)
     options = city.siblings.order(:name).inject("") do |res, el|
-      selected = ((city == el) and !search) ? 'selected="selected"' : ''
+      selected = ((city == el) and !no_select) ? 'selected="selected"' : ''
       res << "<option #{selected} value=\"#{el.id}\">#{el.name}</option>"
     end
     field_name = search ? :city_id_in : :city_id
