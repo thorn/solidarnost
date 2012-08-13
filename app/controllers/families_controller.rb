@@ -42,7 +42,7 @@ class FamiliesController < ApplicationController
   end
 
   def update
-    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_options_ids]
+    @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     if @family.update_attributes(params[:family].merge(status: Family::PERSISTED))
       redirect_to @family, notice: 'Family was successfully updated.'
     else
