@@ -1,48 +1,54 @@
-%table.family_table.sortable_family_table
-  %thead
-    %tr
-      %th.noprint
-        %div(align="center")
-          %input#mark_all(type="checkbox")
-      %th= sort_link @search, :id, "ID"
-      %th= sort_link @search, :priority, "Приоритет"
-      %th= sort_link @search, :title, "Семья"
-      %th.no_show Людей
-      %th= sort_link @search, :telephone, "Телефон"
-      %th= sort_link @search, :city_name, "Город/село"
-      %th= sort_link @search, :address, "Адрес"
-      %th.no_show Подпись
-      - @groups.visible.each do |gr|
-        %th.noprint= gr.name
-      %th.noprint Действия
-  %tbody
-    - priorities = Setting.priority
-    - @families.each do |family|
-      - for priority in priorities do
-        - if family.priority > priority.start and family.priority <= priority.end
-          - color = priority.value
-          - name = priority.name
-          - break
-      - if family.status == Family::NOT_PERSISTED
-        - color = 'gray'
-      %tr{:class => color}
-        %td.noprint
+= form_for @search, :method => :get, html: {class: "fam_filter"} do |search|
+  %table.family_table.sortable_family_table
+    %thead
+      %tr
+        %th.noprint
           %div(align="center")
-            = check_box_tag "model_ids[]", family.id
-        %td= link_to family.id, family
-        - if name
-          %td= link_to priority.name, family
-        -else
-          %td= link_to family.priority, family
-        %td= link_to family.title, family
-        %td.no_show= family.member_counter
-        %td= link_to family.phone, family
-        %td= link_to family.city_name, family
-        %td= link_to family.address, family
-        %td.no_show= raw("&nbsp ")
+            %input#mark_all(type="checkbox")
+        %th= sort_link @search, :id, "ID"
+        %th= sort_link @search, :priority, "Приоритет"
+        %th= sort_link @search, :title, "Семья"
+        %th.no_show Людей
+        %th= sort_link @search, :telephone, "Телефон"
+        %th= sort_link @search, :city_name, "Город/село"
+        %th= sort_link @search, :address, "Адрес"
+        %th.no_show Подпись
         - @groups.visible.each do |gr|
-          - if @go = family.group_options.find_by_group_id(gr.id)
-            %td.noprint= link_to @go.name, family
-        %td.noprint
-          = link_to 'Редактировать', edit_family_path(family)
-          = link_to 'Удалить', family, :method => :delete
+          %th
+            .noprint
+              .filter_value
+                = gr.name
+              .primary_filter
+                = select_tag "group_options_id_in[]", group_options_for_select(gr, nil), include_blank: true
+        %th.noprint Действия
+    %tbody
+      - priorities = Setting.priority
+      - @families.each do |family|
+        - for priority in priorities do
+          - if family.priority > priority.start and family.priority <= priority.end
+            - color = priority.value
+            - name = priority.name
+            - break
+        - if family.status == Family::NOT_PERSISTED
+          - color = 'gray'
+        %tr{:class => color}
+          %td.noprint
+            %div(align="center")
+              = check_box_tag "model_ids[]", family.id
+          %td= link_to family.id, family
+          - if name
+            %td= link_to priority.name, family
+          -else
+            %td= link_to family.priority, family
+          %td= link_to family.title, family
+          %td.no_show= family.member_counter
+          %td= link_to family.phone, family
+          %td= link_to family.full_city_name, family
+          %td= link_to family.address, family
+          %td.no_show= raw("&nbsp ")
+          - @groups.visible.each do |gr|
+            - if @go = family.group_options.find_by_group_id(gr.id)
+              %td.noprint= link_to @go.name, family
+          %td.noprint
+            = link_to 'Редактировать', edit_family_path(family)
+            = link_to 'Удалить', family, :method => :delete

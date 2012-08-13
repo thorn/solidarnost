@@ -15,6 +15,7 @@
 //= require bootstrap/bootstrap-popover
 //= require bootstrap/bootstrap-dropdown
 //= require chosen.jquery.min
+//= require filtering
 //= require step_select
 //= require_tree .
 //= require_self
@@ -36,7 +37,7 @@ $(function(){
   $("a[rel=twipsy]").twipsy({placement: "right"});
   $(".dropdown").dropdown();
   $(".sortable_table").tablesorter({headers: {0: { sorter: false} } });
-  $(".sortable_family_table").tablesorter({headers: {0: { sorter: false}, 1: {sorter: false}, 2: {sorter: false}, 3: {sorter: false}, 4: {sorter: false}, 5: {sorter: false}, 6: {sorter: false}, 7: {sorter: false} } });
+  // $(".sortable_family_table").tablesorter({headers: {0: { sorter: false}, 1: {sorter: false}, 2: {sorter: false}, 3: {sorter: false}, 4: {sorter: false}, 5: {sorter: false}, 6: {sorter: false}, 7: {sorter: false} } });
 
   jQuery("a.scroll_to").click(function () {
       elementClick = jQuery(this).attr("href")
@@ -86,7 +87,7 @@ $(function(){
   });
 
   $('.family-search-button').click(function () {
-    if($("#q_title_cont").val() != ""){
+    if($("#search_title_cont").val() != ""){
       $("#family_search").submit();
     }
     return false;
@@ -107,6 +108,6 @@ $(function(){
     });
   });
 
-  $('.date_select').datepicker();
+  $('.date_select').datepicker({ dateFormat: "yy-mm-dd" });
   $('.print').on('click', function(){window.print(); return false;});
 });

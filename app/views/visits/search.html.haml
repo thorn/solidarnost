@@ -16,7 +16,7 @@
     = f.label :users_id_equals, "Пользователь"
     = f.select :users_id_equals, User.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .field
-    = f.label :funds_id_equals, "Пользователь"
+    = f.label :funds_id_equals, "Фонд"
     = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .actions
     = f.submit "Поиск", :class => "btn primary"

@@ -6,7 +6,10 @@ class FamiliesController < ApplicationController
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
   filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
   def index
-    @search = Family.order(:id).search(params[:search])
+    go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
+    object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
+
+    @search = object_to_search.order(:id).search(params[:search])
     @families = @search.page(params[:page]).per_page(100)
     @groups = Group.for_families
   end

@@ -2,9 +2,9 @@
 %ul.nav
   %li= link_to "Семьи", families_path
   %li
-    = form_tag families_path, :id => "family_search", :method => :get do
+    = form_for @search do |f|
       .input-append
-        = text_field_tag 'search_title_contains', nil, :placeholder => "Поиск по семьям...", :name => 'search[title_contains]'
+        = f.text_field :title_contains, :placeholder => "Поиск по семьям..."
         %a.family-search-button.add-on.active(href="#" style="background-image: url('/assets/search.png')")
       = hidden_field_tag 'commit', 'search'
   %li= link_to "Расширенный поиск", search_families_path
