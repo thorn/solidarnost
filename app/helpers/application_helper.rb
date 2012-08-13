@@ -91,8 +91,8 @@ module ApplicationHelper
     if form.object.class == MetaSearch::Searches::Family
       res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true)
       res << content_tag(:div, "", class: "nested_select")
-    elsif c = form.object.city
-      parents = get_parents(c)
+    elsif form.object.city
+      parents = form.object.get_parents
 
       res = parents.inject("") do |res, city|
         res << render_city_select(city, form, false, true, false)

@@ -1,9 +1,6 @@
 # -*- encoding: utf-8 -*-
 class Family < ActiveRecord::Base
 
-  #before_create :set_source_id
-  #before_update :set_source_id
-
   NOT_PERSISTED = 0
   PERSISTED = 1
 
@@ -71,44 +68,29 @@ class Family < ActiveRecord::Base
     self.necessity_ids = ids
   end
 
-  def descript
-    if self.description.nil? then self.description else "Нет описания" end
-  end
-
-  def city_name
-    if self.city
-      self.city.name
-    else
-      "Город не указан"
-    end
-  end
-
   def priority
     group_options.inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
   end
 
-  # def set_source_id
-  #   m_per_member = whole_money / member_count
-  #   for option in GroupOption.source do
-  #     if m_per_member >= option.amount_start and m_per_member <= option.amount_end
-  #       self.source_id = option.id
-  #       return nil
-  #     end
-  #   end
-  #   self.source_id = GroupOption.source.first.id
-  # end
-
-  def member_count
-    f_c = if self.father then 1 else 0 end
-    m_c = if self.mother then 1 else 0 end
-    t_c = if self.trusty then 1 else 0 end
-    c_c = self.children.count
-    res = f_c + m_c + t_c + c_c
-    # if res == 0 then 1 else res end
+  def city_name
+    city ? city.name : "Город не указан"
   end
 
-  # def whole_money
-  #   source_amount || 0
-  # end
+  def full_city_name
+    return city_name unless city
+    parents = get_parents
+    parents.inject("") do |res, city|
+      name = (city == parents.last) ? city.name : "#{city.name}/"
+      res << name
+    end
+  end
 
+  def get_parents
+    parents = [city]
+    c = city
+    while (c = c.parent) and (c.name != "Респ. Дагестан")
+      parents << c
+    end
+    parents.reverse!
+  end
 end
