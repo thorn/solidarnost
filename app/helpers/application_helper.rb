@@ -43,7 +43,8 @@ module ApplicationHelper
     puts "#{row_count}____________________________________________________-"
     for i in (1..row_count.to_i)
       layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
-      res << "<tr>" if layouts.count > 0
+      puts "#{layouts.to_yaml}____________________________________________________-"
+      res << "<tr>" if layouts.length > 0
       layouts.each do |cell|
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
         cell.groups.for_show.order(:position).each do |group|
@@ -56,22 +57,18 @@ module ApplicationHelper
         end
         res << "</td>" if cell.groups.for_show.count > 0
       end
-      res << "</tr>" if layouts.count > 0
+      res << "</tr>" if layouts.length > 0
     end
     res
   end
 
   def render_select(group, family)
-    if family.groups.include?(group)
-      "<div class=\"field\">
-          <label>#{group.name}</label>
-          <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
-            #{group_options_for_select(group, family)}
-          </select>
-      </div>"
-    else
-      ""
-    end
+    "<div class=\"field\">
+        <label>#{group.name}</label>
+        <select name=\"group_option_ids[]\" id=\"group_options_ids[]\">
+          #{group_options_for_select(group, family)}
+        </select>
+    </div>"
   end
 
   def render_cell(group, family)
@@ -92,37 +89,38 @@ module ApplicationHelper
 
   def city_edit(form)
     if form.object.class == MetaSearch::Searches::Family
-      res = render_city_select(City.roots.first.children.first.children.first, form, true, true)
+      res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true)
       res << content_tag(:div, "", class: "nested_select")
     elsif c = form.object.city
       parents = get_parents(c)
+
       res = parents.inject("") do |res, city|
-        res << render_city_select(city, form)
+        res << render_city_select(city, form, false, true, false)
         res << '<div class="nested_select">'
       end
       parents.length.times {res << "</div>"}
 
       return raw(res)
     else
-      res = render_city_select(City.roots.first.children.first.children.first, form, nil, true)
+      res = render_city_select(City.roots.first.children.first.children.first, form, false, true, true)
       res << content_tag(:div, "", class: "nested_select")
     end
   end
 
   def get_parents(city)
     parents = [city]
-    while (city = city.parent) and (city.name != "Респ Дагестан")
+    while (city = city.parent) and (city.name != "Респ. Дагестан")
       parents << city
     end
     parents.reverse!
   end
 
-  def render_city_select(city, form, search = false, blank = false)
-    field_name = search ? :city_id_in : :city_id
-    options = city.siblings.order(:name).inject("") do |res, c|
-      selected = 'selected="selected"' if city == c
-      res << "<option #{selected} value=#{c.id}>#{c.name}</option>"
+  def render_city_select(city, form, search = false, blank = false, no_select = false)
+    options = city.siblings.order(:name).inject("") do |res, el|
+      selected = ((city == el) and !no_select) ? 'selected="selected"' : ''
+      res << "<option #{selected} value=\"#{el.id}\">#{el.name}</option>"
     end
+    field_name = search ? :city_id_in : :city_id
     form.select field_name, options, include_blank: blank
   end
 

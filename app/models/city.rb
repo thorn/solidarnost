@@ -29,9 +29,10 @@ module Parser
     end
 
     def create_city(el, parent_id = nil)
-      name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
+      # name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
       attr = {
-        name:       name,
+        prefix:     el[:SHORTNAME],
+        name:       el[:OFFNAME],
         aoguid:     el[:AOGUID],
         parent_id:  parent_id
       }
@@ -41,13 +42,18 @@ module Parser
 end
 
 class City < ActiveRecord::Base
-  attr_accessible :parent_id, :ancestry, :name, :aoguid
+  attr_accessible :parent_id, :ancestry, :name, :aoguid, :prefix
   has_ancestry
   has_many  :families, :dependent => :destroy
   include Parser
 
   def self.parse_all
     s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
+  end
+
+  def name
+    insert = (prefix && prefix.length > 3) ? "#{prefix}." : prefix
+    "#{insert} #{super}"
   end
 
   # def parent_id=(parent_id)
@@ -72,5 +78,6 @@ class City < ActiveRecord::Base
         child.update_attribute(:parent_id, city_copy.id) if child.children.length.zero?
       end
     end
+    falsee
   end
 end

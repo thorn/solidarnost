@@ -7,8 +7,9 @@
   = f.text_field :title_contains
 .field
   .city_select
-  .step_select
-    = city_edit(f)
+    = f.label :city_id_in, "Населенный пункт"
+    .step_select
+      = city_edit(f)
 .field
   = f.label :phone_contains, "Номер телефона содержит"
   = f.text_field :phone_contains

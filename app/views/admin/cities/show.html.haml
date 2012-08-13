@@ -1,0 +1,5 @@
+.row
+  %h1.span12= @city.name
+.row
+  .span2= link_to "Удалить", admin_city_path(city), method: :delete
+  .span2= link_to "Изменить", edit_admin_city_path(city)
