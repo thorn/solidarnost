@@ -1,10 +1,11 @@
 #-*- encoding: utf-8 -*-
 class FamiliesController < ApplicationController
   respond_to :html, :json
-  before_filter :find_family, only: [:show, :edit, :update, :destroy]
+  before_filter :find_family, only: [:show, :edit, :update, :destroy, :persist]
   before_filter :make_layout, only: [:edit, :new, :show]
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
   filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
+
   def index
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
@@ -46,7 +47,7 @@ class FamiliesController < ApplicationController
 
   def update
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
-    if @family.update_attributes(params[:family].merge(status: Family::PERSISTED))
+    if @family.update_attributes(params[:family]) && @family.persist!
       redirect_to @family, notice: 'Family was successfully updated.'
     else
       render :edit
@@ -77,6 +78,11 @@ class FamiliesController < ApplicationController
     @whole_families = @search.all.length
     @whole_people = @search.all.map(&:member_counter).compact.sum
     @groups = Group.for_families
+  end
+
+  def persist
+    @family.persists? ? @family.unpersist! : @family.persist!
+    redirect_to family_path(@family)
   end
 
   private

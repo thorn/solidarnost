@@ -8,8 +8,8 @@ class FamilyHelp < ActiveRecord::Base
   has_many :family_help_funds
   has_many :funds, through: :family_help_funds
 
-  has_many :help_users, :dependent => :destroy
-  has_many :users, :through => :help_users
+  has_many :help_users, dependent: :destroy
+  has_many :users, through: :help_users
 
   attr_reader :user_tokens
 
@@ -31,7 +31,7 @@ private
 
   def create_visit
     if self.during_visit == "1"
-      @visit = Visit.create!(:description => "Visit with help", :family_id => self.family_id)
+      @visit = Visit.create!(description: "Visit with help", family_id: self.family_id)
       self.update_attribute(:visit_id, @visit.id)
     end
   end

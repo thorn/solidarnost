@@ -1,20 +1,19 @@
 = content_for :sidebar do
   %li#delete_marked
-    = link_to "Удалить отмеченные", "#", :class => "btn error", :confirm => 'Вы уверены, что хотите удалить отмеченные семьи?'
+    = link_to "Удалить отмеченные", "#", class: "btn error delete_multiple_families", confirm: 'Вы уверены, что хотите удалить отмеченные семьи?'
 
 - if params[:search]
   %h1 Поиск по семьям
   = content_for :sidebar do
     %li
-      = link_to "Полный список семей", families_path, :class => "btn primary"
+      = link_to "Полный список семей", families_path, class: "btn primary"
 - else
   %h1.noprint Список семей
-
-= render 'families/table'
-= form_tag delete_multiple_path, :id => "delete_multiple" do
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
   %input(type="hidden" name="model" value="Families")
-  = submit_tag "Удалить отмеченные", :class => "btn error noprint"
+= render 'families/table'
+= link_to "Удалить отмеченные", "#", class: "btn error noprint delete_multiple_families"
 
 - if params[:q]
-  = link_to "Полный список семей", families_path, :class => "btn info noprint"
+  = link_to "Полный список семей", families_path, class: "btn info noprint"
 = will_paginate @families

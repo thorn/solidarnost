@@ -19,7 +19,7 @@
               .filter_value
                 = gr.name
               .primary_filter
-                = select_tag "group_options_id_in[]", group_options_for_select(gr, nil), include_blank: true
+                = select_tag "group_options_id_in[]", group_options_for_select(gr, nil, params), include_blank: true
         %th.noprint Действия
     %tbody
       - priorities = Setting.priority

@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   respond_to :html, :json
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_user, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.scoped
     respond_with @users

@@ -2,10 +2,9 @@
 %ul.nav
   %li= link_to "Семьи", families_path
   %li
-    = form_for @search do |f|
+    = form_tag families_path, id: "family_search", method: :get do
       .input-append
-        = f.text_field :title_contains, :placeholder => "Поиск по семьям..."
-        %a.family-search-button.add-on.active(href="#" style="background-image: url('/assets/search.png')")
+        = text_field_tag 'search_title_contains', nil, placeholder: "Поиск по семьям...", name: 'search[title_contains]'
       = hidden_field_tag 'commit', 'search'
   %li= link_to "Расширенный поиск", search_families_path
   %li= link_to "Статистика", statistics_path
@@ -25,7 +24,7 @@
       %li= link_to "Новости", admin_news_index_path
 
   - if user_signed_in?
-    %li= link_to "Выйти", destroy_user_session_path, :method => :delete
+    %li= link_to "Выйти", destroy_user_session_path, method: :delete
     %li= link_to current_user.email, edit_user_registration_path
   - else
     %li= link_to "Регистрация", new_user_registration_path

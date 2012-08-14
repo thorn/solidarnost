@@ -10,7 +10,7 @@ class VisitsController < ApplicationController
 
   def new
     if params[:family_id] && !Family.find_by_id(params[:family_id]).blank?
-      @visit = Visit.new(:family_id => params[:family_id])
+      @visit = Visit.new(family_id: params[:family_id])
     else
       redirect_to root_path
     end

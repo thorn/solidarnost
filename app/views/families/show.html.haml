@@ -1,6 +1,6 @@
 = content_for :sidebar do
   %li
-    = link_to "Редактировать семью", edit_family_path(@family), :class => "btn info"
+    = link_to "Редактировать семью", edit_family_path(@family), class: "btn info"
 %p#notice= notice
 %ul.tabs
   %li.active
@@ -16,6 +16,10 @@
     = render 'help_tab'
   #desc_tab.tab-pane
     = render 'desc_tab'
-= link_to 'Редактировать', edit_family_path(@family), :class => "btn"
-
-= link_to 'Назад', families_path, :class => "btn"
+= link_to 'Редактировать', edit_family_path(@family), class: "btn"
+= link_to 'Назад', families_path, class: "btn"
+- if permitted_to? :persist, :families
+  - if @family.persists?
+    = link_to 'Сделать запись предварительной', persist_family_path(@family), class: "btn"
+  - else
+    = link_to 'Сделать запись постоянной', persist_family_path(@family), class: "btn"

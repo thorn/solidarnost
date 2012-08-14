@@ -57,7 +57,7 @@ authorization do
 end
 
 privileges do
-  privilege :superman, :includes => [:manage, :delete_multiple, :read_multiple, :additional, :mark_as_read]
+  privilege :superman, :includes => [:persist, :manage, :delete_multiple, :read_multiple, :additional, :mark_as_read]
   privilege :manage, :includes => [:create, :read, :update, :delete]
   privilege :additional, includes: [:home, :about, :search, :get_new]
   privilege :read, :includes => [:index, :show]

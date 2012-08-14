@@ -1,7 +1,7 @@
 Solidarnost::Application.routes.draw do
 
-  match 'statistics' => 'statistics#index', :as => 'statistics'
-  match 'statistics/show' => 'statistics#show', :as => 'statistic'
+  match 'statistics' => 'statistics#index', as: 'statistics'
+  match 'statistics/show' => 'statistics#show', as: 'statistic'
 
   get "pages/home"
 
@@ -10,6 +10,9 @@ Solidarnost::Application.routes.draw do
   resources :families do
     collection do
       match :search
+    end
+    member do
+      match :persist
     end
   end
   resources :visits do
@@ -51,10 +54,10 @@ Solidarnost::Application.routes.draw do
   resources :mothers
   resources :fathers
 
-  match '/delete_multiple' => "pages#delete_multiple", :as => :delete_multiple
-  match '/read_multiple'   => "pages#read_multiple",   :as => :read_multiple
+  match '/delete_multiple' => "pages#delete_multiple", as: :delete_multiple
+  match '/read_multiple'   => "pages#read_multiple",   as: :read_multiple
 
-  root :to => 'families#index'
+  root to: 'families#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -64,7 +67,7 @@ Solidarnost::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  #   match 'products/:id/purchase' => 'catalog#purchase', as: :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):

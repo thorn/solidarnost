@@ -9,15 +9,15 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :phone, :address, :city_id, :profession, :description, :role_ids, :fund_id
 
   has_many :user_roles
-  has_many :roles, :through => :user_roles
+  has_many :roles, through: :user_roles
 
   has_many :users_families
-  has_many :families, :through => :users_families
+  has_many :families, through: :users_families
 
   belongs_to :city
   belongs_to :fund
 
-  validates :name, :phone, :address, :presence => true
+  validates :name, :phone, :address, presence: true
 
   before_create :set_role
 
@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
 
   def to_json(options=nil)
     super (options || {}).merge(
-      :only => [:id],
-      :methods => [:name])
+      only: [:id],
+      methods: [:name])
   end
 
   def user_info
@@ -49,6 +49,6 @@ class User < ActiveRecord::Base
 private
 
   def set_role
-    self.user_roles.build(:role_id => Role.find_by_name("user").id)
+    self.user_roles.build(role_id: Role.find_by_name("user").id)
   end
 end

@@ -85,6 +85,18 @@ class Family < ActiveRecord::Base
     end
   end
 
+  def persists?
+    status == PERSISTED
+  end
+
+  def unpersist!
+    update_attribute(:status, NOT_PERSISTED)
+  end
+
+  def persist!
+    update_attribute(:status, PERSISTED)
+  end
+
   def get_parents
     parents = [city]
     c = city

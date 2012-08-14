@@ -8,7 +8,7 @@ class Visit < ActiveRecord::Base
   has_one :family_help
 
   has_many :assistances
-  has_many :users, :through => :assistances
+  has_many :users, through: :assistances
 
   attr_reader :user_tokens
 
