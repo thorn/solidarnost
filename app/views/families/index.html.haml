@@ -1,7 +1,8 @@
 = content_for :sidebar do
   %li#delete_marked
     = link_to "Удалить отмеченные", "#", class: "btn error delete_multiple_families", confirm: 'Вы уверены, что хотите удалить отмеченные семьи?'
-
+  %li
+    = link_to "Сбросить фильтры", "#", class: "btn info reset_filters"
 - if params[:search]
   %h1 Поиск по семьям
   = content_for :sidebar do

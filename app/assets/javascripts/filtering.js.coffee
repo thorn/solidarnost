@@ -18,3 +18,9 @@ $ ->
         $(form).append('<input id="model_ids_" name="model_ids[]" type="hidden" value="'+ id + '">')
 
       $(form).submit()
+
+  $('.reset_filters').on 'click', (event) ->
+    $('select[id^=group_options_id_in_]').each (i, el) ->
+      $(el).val('')
+    $('.fam_filter').submit()
+    false
