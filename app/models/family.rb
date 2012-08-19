@@ -47,6 +47,7 @@ class Family < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   belongs_to :city
+  belongs_to :area
 
   belongs_to :home,     :class_name => "GroupOption"
   belongs_to :resource, :class_name => "GroupOption"
@@ -59,7 +60,7 @@ class Family < ActiveRecord::Base
 
   attr_reader :user_tokens
   attr_reader :necessity_tokens
-  attr_reader :volunteer_tokens
+  attr_accessor :volunteer_tokens
 
   def user_tokens=(ids)
     self.user_ids = ids
@@ -69,12 +70,8 @@ class Family < ActiveRecord::Base
     self.necessity_ids = ids
   end
 
-  def volunteer_tokens=(ids)
-    visits.build(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today, user_ids: ids)
-  end
-
   def priority
-    group_options.inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
+    group_options.includes(:group).inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
   end
 
   def city_name
@@ -88,6 +85,10 @@ class Family < ActiveRecord::Base
       name = (city == parents.last) ? city.name : "#{city.name}/"
       res << name
     end
+  end
+
+  def area_name
+    area ? area.name : "Нет"
   end
 
   def persists?

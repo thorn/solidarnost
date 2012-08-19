@@ -11,6 +11,9 @@
     .step_select
       = city_edit(f)
 .field
+  = f.label :area_id_equals, "Район"
+  = f.select :area_id_equals, Area.scoped.map{|a| [a.name, a.id]}, include_blank: true
+.field
   = f.label :phone_contains, "Номер телефона содержит"
   = f.text_field :phone_contains
 .field

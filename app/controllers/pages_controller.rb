@@ -75,7 +75,11 @@ class PagesController < ApplicationController
           visit.destroy
         end
         redirect_to search_visits_path
-
+      when "Areas"
+        Area.find_all_by_id(params[:model_ids]).each do |area|
+          area.destroy
+        end
+        redirect_to admin_areas_path
       else
         redirect_to families_path
     end

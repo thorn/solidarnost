@@ -1,0 +1,23 @@
+%h1 Список районов
+= form_tag delete_multiple_path, :id =>"delete_multiple" do
+  %input(type="hidden" name="model" value="Areas")
+  %table.sortable_table(style="width: 600px;")
+    %thead
+      %tr
+        %th
+          %div(align="center")
+            %input#mark_all(type="checkbox")
+        %th Название
+        %th Действия
+    %tbody
+      - @areas.each do |area|
+        %tr
+          %td
+            %div(align="center")
+              = check_box_tag "model_ids[]", area.id
+          %td= area.name
+          %td
+            = link_to 'Удалить', [:admin, area], method: :delete
+            = link_to 'Изменить', edit_admin_area_path(area)
+  = submit_tag "Удалить отмеченные", :class => "btn error", :confirm => 'Все семьи с отмеченных населенных пунктов будут также удалены!'
+= will_paginate @areas

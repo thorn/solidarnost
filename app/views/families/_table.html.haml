@@ -11,6 +11,7 @@
         %th.no_show Людей
         %th= sort_link @search, :telephone, "Телефон"
         %th= sort_link @search, :city_name, "Город/село"
+        %th= sort_link @search, :area, "Район"
         %th= sort_link @search, :address, "Адрес"
         %th.no_show Подпись
         - @groups.visible.each do |gr|
@@ -44,6 +45,7 @@
           %td.no_show= family.member_counter
           %td= link_to family.phone, family
           %td= link_to family.full_city_name, family
+          %td= link_to family.area_name, family
           %td= link_to family.address, family
           %td.no_show= raw("&nbsp ")
           - @groups.visible.each do |gr|

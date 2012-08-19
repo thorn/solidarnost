@@ -1,0 +1,15 @@
+= form_for [:admin, @area], html: {class: "form-stacked"} do |f|
+  -if @area.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@area.errors.count, "error")} prohibited this area from being saved:"
+      %ul
+        - @area.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label :name, "Название района"
+    = f.text_field :name
+  - if params[:action] == "edit"
+    = f.submit 'Сохранить', class: "btn primary"
+  - else
+    = f.submit "Создать", class: "btn primary"
+  = link_to 'Отмена', admin_cities_path, class: "btn"

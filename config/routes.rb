@@ -42,6 +42,7 @@ Solidarnost::Application.routes.draw do
     resources :roles
     resources :funds
     resources :settings
+    resources :areas
     resources :news do
       member do
         get :mark_as_read

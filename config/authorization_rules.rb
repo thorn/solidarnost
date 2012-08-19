@@ -50,7 +50,8 @@ authorization do
                         :admin_study_categories,
                         :admin_settings,
                         :admin_funds,
-                        :admin_news
+                        :admin_news,
+                        :admin_areas
                       ], :to => :superman
   end
 

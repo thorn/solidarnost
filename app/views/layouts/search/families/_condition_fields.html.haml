@@ -2,7 +2,7 @@
 .field.multiparam_field
   = f.label :priority_between, "Приоритет от и до"
   = f.multiparameter_field :priority_between, {:field_type => :number_field}, {:field_type => :number_field}, :size => 5
-- Group.for_families.each do |gr|
+- Group.includes(:group_options).for_families.each do |gr|
   .field
     = f.label gr.name
     %select{id: "group_options_id_in[]", name: "group_options_id_in[]"}
