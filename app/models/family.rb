@@ -59,6 +59,7 @@ class Family < ActiveRecord::Base
 
   attr_reader :user_tokens
   attr_reader :necessity_tokens
+  attr_reader :volunteer_tokens
 
   def user_tokens=(ids)
     self.user_ids = ids
@@ -66,6 +67,10 @@ class Family < ActiveRecord::Base
 
   def necessity_tokens=(ids)
     self.necessity_ids = ids
+  end
+
+  def volunteer_tokens=(ids)
+    visits.build(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today, user_ids: ids)
   end
 
   def priority

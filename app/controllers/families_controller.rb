@@ -4,15 +4,14 @@ class FamiliesController < ApplicationController
   before_filter :find_family, only: [:show, :edit, :update, :destroy, :persist]
   before_filter :make_layout, only: [:edit, :new, :show]
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
+  before_filter :find_groups, only: [:index, :search]
   filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
-
   def index
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
 
     @search = object_to_search.order(:id).search(params[:search])
     @families = @search.page(params[:page]).per_page(100)
-    @groups = Group.for_families
   end
 
   def show
@@ -38,7 +37,6 @@ class FamiliesController < ApplicationController
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     if @family.save
       News.create_about @family
-      @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today)
       redirect_to families_path, notice: 'Family was successfully created.'
     else
       render :new
@@ -77,7 +75,6 @@ class FamiliesController < ApplicationController
     @families  = @search.page(params[:page]).per_page(100)
     @whole_families = @search.all.length
     @whole_people = @search.all.map(&:member_counter).compact.sum
-    @groups = Group.for_families
   end
 
   def persist
@@ -100,4 +97,7 @@ class FamiliesController < ApplicationController
       @info = News.get_info
     end
 
+    def find_groups
+      @groups = Group.includes(:group_options).for_families
+    end
 end

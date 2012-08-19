@@ -50,7 +50,7 @@ class Admin::NewsController < Admin::BaseController
 
   def destroy
     @news.destroy
-    redirect_to admin_news_index_path
+    redirect_to :back
   end
 
   private

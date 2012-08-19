@@ -21,6 +21,7 @@ group :test do
   gem 'cucumber-rails'
 end
 group :test, :development do
+  gem 'bullet'
   gem 'guard-spork'
   gem 'hirb'
   gem 'libnotify'
