@@ -49,6 +49,9 @@ class FamiliesController < ApplicationController
   def update
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     if @family.update_attributes(params[:family]) && @family.persist!
+      if !@family.visits or @family.visits.where(title: 'Мониторинг семьи').count.zero?
+        @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today, user_ids: params[:family][:volunteer_tokens])
+      end
       redirect_to @family, notice: 'Family was successfully updated.'
     else
       render :edit

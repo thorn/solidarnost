@@ -87,9 +87,8 @@
       #volunteers_tab.tab-pane
         = f.label :user_tokens, "Прикрепленные к семье люди"
         = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect {|u| u.id}), { include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
-        - if params[:action] == 'new'
-          = f.label :volunteer_tokens, "Внесшие семью"
-          = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
+        = f.label :volunteer_tokens, "Внесшие семью"
+        = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
       #description_tab.tab-pane
         .field
           = f.label :necessity_tokens, "Введите нужные предметы"
