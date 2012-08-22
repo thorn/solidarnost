@@ -36,7 +36,9 @@ class FamiliesController < ApplicationController
     @family = Family.new(params[:family])
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     if @family.save
-      @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today, user_ids: params[:family][:volunteer_tokens])
+      if @family.persists?
+        @family.visits.create(title: "Мониторинг семьи", visit_date: Date.today, made_at: Date.today, user_ids: params[:family][:volunteer_tokens])
+      end
       News.create_about @family
       redirect_to families_path, notice: 'Family was successfully created.'
     else
