@@ -24,6 +24,16 @@ class FamilyHelpsController < ApplicationController
     @search = FamilyHelp.search(params[:search])
     @family_helps = @search.page(params[:page]).per_page(100)
     @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount || 0}
+    @groups = Group.for_families
+    if @family_helps.length > 0
+      @families = Family.where(id: @family_helps.map(&:family_id))
+      @whole_people = @families.sum(:member_counter)
+      @whole_families = @families.count
+    else
+      @families = []
+      @whole_people = 0
+      @whole_families = 0
+    end
   end
 
   def create

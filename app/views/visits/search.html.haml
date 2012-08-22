@@ -21,7 +21,9 @@
   .actions
     = f.submit "Поиск", :class => "btn primary"
     %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
-
+%h1
+  Найденные семьи
+  %small= "Всего #{@whole_families}. Людей: #{@whole_people}"
 = form_tag delete_multiple_path, :id => "delete_multiple" do
-  = render 'table'
+  = render 'families/table'
   = submit_tag "Удалить отмеченные", :class => "btn error noprint"
