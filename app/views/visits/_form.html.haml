@@ -19,7 +19,7 @@
 
   .field
     = f.label :made_at, "Дата совершения визита"
-    = f.text_field :made_at, class: "date_select"
+    = f.text_field :made_at, class: "date_select", value: Date.today
 
   - if params[:action] == "edit"
     = f.submit "Сохранить изменения", :class => "btn primary"
