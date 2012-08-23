@@ -31,7 +31,7 @@ private
 
   def create_visit
     if self.during_visit == "1"
-      @visit = Visit.create!(description: "Visit with help", family_id: self.family_id)
+      @visit = Visit.create!(description: "Visit with help", family_id: self.family_id, made_at: Date.today, visit_date: Date.today)
       self.update_attribute(:visit_id, @visit.id)
     end
   end
