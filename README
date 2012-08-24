@@ -155,3 +155,5 @@ v Выводить в редактировании поля, отмеченны�
   Пометить прочитанным   -> возвращение на news_path
   Удалить                -> возвращение на news_path
   Создать
+
+Family.where("id NOT IN (?)", Family.includes(:family_helps).where("family_helps.made_at >= ? and family_helps.made_at <= ?", Date.today - 5, Date.today).map(&:id))
