@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 class Family < ActiveRecord::Base
 
+  before_save :set_priority
+
   NOT_PERSISTED = 0
   PERSISTED = 1
 
@@ -62,6 +64,12 @@ class Family < ActiveRecord::Base
   attr_reader :necessity_tokens
   attr_accessor :volunteer_tokens
 
+  attr_writer :sirota
+
+  def sirota
+    mother_counter == 0 and father_counter == 0 and children > 0
+  end
+
   def user_tokens=(ids)
     self.user_ids = ids
   end
@@ -70,8 +78,8 @@ class Family < ActiveRecord::Base
     self.necessity_ids = ids
   end
 
-  def priority
-    group_options.includes(:group).inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
+  def set_priority
+    priority = group_options.includes(:group).inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
   end
 
   def city_name
