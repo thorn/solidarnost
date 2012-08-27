@@ -1,7 +1,12 @@
 # -*- encoding: utf-8 -*-
 class Family < ActiveRecord::Base
 
-  before_save :set_priority
+  before_update :set_priority
+  before_create :set_priority
+
+  def set_priority
+    self.priority = group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 }
+  end
 
   NOT_PERSISTED = 0
   PERSISTED = 1
@@ -76,10 +81,6 @@ class Family < ActiveRecord::Base
 
   def necessity_tokens=(ids)
     self.necessity_ids = ids
-  end
-
-  def set_priority
-    priority = group_options.includes(:group).inject(0){|sum, go| sum += go.coeff * go.group.coeff/10}
   end
 
   def city_name

@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class Group < ActiveRecord::Base
   has_many :group_options, dependent: :destroy
   scope :for_families, where(for_people: false)
@@ -9,5 +10,13 @@ class Group < ActiveRecord::Base
 
   def for_admin?
     hidden == true
+  end
+
+  def setting_name
+    if setting
+      "#{setting.name}:#{setting.value}:#{setting.start}:#{setting.end}"
+    else
+      "Нет настройки"
+    end
   end
 end

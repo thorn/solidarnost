@@ -25,10 +25,8 @@
           %td= group.coeff
           %td= group.for_people? ? "Да" : "Нет"
           %td= group.important? ? "Да" : "Нет"
-          - if group.setting
-            %td= "#{group.setting.name}:#{group.setting.value}:#{group.setting.start}:#{group.setting.end}"
-          - else
-            %td Нет настройки
+          %td= group.setting_name
+
           %td= group.position? ? group.position : "Нет"
           %td= group.hidden? ? group.hidden : "Нет"
           %td
