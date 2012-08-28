@@ -1,6 +1,8 @@
 %h2 Описание помощи
 %h3 Помощь оказана
 = @help.made_at
+%h3 Тип помощи
+= @help.help_type.name if @help.help_type
 %h3 Волонтеры
 %ul.unstyled
   - @help.users.each do |user|
