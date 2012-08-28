@@ -6,6 +6,7 @@ class FamiliesController < ApplicationController
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
   before_filter :find_groups, only: [:index, :search]
   filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
+
   def index
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
@@ -64,19 +65,7 @@ class FamiliesController < ApplicationController
   end
 
   def search
-    if params[:search] && params[:search][:city_id_in]
-      city = City.find(params[:search][:city_id_in])
-      params[:search][:city_id_in] = city.subtree.map(&:id) if city
-    end
-    go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
-    object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
-    if params[:with_one_parent]
-      @search = object_to_search.order(:id).where("children_counter > ? AND (mother_counter = ? OR father_counter = ?)", 0, 0, 0).search(params[:search])
-    elsif params[:without_parents]
-      @search = object_to_search.order(:id).where("children_counter > ? AND (mother_counter = ? AND father_counter = ?)", 0, 0, 0).search(params[:search])
-    else
-      @search = object_to_search.order(:id).search(params[:search])
-    end
+    @search = FamilySearch.search(params)
 
     @families  = @search.page(params[:page]).per_page(100)
     @whole_families = @search.all.length

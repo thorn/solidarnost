@@ -33,3 +33,8 @@
   = f.label :member_counter_greater_than_or_equal_to, "Людей в семье"
   = f.number_field :member_counter_greater_than_or_equal_to, min: 0
   = f.number_field :member_counter_less_than_or_equal_to, min: 0
+.field
+  = f.label :date_from, "Помощь не была оказана"
+  = text_field_tag :date_from, nil, class: "date_select"
+  = text_field_tag :date_to  , nil, class: "date_select"
+  = select_tag :help_type, options_from_collection_for_select(HelpType.all, :id, :name)
