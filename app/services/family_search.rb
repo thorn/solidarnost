@@ -9,7 +9,8 @@ class FamilySearch
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
     if (par[:date_from] or par[:date_to]) and (par[:help_type])
       ids_with_help = Family.includes(:family_helps).where("family_helps.made_at >= ? and family_helps.made_at <= ? and family_helps.help_type_id = ?", par[:help_from] || Date.today, par[:help_to] || Date.today, par[:help_type]).map(&:id) << -1
-      object_to_search = object_to_search.where("id NOT IN (?)", ids_with_help).order(:id)
+      par[:search][:id_not_in] = ids_with_help
+      # object_to_search = object_to_search.where("id NOT IN (?)", ids_with_help).order(:id)
     end
 
     if par[:with_one_parent]
