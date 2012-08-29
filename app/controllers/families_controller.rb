@@ -68,7 +68,7 @@ class FamiliesController < ApplicationController
     @search = FamilySearch.search(params)
 
     @families  = @search.page(params[:page]).per_page(100)
-    @whole_families = @search.all.length
+    @whole_families = @search.count
     @whole_people = @search.all.map(&:member_counter).compact.sum
   end
 

@@ -38,3 +38,6 @@
   = text_field_tag :date_from, nil, class: "date_select"
   = text_field_tag :date_to  , nil, class: "date_select"
   = select_tag :help_type, options_from_collection_for_select(HelpType.all, :id, :name), include_blank: true
+.field
+  = f.label :users_id_in, "Добровольцы"
+  = f.select :users_id_in, User.all.collect{|u| [u.name, u.id]}, include_blank: true
