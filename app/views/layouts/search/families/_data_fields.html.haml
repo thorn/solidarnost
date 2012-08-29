@@ -37,4 +37,4 @@
   = f.label :date_from, "Помощь не была оказана"
   = text_field_tag :date_from, nil, class: "date_select"
   = text_field_tag :date_to  , nil, class: "date_select"
-  = select_tag :help_type, options_from_collection_for_select(HelpType.all, :id, :name)
+  = select_tag :help_type, options_from_collection_for_select(HelpType.all, :id, :name), include_blank: true
