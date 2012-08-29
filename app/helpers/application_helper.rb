@@ -37,15 +37,13 @@ module ApplicationHelper
       end
       res << "</option>"
     end
-    res.html_safe
+    res
   end
 
   def render_table(layout, row_count, family, edit = true)
     res = ""
-    puts "#{row_count}____________________________________________________-"
     for i in (1..row_count.to_i)
       layouts = layout.where("name = '#{i.to_s}'").order(:name, :value)
-      puts "#{layouts.to_yaml}____________________________________________________-"
       res << "<tr>" if layouts.length > 0
       layouts.each do |cell|
         res << "<td colspan=#{cell.start} rowspan=#{cell.end}>" if cell.groups.count > 0
@@ -55,7 +53,6 @@ module ApplicationHelper
           else
             res << render_cell(group, family)
           end
-          #{cell.name}:#{cell.value}:#{cell.start}:#{cell.end}
         end
         res << "</td>" if cell.groups.for_show.count > 0
       end
@@ -124,6 +121,16 @@ module ApplicationHelper
     end
     field_name = search ? :city_id_in : :city_id
     form.select field_name, options, include_blank: blank
+  end
+
+  def help_types_for_select(params)
+    selected_id = params[:help_type].to_i
+    puts "#{selected_id}|-------------------------"
+    res = HelpType.all.inject("") do |res, type|
+      selected = type.id == selected_id ? 'selected="selected"' : nil
+      res << "<option #{selected} value=\"#{type.id}\">#{type.name}</option>"
+    end
+    raw(res)
   end
 
 end

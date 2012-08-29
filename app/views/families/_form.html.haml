@@ -62,12 +62,15 @@
               .field
                 = f.label :credit_time, "Срок кредита"
                 = f.text_field :credit_time, class: "date_select"
+          = f.submit "Создать", class: "btn primary"
+
           = raw(render_table @layout, @row_count, @family)
+
           - if permitted_to? :edit, :families
             %tr
               %td
                 - Group.for_admin.each do |g|
-                  = raw(render_select(g, @family))
+                  = render_select(g, @family)
         .row
           = f.fields_for :attachments do |af|
             = render 'attachment_fields', f: af

@@ -26,7 +26,7 @@
     = f.number_field :position
   .field
     = f.label :setting_id, "Расположение на странице 'номер строки:номер столбца:съест столбцов:съест строк'"
-    = f.select :setting_id, Setting.layout.map{|s| ["#{s.name}:#{s.value}:#{s.start}:#{s.end}", s.id]}
+    = f.select :setting_id, Setting.layout.map{|s| ["#{s.name}:#{s.value}:#{s.start}:#{s.end}", s.id]}, include_blank: true
   .actions
     - if params[:action] == 'edit'
       = f.submit 'Сохранить', :class => "btn primary"

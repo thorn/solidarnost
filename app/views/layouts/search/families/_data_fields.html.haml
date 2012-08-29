@@ -35,9 +35,9 @@
   = f.number_field :member_counter_less_than_or_equal_to, min: 0
 .field
   = f.label :date_from, "Помощь не была оказана"
-  = text_field_tag :date_from, nil, class: "date_select"
-  = text_field_tag :date_to  , nil, class: "date_select"
-  = select_tag :help_type, options_from_collection_for_select(HelpType.all, :id, :name), include_blank: true
+  = text_field_tag :date_from, params[:date_from], class: "date_select"
+  = text_field_tag :date_to  , params[:date_to], class: "date_select"
+  = select_tag :help_type, help_types_for_select(params), include_blank: true
 .field
   = f.label :users_id_in, "Добровольцы"
   = f.select :users_id_in, User.all.collect{|u| [u.name, u.id]}, include_blank: true
