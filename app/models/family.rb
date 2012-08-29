@@ -8,6 +8,12 @@ class Family < ActiveRecord::Base
     self.priority = group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 }
   end
 
+  def process_visits(params)
+    if params[:visit_date] != '' and params[:make_visit]
+      visits.create(title: "Мониторинг семьи", visit_date: params[:visit_date], made_at: params[:visit_date] , user_ids: params[:volunteer_tokens])
+    end
+  end
+
   NOT_PERSISTED = 0
   PERSISTED = 1
 
@@ -68,6 +74,8 @@ class Family < ActiveRecord::Base
   attr_reader :user_tokens
   attr_reader :necessity_tokens
   attr_accessor :volunteer_tokens
+  attr_accessor :visit_date
+  attr_accessor :make_visit
 
   attr_writer :sirota
 

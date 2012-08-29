@@ -1,4 +1,4 @@
-= simple_form_for @family , :html => {:class => "form-stacked"} do |f|
+= simple_form_for @family , html: {class: "form-stacked"} do |f|
   -if @family.errors.any?
     #error_explanation
       %h2= "#{pluralize(@family.errors.count, "error")} prohibited this family from being saved:"
@@ -28,6 +28,7 @@
           %tr
             %td
               = f.hidden_field :status, value: (params[:persisted] == "false" ? 0 : 1)
+              = f.hidden_field :make_visit, value: nil
               .field
                 = f.label :title, "Идентификация семьи"
                 = f.text_field :title
@@ -89,6 +90,9 @@
         = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect {|u| u.id}), { include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :volunteer_tokens, "Внесшие семью"
         = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
+        = f.label :visit_date, "Дата визита"
+        = f.text_field :visit_date, class: "date_select"
+
       #description_tab.tab-pane
         .field
           = f.label :necessity_tokens, "Введите нужные предметы"
@@ -97,7 +101,9 @@
           = f.label :description, "Описание"
           = f.text_area :description
   - if params[:action] == "edit"
-    = f.submit 'Сохранить', :class => "btn primary"
+    = f.submit 'Сохранить', class: "btn primary"
   - else
-    = f.submit "Создать", :class => "btn primary"
-  = link_to 'Отмена', families_path, :class => "btn"
+    = f.submit "Создать", class: "btn primary"
+
+  = f.submit 'Создать визит и сохранить', class: "btn info make_visit"
+  = link_to 'Отмена', families_path, class: "btn"

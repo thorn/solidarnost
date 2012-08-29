@@ -110,4 +110,8 @@ $(function(){
 
   $('.date_select').datepicker({ dateFormat: "yy-mm-dd" });
   $('.print').on('click', function(){window.print(); return false;});
+
+  $('.make_visit').on('click', function(el){
+    $("#family_make_visit").val("true")
+  });
 });
