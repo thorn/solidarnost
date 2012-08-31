@@ -3,7 +3,7 @@ class Father < ActiveRecord::Base
   belongs_to :health, class_name: "GroupOption"
 
   before_save :set_age
-    before_create :increment_counter
+  before_create :increment_counter
   before_destroy :decrement_counter
 
   def increment_counter
