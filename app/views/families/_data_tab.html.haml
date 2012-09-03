@@ -77,6 +77,27 @@
 
     .info-block
       .info-block-title
+        Другие члены семьи
+      .info-block-body
+        %table(style="width: 700px;")
+          %tr
+            %th ФИО
+            %th Дата рождения
+            %th Здоровье
+            %th Учёба
+            %th
+
+          - @family.family_members.each do |family_member|
+            %tr
+              %td= family_member.name
+              %td= family_member.birthday
+              %td= family_member.health.name if family_member.health
+              %td= family_member.study.name if family_member.study
+              %td
+                = link_to 'Удалить', family_member, :method => :delete
+                = link_to 'Показать', family_member_path(family_member)
+    .info-block
+      .info-block-title
         Дети
       .info-block-body
         %table(style="width: 700px;")

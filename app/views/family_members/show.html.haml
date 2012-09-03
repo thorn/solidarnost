@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%p
+  %b ФИО:
+  = @family_member.name
+%p
+  %b Дата рождения:
+  = @family_member.birthday
+%p
+  %b Здоровье:
+  = @family_member.health.name
+%p
+  %b Учёба:
+  = @family_member.study_name
+
+= link_to 'Назад', family_path(@family_member.family), class: "btn primary"

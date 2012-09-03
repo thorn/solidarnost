@@ -21,6 +21,7 @@ class FamiliesController < ApplicationController
   def new
     @family = Family.new(status: Family::PERSISTED)
     @family.children.build
+    @family.family_members.build
     @family.build_mother
     @family.build_father
     @family.build_trusty
@@ -28,6 +29,7 @@ class FamiliesController < ApplicationController
 
   def edit
     @family.children.build
+    @family.family_members.build
     @family.build_mother if @family.mother.nil?
     @family.build_father if @family.father.nil?
     @family.build_trusty if @family.trusty.nil?

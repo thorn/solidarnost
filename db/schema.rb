@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819053718) do
+ActiveRecord::Schema.define(:version => 20120903083702) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -115,6 +115,23 @@ ActiveRecord::Schema.define(:version => 20120819053718) do
     t.datetime "updated_at"
   end
 
+  create_table "family_members", :force => true do |t|
+    t.string   "first_name"
+    t.string   "second_name"
+    t.string   "last_name"
+    t.date     "birthday"
+    t.integer  "health_id"
+    t.integer  "family_id"
+    t.integer  "age"
+    t.integer  "study_id"
+    t.text     "description"
+    t.boolean  "sex"
+    t.string   "phone"
+    t.integer  "family_member_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "family_necessities", :force => true do |t|
     t.integer  "family_id"
     t.integer  "necessity_id"
@@ -157,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20120819053718) do
     t.boolean  "important",  :default => true
     t.integer  "setting_id"
     t.integer  "position"
-    t.boolean  "hidden",     :default => false
+    t.boolean  "hidden"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

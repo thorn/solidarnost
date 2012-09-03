@@ -54,6 +54,7 @@ Solidarnost::Application.routes.draw do
   resources :trusties
   resources :mothers
   resources :fathers
+  resources :family_members
 
   match '/delete_multiple' => "pages#delete_multiple", as: :delete_multiple
   match '/read_multiple'   => "pages#read_multiple",   as: :read_multiple

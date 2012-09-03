@@ -43,6 +43,7 @@ class Family < ActiveRecord::Base
   has_one  :mother      , dependent: :destroy
   has_one  :trusty      , dependent: :destroy
   has_many :children    , dependent: :destroy
+  has_many :family_members    , dependent: :destroy
   has_many :visits      , dependent: :destroy
   has_many :family_helps, dependent: :destroy
 
@@ -70,6 +71,7 @@ class Family < ActiveRecord::Base
   accepts_nested_attributes_for :mother  , allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
   accepts_nested_attributes_for :trusty  , allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
   accepts_nested_attributes_for :children, allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
+  accepts_nested_attributes_for :family_members, allow_destroy: true, reject_if: lambda { |a| a[:first_name].blank? }
 
   attr_reader :user_tokens
   attr_reader :necessity_tokens

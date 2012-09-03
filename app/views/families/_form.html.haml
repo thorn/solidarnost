@@ -19,6 +19,8 @@
       %li
         %a(href="#trusty_tab")Опекун
       %li
+        %a(href="#other_tab")Другие
+      %li
         %a(href="#volunteers_tab")Добровольцы
       %li
         %a(href="#description_tab")Описание
@@ -88,13 +90,17 @@
       #trusty_tab.tab-pane
         = f.fields_for :trusty do |fld|
           =render "trusty_fields", f: fld
+      #other_tab.tab-pane
+        = f.fields_for :family_members do |fld|
+          =render "family_member_fields", f: fld
+        = link_to_add_fields "Добавить анкету", f, :family_members
       #volunteers_tab.tab-pane
         = f.label :user_tokens, "Прикрепленные к семье люди"
         = f.select :user_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect {|u| u.id}), { include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :volunteer_tokens, "Внесшие семью"
         = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :visit_date, "Дата визита"
-        = f.text_field :visit_date, class: "date_select"
+        = f.text_field :visit_date, class: "date_select", value: Date.today
 
       #description_tab.tab-pane
         .field

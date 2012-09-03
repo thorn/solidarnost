@@ -1,0 +1,28 @@
+.fields
+  .field
+    = f.label :name, "Имя"
+    = f.text_field :first_name
+    = f.label :name, "Фамилия"
+    = f.text_field :second_name
+    = f.label :name, "Отчество"
+    = f.text_field :last_name
+  .field
+    = f.label :sex, "Пол"
+    = f.select :sex, [['Женский', false],['Мужской', true]]
+  .field
+    = f.label :birthday, "Дата рождения"
+    = f.date_select :birthday, :start_year => 1970
+  .field
+    = f.label :health_id, "Состояние здоровья"
+    = f.select :health_id, GroupOption.health.collect { |g| [g.name, g.id]}
+  .field
+    = f.label :phone, "Телефон"
+    = f.text_field :phone
+  .field
+    = f.label "Образование"
+    = f.select :study_id, StudyCategory.all.collect { |g| [g.name, g.id]}
+  .field
+    = f.label :description, "Описание"
+    = f.text_area :description
+  .field
+    = link_to_remove_fields "Удалить анкету", f
