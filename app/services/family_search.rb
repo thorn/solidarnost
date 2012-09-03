@@ -19,7 +19,7 @@ class FamilySearch
       help_to   = par[:date_to] == '' ? Date.today : Date.parse(par[:date_to])
       ids_with_help = Family.includes(:family_helps).where("family_helps.made_at >= ? and family_helps.made_at <= ? and family_helps.help_type_id = ?", help_from, help_to, par[:help_type].to_i).map(&:id) << -1
       par[:search][:id_not_in] = ids_with_help
-      obj = obj.where("id NOT IN (?)", ids_with_help)
+      obj = obj.where("families.id NOT IN (?)", ids_with_help)
     end
 
     if par[:with_one_parent]
