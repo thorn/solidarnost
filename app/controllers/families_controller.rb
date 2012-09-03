@@ -69,9 +69,17 @@ class FamiliesController < ApplicationController
     respond_to do |format|
       format.html
       format.xls do
-        render :xls => @families,
-               :columns => [ :id, :title ],
-               :headers => %w[ Id Title ]
+        render  xls: @families,
+                columns: [
+                  :id,
+                  :title,
+                  :full_city_name,
+                  :address,
+                  :area_name,
+                  :phone,
+                  :member_counter
+                ],
+                headers: %w[ ID Название Город Адрес Район Телефон Людей ]
       end
     end
   end
