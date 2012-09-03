@@ -1,4 +1,7 @@
-= form_for @search, url: search_family_helps_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
+= content_for :sidebar do
+  %li= link_to 'Экспорт в Excel', "#", class: "btn info excel_export"
+
+= form_for @search, url: search_family_helps_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
     = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {:class => "select_multiple", :multiple => false, 'data-placeholder' => "Нажмите сюда" }

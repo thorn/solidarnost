@@ -115,8 +115,11 @@ $(function(){
     $("#family_make_visit").val("true")
   });
   $('.excel_export').on('click', function(el){
-      $(".family_search").last().attr('action', "/families/search.xls");
-      $(".family_search").last().submit();
-      $(".family_search").last().attr('action', "/families/search");
+    search_field_name = ".family_search"
+    form = $(search_field_name).last()
+    action = $(form).attr('action')
+    $(form).attr('action', action + ".xls");
+    $(form).submit();
+    $(form).attr('action', action);
   });
 });

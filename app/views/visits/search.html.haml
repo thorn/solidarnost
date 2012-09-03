@@ -1,7 +1,10 @@
-= form_for @search, url: search_visits_path, :html => {:method => :post, :class => "form-stacked noprint"} do |f|
+= content_for :sidebar do
+  %li= link_to 'Экспорт в Excel', "#", class: "btn info excel_export"
+
+= form_for @search, url: search_visits_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
-    = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {:class => "select_multiple", :multiple => false, 'data-placeholder' => "Нажмите сюда" }
+    = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {class: "select_multiple", multiple: false, 'data-placeholder' => "Нажмите сюда" }
   .multiparam_field
     = f.label :made_at_greater_than_or_equal_to, "Помощь оказана"
     = f.text_field :made_at_greater_than_or_equal_to, class: 'date_select'
@@ -19,11 +22,11 @@
     = f.label :funds_id_equals, "Фонд"
     = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .actions
-    = f.submit "Поиск", :class => "btn primary"
-    %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}
+    = f.submit "Поиск", class: "btn primary"
+    %input{:type => "button", :value => "Сброс", class: "btn", class: "clear_form_button"}
 %h1
   Найденные семьи
   %small= "Всего #{@whole_families}. Людей: #{@whole_people}"
-= form_tag delete_multiple_path, :id => "delete_multiple" do
+= form_tag delete_multiple_path, id: "delete_multiple" do
   = render 'families/table'
-  = submit_tag "Удалить отмеченные", :class => "btn error noprint"
+  = submit_tag "Удалить отмеченные", class: "btn error noprint"

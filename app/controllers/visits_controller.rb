@@ -1,3 +1,4 @@
+#-*- encoding: utf-8 -*-
 class VisitsController < ApplicationController
   before_filter :find_visit, only: [:show, :update, :edit, :destroy]
 
@@ -57,7 +58,23 @@ class VisitsController < ApplicationController
       @whole_people = 0
       @whole_families = 0
     end
-    @groups = Group.for_families
+    @groups = Group.for_families.includes(:group_options)
+    respond_to do |format|
+      format.html
+      format.xls do
+        render  xls: @families,
+                columns: [
+                  :id,
+                  :title,
+                  :full_city_name,
+                  :address,
+                  :area_name,
+                  :phone,
+                  :member_counter
+                ],
+                headers: %w[ ID Название Город Адрес Район Телефон Людей ]
+      end
+    end
   end
 
   private
