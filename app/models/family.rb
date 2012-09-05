@@ -4,7 +4,7 @@ class Family < ActiveRecord::Base
   before_save :set_priority
 
   def set_priority
-    self.priority, self.group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 }
+    self.priority = group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 }
   end
 
   def process_visits(params)
