@@ -1,11 +1,10 @@
 # -*- encoding: utf-8 -*-
 class Family < ActiveRecord::Base
 
-  before_update :set_priority
-  before_create :set_priority
+  before_save :set_priority
 
   def set_priority
-    self.priority = group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 }
+    self.update_column(:priority, self.group_options.includes(:group).inject(0){ |sum, go| sum += go.coeff * go.group.coeff/10 })
   end
 
   def process_visits(params)
