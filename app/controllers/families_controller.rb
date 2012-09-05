@@ -65,7 +65,7 @@ class FamiliesController < ApplicationController
   def search
     @search = FamilySearch.search(params)
 
-    @families  = @search.page(params[:page]).per_page(100)
+    @families  = @search.relation.select("DISTINCT(families.id), families.*").page(params[:page]).per_page(100)
     @whole_families = @search.count
     @whole_people = @search.all.map(&:member_counter).compact.sum
     respond_to do |format|
