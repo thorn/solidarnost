@@ -65,12 +65,12 @@
   %h4
     %a(href="#") Опекун
   %div
-    = f.label :children_first_name_contains, "Имя содержит"
-    = f.text_field :children_first_name_contains
-    = f.label :children_second_name_contains, "Фамилия содержит"
-    = f.text_field :children_second_name_contains
-    = f.label :children_last_name_contains, "Отчество содержит"
-    = f.text_field :children_last_name_contains
+    = f.label :trusty_first_name_contains, "Имя содержит"
+    = f.text_field :trusty_first_name_contains
+    = f.label :trusty_second_name_contains, "Фамилия содержит"
+    = f.text_field :trusty_second_name_contains
+    = f.label :trusty_last_name_contains, "Отчество содержит"
+    = f.text_field :trusty_last_name_contains
 
     = f.label :trusty_health_id_equals, "Здоровье опекуна"
     = f.select :trusty_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -78,3 +78,30 @@
       = f.label :trusty_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
       = f.number_field :trusty_age_greater_than_or_equal_to, min:0
       = f.number_field :trusty_age_less_than_or_equal_to, min:0
+  %h4
+    %a(href="#") Другие
+  %div
+    = f.label :family_members_first_name_contains, "Имя содержит"
+    = f.text_field :family_members_first_name_contains
+    = f.label :family_members_second_name_contains, "Фамилия содержит"
+    = f.text_field :family_members_second_name_contains
+    = f.label :family_members_last_name_contains, "Отчество содержит"
+    = f.text_field :family_members_last_name_contains
+    = f.label :family_members_sex_equals, "Пол"
+    = f.select :family_members_sex_equals, [['Женский', 0],['Мужской', 1]], include_blank: true
+
+    = f.label :family_members_health_id_equals, "Здоровье детей"
+    = f.select :family_members_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
+
+    .multiparam_field
+      = f.label :family_members_age_greater_than_or_equal_to, "Возраст больше и/или меньше"
+      = f.number_field :family_members_age_greater_than_or_equal_to, min:0
+      = f.number_field :family_members_age_less_than_or_equal_to, min:0
+
+    .multiparam_field
+      = label_tag "Один кормилец Сирота"
+      = check_box_tag :with_one_parent
+      = check_box_tag :without_parents
+
+    = f.label :family_members_study_id_equals, "Образование"
+    = f.select :family_members_study_id_equals, StudyCategory.all.collect {|o| [o.name, o.id]}, :include_blank => true
