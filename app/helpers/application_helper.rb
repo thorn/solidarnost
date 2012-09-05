@@ -37,7 +37,7 @@ module ApplicationHelper
       end
       res << "</option>"
     end
-    res
+    raw(res)
   end
 
   def render_table(layout, row_count, family, edit = true)
