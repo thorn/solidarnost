@@ -11,7 +11,7 @@
     = f.select :sex, [['Женский', false],['Мужской', true]]
   .field
     = f.label :birthday, "Дата рождения"
-    = f.date_select :birthday, :start_year => 1970
+    = f.date_select :birthday, :start_year => 1900
   .field
     = f.label :health_id, "Состояние здоровья"
     = f.select :health_id, GroupOption.health.collect { |g| [g.name, g.id]}
