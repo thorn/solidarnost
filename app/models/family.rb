@@ -10,6 +10,7 @@ class Family < ActiveRecord::Base
   def process_visits(params)
     if params[:visit_date] != '' and params[:make_visit] == "true"
       visits.create(title: "Мониторинг семьи", visit_date: params[:visit_date], made_at: params[:visit_date] , user_ids: params[:volunteer_tokens])
+      self.persist!
     end
   end
 

@@ -49,7 +49,7 @@ class FamiliesController < ApplicationController
 
   def update
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
-    if @family.update_attributes(params[:family]) && @family.persist!
+    if @family.update_attributes(params[:family])
       @family.process_visits(params[:family])
       redirect_to @family, notice: 'Family was successfully updated.'
     else
