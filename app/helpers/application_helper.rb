@@ -27,17 +27,21 @@ module ApplicationHelper
   end
 
   def group_options_for_select(gr, family, params = nil)
-    res = gr.group_options.inject("") do |res, go|
-      if family and family.group_options.include?(go)
-        res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
-      elsif params and params[:group_options_id_in] and params[:group_options_id_in].include?(go.id.to_s)
-        res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
-      else
-        res << "<option value=\"#{go.id}\">#{go.name}"
+    if gr.group_options.length > 0
+      res = gr.group_options.order(:created_at).inject("") do |res, go|
+        if family and family.group_options.include?(go)
+          res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
+        elsif params and params[:group_options_id_in] and params[:group_options_id_in].include?(go.id.to_s)
+          res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
+        else
+          res << "<option value=\"#{go.id}\">#{go.name}"
+        end
+        res << "</option>"
       end
-      res << "</option>"
+      raw(res)
+    else
+      ''
     end
-    raw(res)
   end
 
   def render_table(layout, row_count, family, edit = true)
