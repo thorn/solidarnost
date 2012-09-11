@@ -51,6 +51,8 @@
               .field
                 = f.label :address, "Адрес"
                 = f.text_field :address
+              .field
+                = f.submit "Создать", class: "btn primary"
             %td
               .field
                 = f.label :debt_amount, "Размер долга"
@@ -64,7 +66,6 @@
               .field
                 = f.label :credit_time, "Срок кредита"
                 = f.text_field :credit_time, class: "date_select"
-          = f.submit "Создать", class: "btn primary"
 
           = raw(render_table @layout, @row_count, @family)
 
