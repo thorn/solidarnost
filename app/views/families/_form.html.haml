@@ -72,7 +72,7 @@
             %tr
               %td
                 - Group.for_admin.each do |g|
-                  = render_select(g, @family)
+                  = raw(render_select(g, @family))
         .row
           = f.fields_for :attachments do |af|
             = render 'attachment_fields', f: af
