@@ -101,7 +101,7 @@
         = f.label :volunteer_tokens, "Внесшие семью"
         = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :visit_date, "Дата визита"
-        = f.text_field :visit_date, class: "date_select", value: Date.today
+        = f.text_field :visit_date, class: "date_select"
 
       #description_tab.tab-pane
         .field
