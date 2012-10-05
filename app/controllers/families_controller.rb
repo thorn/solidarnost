@@ -19,7 +19,8 @@ class FamiliesController < ApplicationController
   end
 
   def new
-    @family = Family.new(status: Family::PERSISTED)
+    persisted = params[:persisted] == "false" ? Family::NOT_PERSISTED : Family::PERSISTED
+    @family = Family.new(status: persisted)
     @family.children.build
     @family.family_members.build
     @family.build_mother

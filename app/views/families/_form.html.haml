@@ -29,7 +29,7 @@
         %table
           %tr
             %td
-              = f.hidden_field :status, value: (params[:persisted] == "false" ? 0 : 1)
+              = f.hidden_field :status
               = f.hidden_field :make_visit
               .field
                 = f.label :title, "Идентификация семьи"
