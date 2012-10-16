@@ -69,6 +69,7 @@ class FamiliesController < ApplicationController
     @families  = @search.relation.select("DISTINCT(families.id), families.*").page(params[:page]).per_page(100)
     @whole_families = @search.count
     @whole_people = @search.all.map(&:member_counter).compact.sum
+    @whole_children = @search.all.map(&:children_counter).compact.sum
     respond_to do |format|
       format.html
       format.xls do
