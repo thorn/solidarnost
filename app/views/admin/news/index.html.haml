@@ -23,3 +23,4 @@
             = link_to "Удалить", admin_news_path(news), method: :delete
 
   = submit_tag "Отметить прочитанными", :class => "btn error", :confirm => 'Новости будут помечены прочитанными!'
+= will_paginate @news

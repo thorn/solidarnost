@@ -11,7 +11,7 @@ class FamiliesController < ApplicationController
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
     object_to_search = (go_ids.nil? or go_ids.length.zero?) ? Family : Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length)
 
-    @search = object_to_search.order(:id).search(params[:search])
+    @search = object_to_search.order("id DESC").search(params[:search])
     @families = @search.page(params[:page]).per_page(100)
   end
 
@@ -65,7 +65,7 @@ class FamiliesController < ApplicationController
   def search
     @search = FamilySearch.search(params)
 
-    @families  = @search.relation.select("DISTINCT(families.id), families.*").page(params[:page]).per_page(100)
+    @families  = @search.relation.select("DISTINCT(families.id), families.*").order("id DESC").page(params[:page]).per_page(100)
     @whole_families = @search.count
     @whole_people = @search.all.map(&:member_counter).compact.sum
     respond_to do |format|

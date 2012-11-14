@@ -10,6 +10,7 @@
       = link_to "Полный список семей", families_path, class: "btn primary"
 - else
   %h1.noprint Список семей
+= will_paginate @families
 = form_tag delete_multiple_path, :id =>"delete_multiple" do
   %input(type="hidden" name="model" value="Families")
 = render 'families/table'
