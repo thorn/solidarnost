@@ -5,6 +5,22 @@ authorization do
     has_permission_on :devise_sessions, :to => :manage
   end
 
+  role :user do
+    includes :guest
+    has_permission_on [:families,
+                       :fathers,
+                       :mothers,
+                       :children,
+                       :trusties,
+                       :family_members,
+                       :pages,
+                       :users_families,
+                       :statistics,
+                       :family_helps,
+                       :visits
+                      ], to: [:read, :additional]
+  end
+
   role :operator do
     has_permission_on [:families,
                        :fathers,

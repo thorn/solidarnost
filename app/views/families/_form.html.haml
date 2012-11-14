@@ -29,7 +29,7 @@
         %table
           %tr
             %td
-              = f.hidden_field :status, value: (params[:persisted] == "false" ? 0 : 1)
+              = f.hidden_field :status
               = f.hidden_field :make_visit
               .field
                 = f.label :title, "Идентификация семьи"
@@ -51,6 +51,8 @@
               .field
                 = f.label :address, "Адрес"
                 = f.text_field :address
+              .field
+                = f.submit "Создать", class: "btn primary"
             %td
               .field
                 = f.label :debt_amount, "Размер долга"
@@ -64,7 +66,6 @@
               .field
                 = f.label :credit_time, "Срок кредита"
                 = f.text_field :credit_time, class: "date_select"
-          = f.submit "Создать", class: "btn primary"
 
           = raw(render_table @layout, @row_count, @family)
 
@@ -72,7 +73,7 @@
             %tr
               %td
                 - Group.for_admin.each do |g|
-                  = render_select(g, @family)
+                  = raw(render_select(g, @family))
         .row
           = f.fields_for :attachments do |af|
             = render 'attachment_fields', f: af
@@ -100,7 +101,7 @@
         = f.label :volunteer_tokens, "Внесшие семью"
         = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :visit_date, "Дата визита"
-        = f.text_field :visit_date, class: "date_select", value: Date.today
+        = f.text_field :visit_date, class: "date_select"
 
       #description_tab.tab-pane
         .field

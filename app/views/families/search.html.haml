@@ -19,7 +19,7 @@
 
 %h1
   Найденные семьи
-  %small= "Всего #{@whole_families}. Людей: #{@whole_people}"
+  %small= "Всего #{@whole_families}. Людей: #{@whole_people}. Детей: #{@whole_children}"
 = form_tag delete_multiple_path, id: "delete_multiple" do
   = render 'table'
   = submit_tag "Удалить отмеченные", class: "btn error noprint"
