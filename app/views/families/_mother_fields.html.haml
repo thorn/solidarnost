@@ -10,6 +10,12 @@
     = f.label :birthday, "Дата рождения"
     = f.date_select :birthday, :start_year => 1910
   .field
+    = f.label :working, "Работает"
+    = f.select :working, [["Не работает", 0], ["Работает", 1]]
+  .field
+    = f.label :profession, "Профессия/специальность"
+    = f.text_field :profession
+  .field
     = f.label :phone, "Телефон"
     = f.text_field :phone
   .field

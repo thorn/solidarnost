@@ -13,6 +13,12 @@
     = f.label :birthday, "Дата рождения"
     = f.date_select :birthday, :start_year => 1900
   .field
+    = f.label :working, "Работает"
+    = f.select :working, [["Не работает", 0], ["Работает", 1]]
+  .field
+    = f.label :profession, "Профессия/специальность"
+    = f.text_field :profession
+  .field
     = f.label :health_id, "Состояние здоровья"
     = f.select :health_id, GroupOption.health.collect { |g| [g.name, g.id]}
   .field

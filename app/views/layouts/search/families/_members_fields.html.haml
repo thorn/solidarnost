@@ -9,6 +9,10 @@
     = f.text_field :children_second_name_contains
     = f.label :children_last_name_contains, "Отчество содержит"
     = f.text_field :children_last_name_contains
+    = f.label :children_working_equals, "Работает"
+    = f.select :children_working_equals, [["Не работает", 0], ['Работает', 1]], include_blank: true
+    = f.label :children_profession_contains, "Профессия/специальность"
+    = f.text_field :children_profession_contains
     = f.label :children_sex_equals, "Пол"
     = f.select :children_sex_equals, [['Женский', 0],['Мужской', 1]], include_blank: true
 
@@ -30,12 +34,16 @@
   %h4
     %a(href="#") Отец
   %div
-    = f.label :children_first_name_contains, "Имя содержит"
-    = f.text_field :children_first_name_contains
-    = f.label :children_second_name_contains, "Фамилия содержит"
-    = f.text_field :children_second_name_contains
-    = f.label :children_last_name_contains, "Отчество содержит"
-    = f.text_field :children_last_name_contains
+    = f.label :father_first_name_contains, "Имя содержит"
+    = f.text_field :father_first_name_contains
+    = f.label :father_second_name_contains, "Фамилия содержит"
+    = f.text_field :father_second_name_contains
+    = f.label :father_last_name_contains, "Отчество содержит"
+    = f.text_field :father_last_name_contains
+    = f.label :father_working_equals, "Работает"
+    = f.select :father_working_equals, [["Не работает", 0], ['Работает', 1]], include_blank: true
+    = f.label :father_profession_contains, "Профессия/специальность"
+    = f.text_field :father_profession_contains
 
     = f.label :father_health_id_equals, "Здоровье отца"
     = f.select :father_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -48,12 +56,16 @@
   %h4
     %a(href="#") Мать
   %div
-    = f.label :children_first_name_contains, "Имя содержит"
-    = f.text_field :children_first_name_contains
-    = f.label :children_second_name_contains, "Фамилия содержит"
-    = f.text_field :children_second_name_contains
-    = f.label :children_last_name_contains, "Отчество содержит"
-    = f.text_field :children_last_name_contains
+    = f.label :mother_first_name_contains, "Имя содержит"
+    = f.text_field :mother_first_name_contains
+    = f.label :mother_second_name_contains, "Фамилия содержит"
+    = f.text_field :mother_second_name_contains
+    = f.label :mother_last_name_contains, "Отчество содержит"
+    = f.text_field :mother_last_name_contains
+    = f.label :mother_working_equals, "Работает"
+    = f.select :mother_working_equals, [["Не работает", 0], ['Работает', 1]], include_blank: true
+    = f.label :mother_profession_contains, "Профессия/специальность"
+    = f.text_field :mother_profession_contains
 
     = f.label :mother_health_id_equals, "Здоровье матери"
     = f.select :mother_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -71,6 +83,10 @@
     = f.text_field :trusty_second_name_contains
     = f.label :trusty_last_name_contains, "Отчество содержит"
     = f.text_field :trusty_last_name_contains
+    = f.label :trusty_working_equals, "Работает"
+    = f.select :trusty_working_equals, [["Не работает", 0], ['Работает', 1]], include_blank: true
+    = f.label :trusty_profession_contains, "Профессия/специальность"
+    = f.text_field :trusty_profession_contains
 
     = f.label :trusty_health_id_equals, "Здоровье опекуна"
     = f.select :trusty_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true
@@ -89,6 +105,10 @@
     = f.text_field :family_members_last_name_contains
     = f.label :family_members_sex_equals, "Пол"
     = f.select :family_members_sex_equals, [['Женский', 0],['Мужской', 1]], include_blank: true
+    = f.label :family_members_working_equals, "Работает"
+    = f.select :family_members_working_equals, [["Не работает", 0], ['Работает', 1]], include_blank: true
+    = f.label :family_members_profession_contains, "Профессия/специальность"
+    = f.text_field :family_members_profession_contains
 
     = f.label :family_members_health_id_equals, "Здоровье детей"
     = f.select :family_members_health_id_equals, GroupOption.health.collect {|o| [o.name, o.id]}, :include_blank => true

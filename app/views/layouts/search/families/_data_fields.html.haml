@@ -9,7 +9,7 @@
   .city_select
     = f.label :city_id_in, "Населенный пункт"
     .step_select
-      = city_edit(f)
+      =# city_edit(f)
 .field
   = f.label :area_id_equals, "Район"
   = f.select :area_id_equals, Area.scoped.map{|a| [a.name, a.id]}, include_blank: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120903083702) do
+ActiveRecord::Schema.define(:version => 20121120053510) do
 
   create_table "assistances", :force => true do |t|
     t.integer  "family_help_id"
@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20120903083702) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "sex"
+    t.integer  "working"
+    t.string   "profession"
   end
 
   create_table "cities", :force => true do |t|
@@ -130,6 +132,8 @@ ActiveRecord::Schema.define(:version => 20120903083702) do
     t.integer  "family_member_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "working"
+    t.string   "profession"
   end
 
   create_table "family_necessities", :force => true do |t|
@@ -151,6 +155,8 @@ ActiveRecord::Schema.define(:version => 20120903083702) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "working"
+    t.string   "profession"
   end
 
   create_table "group_options", :force => true do |t|
@@ -198,6 +204,8 @@ ActiveRecord::Schema.define(:version => 20120903083702) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "working"
+    t.string   "profession"
   end
 
   create_table "necessities", :force => true do |t|
@@ -242,6 +250,8 @@ ActiveRecord::Schema.define(:version => 20120903083702) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "working"
+    t.string   "profession"
   end
 
   create_table "user_roles", :force => true do |t|
