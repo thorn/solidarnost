@@ -23,6 +23,6 @@ class FamilyMember < ActiveRecord::Base
   end
 
   def name
-    first_name + " " + last_name
+    second_name + ' ' + first_name + ' ' + last_name
   end
 end
