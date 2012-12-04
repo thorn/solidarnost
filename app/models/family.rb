@@ -39,6 +39,12 @@ class Family < ActiveRecord::Base
       SELECT "families".* FROM "families" LEFT JOIN mothers ON mothers.family_id=families.id WHERE (mothers.family_id IS NULL)')
   }
 
+  def self.by_colour(setting)
+    low_end = setting.start
+    high_end = setting.end
+    where("priority >= ? AND priority < ?", low_end, high_end)
+  end
+
   has_one  :father      , dependent: :destroy
   has_one  :mother      , dependent: :destroy
   has_one  :trusty      , dependent: :destroy
