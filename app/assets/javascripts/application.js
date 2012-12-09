@@ -125,8 +125,8 @@ $(function(){
 
   $('body').on('click', '.pagination a', function(ev){
     var page = $(ev.target).attr('href').split('/families/search?page=')[1]
-    $("#family_search input#page").val(page);
-    $("#family_search").submit();
+    $(".family_search input#page").val(page);
+    $(".family_search").submit();
     return false;
   });
 });
