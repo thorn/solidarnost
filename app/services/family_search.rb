@@ -10,7 +10,7 @@ class FamilySearch
     if (go_ids.nil? or go_ids.length.zero?)
       object_to_search = Family
     else
-      object_to_search = Family.joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length).map(&:id)
+      object_to_search = Family.includes(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length).map(&:id)
       par[:search][:id_in] = object_to_search
     end
 

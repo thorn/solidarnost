@@ -6,6 +6,7 @@
 %h1.noprint Расширенный поиск по семьям
 
 = form_for @search, url: search_families_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
+  = hidden_field_tag :page, params[:page] || 1
   .row
     .span5
       = render 'layouts/search/families/data_fields', f: f
@@ -20,6 +21,7 @@
 %h1
   Найденные семьи
   %small= "Всего #{@whole_families}. Людей: #{@whole_people}. Детей: #{@whole_children}"
+= will_paginate @families
 = form_tag delete_multiple_path, id: "delete_multiple" do
   = render 'table'
   = submit_tag "Удалить отмеченные", class: "btn error noprint"
