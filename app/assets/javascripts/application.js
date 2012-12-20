@@ -122,4 +122,12 @@ $(function(){
     $(form).submit();
     $(form).attr('action', action);
   });
+
+  $('.goto_id').on('submit', function(ev){
+    id = $(ev.target).find('input[type=text]').val();
+    if ((id != null) && (id.match(/\d/) > 0)){
+      window.location.assign('/families/' + id);
+    }
+    return false;
+  });
 });

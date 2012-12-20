@@ -1,6 +1,5 @@
 = content_for :sidebar do
   %li= link_to 'Экспорт в Excel', "#", class: "btn info excel_export"
-
 = form_for @search, url: search_family_helps_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
@@ -25,7 +24,7 @@
     = f.label :users_id_equals, "Пользователь"
     = f.select :users_id_equals, User.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .field
-    = f.label :funds_id_equals, "Пользователь"
+    = f.label :funds_id_equals, "Фонд"
     = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
   .actions
     = f.submit "Поиск", :class => "btn primary"
@@ -34,6 +33,7 @@
 %h1
   Найденная помощь
   %small= "Всего оказано на #{@whole_amount} руб. Всего семей #{@whole_families}. Людей: #{@whole_people}"
+
 = form_tag delete_multiple_path, :id => "delete_multiple" do
   = render 'families/table'
   = submit_tag "Удалить отмеченные", :class => "btn error noprint"

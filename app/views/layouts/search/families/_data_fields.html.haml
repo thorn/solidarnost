@@ -22,9 +22,6 @@
 .field
   = f.label :description_contains, "Описание содержит"
   = f.text_field :description_contains
-.field
-  = f.label :status_equals, "Подтвержденность"
-  = f.select :status_equals, [["Заполненная", 1], ["Не заполненная", 0]], include_blank: true
 .multiparam_field
   = f.label :children_counter_greater_than_or_equal_to, "Детей в семье"
   = f.number_field :children_counter_greater_than_or_equal_to, min: 0
@@ -41,3 +38,10 @@
 .field
   = f.label :users_id_in, "Добровольцы"
   = f.select :users_id_in, User.all.collect{|u| [u.name, u.id]}, include_blank: true
+.multiparam_field
+  = f.label :created_at_greater_than_or_equal_to, "Заявка создана"
+  = f.text_field :created_at_greater_than_or_equal_to, class: 'date_select'
+  = f.text_field :created_at_less_than_or_equal_to, class: 'date_select'
+.field
+  = f.label :status_equals, "Подтвержденность"
+  = f.select :status_equals, Family.status_for_select, include_blank: true

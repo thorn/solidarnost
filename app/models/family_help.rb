@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class FamilyHelp < ActiveRecord::Base
-  after_create :create_visit
+  before_create :create_visit
   belongs_to :family
   belongs_to :visit
   belongs_to :help_type
@@ -31,8 +31,15 @@ private
 
   def create_visit
     if self.during_visit == "1"
-      @visit = Visit.create!(description: "Visit with help", family_id: self.family_id, made_at: Date.today, visit_date: Date.today)
-      self.update_attribute(:visit_id, @visit.id)
+      @visit = Visit.create!(
+        description: "Visit with help",
+        family_id: self.family_id,
+        made_at: Date.today,
+        visit_date: Date.today,
+        fund_ids: self.fund_ids,
+        user_ids: self.user_ids
+      )
+      self.visit_id = @visit.id
     end
   end
 end

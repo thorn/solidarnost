@@ -136,4 +136,11 @@ class Family < ActiveRecord::Base
     end
     parents.reverse!
   end
+
+  def self.status_for_select
+    [
+      ['Заявка', Family::NOT_PERSISTED],
+      ['Постоянная', Family::PERSISTED]
+    ]
+  end
 end
