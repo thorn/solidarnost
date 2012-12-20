@@ -50,7 +50,7 @@ class VisitsController < ApplicationController
     @visits = @search.page(params[:page]).per_page(100)
     @whole_visits = @search.all.length
     if @visits.length > 0
-      @families = Family.where(id: @visits.map(&:family_id))
+      @families = Family.where(id: @search.all.map(&:family_id).uniq)
       @whole_people = @families.sum(:member_counter)
       @whole_families = @families.count
     else
