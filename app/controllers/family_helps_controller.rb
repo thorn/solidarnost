@@ -27,7 +27,7 @@ class FamilyHelpsController < ApplicationController
     @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount || 0}
     @groups = Group.for_families
     if @family_helps.length > 0
-      @families = Family.where(id: @family_helps.map(&:family_id))
+      @families = Family.where(id: @search.all.map(&:family_id).uniq)
       @whole_people = @families.sum(:member_counter)
       @whole_families = @families.count
     else
