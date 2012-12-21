@@ -9,7 +9,7 @@
   .city_select
     = f.label :city_id_in, "Населенный пункт"
     .step_select
-      = city_edit(f)
+      = city_edit(f) unless Rails.env == 'development'
 .field
   = f.label :area_id_equals, "Район"
   = f.select :area_id_equals, Area.scoped.map{|a| [a.name, a.id]}, include_blank: true
@@ -36,8 +36,11 @@
   = text_field_tag :date_to  , params[:date_to], class: "date_select"
   = select_tag :help_type, help_types_for_select(params), include_blank: true
 .field
-  = f.label :users_id_in, "Добровольцы"
+  = f.label :users_id_in, "Доброволец"
   = f.select :users_id_in, User.all.collect{|u| [u.name, u.id]}, include_blank: true
+.field
+  = f.label :fund_id, "Фонд"
+  = select_tag :fund_id, funds_for_select(params), include_blank: true
 .multiparam_field
   = f.label :created_at_greater_than_or_equal_to, "Заявка создана"
   = f.text_field :created_at_greater_than_or_equal_to, class: 'date_select'

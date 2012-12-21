@@ -44,7 +44,7 @@
                 Дагестан
                 .city_select
                   .step_select
-                    = city_edit(f)
+                    = city_edit(f) unless Rails.env == 'development'
               .field
                 = f.label :area_id, "Район"
                 = f.select :area_id, Area.all.collect{|a| [a.name, a.id]}, {include_blank: true}, {class: "select_multiple", "data-placeholder" => "Нажмите сюда"}

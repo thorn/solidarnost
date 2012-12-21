@@ -137,4 +137,13 @@ module ApplicationHelper
     raw(res)
   end
 
+  def funds_for_select(params)
+    selected_id = params[:fund_id].to_i
+    res = Fund.all.inject("") do |res, fund|
+      selected = fund.id == selected_id ? 'selected="selected"' : nil
+      res << "<option #{selected} value=\"#{fund.id}\">#{fund.name}</option>"
+    end
+    raw(res)
+  end
+
 end

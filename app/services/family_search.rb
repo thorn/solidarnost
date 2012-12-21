@@ -1,10 +1,17 @@
 require "date"
 class FamilySearch
   def self.search(par)
-    if par[:search] && par[:search][:city_id_in]
-      city = City.find(par[:search][:city_id_in])
-      par[:search][:city_id_in] = city.subtree.map(&:id) if city
+    if par[:search]
+      if par[:search][:city_id_in]
+        city = City.find(par[:search][:city_id_in])
+        par[:search][:city_id_in] = city.subtree.map(&:id) if city
+      end
+      if par[:fund_id]
+        user_ids = Fund.find(par[:fund_id]).users.map(&:id)
+        par[:search][:users_id_in] = user_ids
+      end
     end
+
     obj = Family
     go_ids = par[:group_options_id_in].reject { |e| e == "" } if par[:group_options_id_in]
     if (go_ids.nil? or go_ids.length.zero?)

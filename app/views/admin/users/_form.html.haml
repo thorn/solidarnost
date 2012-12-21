@@ -36,13 +36,12 @@
     = f.label :description, "Краткая информация о себе"
     = f.text_area :description
 
-  - if params[:action] == "new"
-    .field
-      = f.label :password, "Пароль"
-      = f.password_field :password
-    .field
-      = f.label :password_confirmation, "Подтверждение пароля"
-      = f.password_field :password_confirmation
+  .field
+    = f.label :password, "Пароль"
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation, "Подтверждение пароля"
+    = f.password_field :password_confirmation
   .field
     = f.label :role_ids, "Роль"
     = f.select :role_ids, Role.scoped.map{|r| [r.name, r.id]}, {:include_blank => true}, {:class => "select_multiple", :multiple => true, 'data-placeholder' => "Нажмите сюда"}
