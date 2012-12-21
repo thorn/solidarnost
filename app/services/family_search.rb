@@ -2,11 +2,12 @@ require "date"
 class FamilySearch
   def self.search(par)
     if par[:search]
-      if par[:search][:city_id_in]
+      if par[:search][:city_id_in] != ''
         city = City.find(par[:search][:city_id_in])
         par[:search][:city_id_in] = city.subtree.map(&:id) if city
       end
-      if par[:fund_id]
+
+      if par[:fund_id] != ''
         user_ids = Fund.find(par[:fund_id]).users.map(&:id)
         par[:search][:users_id_in] = user_ids
       end
