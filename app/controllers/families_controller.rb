@@ -11,9 +11,9 @@ class FamiliesController < ApplicationController
     go_ids = params[:group_options_id_in].reject { |e| e == "" } if params[:group_options_id_in]
 
     if go_ids.nil? or go_ids.length.zero?
-      @search = Family.order("id DESC").search(params[:search])
+      @search = Family.order("id DESC").includes(:area).includes(:city).search(params[:search])
     else
-      @search = Family.order("id DESC").includes(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length).search(params[:search])
+      @search = Family.order("id DESC").includes(:area).includes(:city).joins(:group_options).where(group_options: {id: go_ids}).group("families.id").having("count(families.id)= ?", go_ids.length).search(params[:search])
     end
     @families = @search.page(params[:page]).per_page(100)
 
@@ -115,6 +115,6 @@ class FamiliesController < ApplicationController
     end
 
     def find_groups
-      @groups = Group.includes(:group_options).for_families
+      @groups = Group.includes(:group_options).for_families.visible
     end
 end

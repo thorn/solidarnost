@@ -14,7 +14,7 @@
         %th= sort_link @search, :area, "Район"
         %th= sort_link @search, :address, "Адрес"
         %th.no_show Подпись
-        - @groups.visible.each do |gr|
+        - @groups.each do |gr|
           %th.noprint
             .filter_value
               = gr.name
@@ -47,9 +47,11 @@
           %td= link_to family.area_name, family
           %td= link_to family.address, family
           %td.no_show= raw("&nbsp ")
-          - @groups.visible.each do |gr|
-            - if @go = family.group_options.find_by_group_id(gr.id)
-              %td.noprint= link_to @go.name, family
+          - result = {}
+          - family.group_options.each do |opt|
+            - result[opt.group_id] = opt.name
+          - @groups.each do |gr|
+            %td.noprint= link_to result[gr.id], family
           %td.noprint
             = link_to 'Редактировать', edit_family_path(family)
             = link_to 'Удалить', family, :method => :delete
