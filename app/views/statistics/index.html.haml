@@ -7,3 +7,12 @@
   = priority_families.map(&:member_counter).sum
 
   %br
+%table.table
+  %tr
+    %th Время
+    %td Тип помощи
+  - HelpType.scoped.each do |ht|
+    = ht.name
+    \=>
+    = families_count = FamilyHelp.where(help_type_id: ht.id).map(&:family_id).uniq.length
+    %br
