@@ -1,0 +1,8 @@
+%table.table(style="width: 400px;")
+  - types.each do |type|
+    %tr
+      %td= type.name
+      %td
+        = type.family_info[:families_count]
+        \/
+        = type.family_info[:people_count]

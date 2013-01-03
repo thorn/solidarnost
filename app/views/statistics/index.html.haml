@@ -1,18 +1,32 @@
 - priority_names = { "red" => "Нуждаются", "blue" => "Средняя категория", "green" => "Не нуждаются" }
-- @priorities.each do |priority|
-  - priority_families = Family.by_colour(priority)
-  = priority_names[priority.value]
-  = priority_families.count
-  = "/"
-  = priority_families.map(&:member_counter).sum
+%table(style="width:600px")
+  %tr
+    %th Категория
+    %th Количество
+
+  - @priorities.each do |priority|
+    %tr
+      - priority_families = Family.by_colour(priority)
+      %td= priority_names[priority.value]
+      %td
+        = priority_families.count
+        = "/"
+        = priority_families.map(&:member_counter).sum
 
   %br
 %table.table
   %tr
     %th Время
     %th Оказано помощи
-  - HelpType.scoped.each do |ht|
-    = ht.name
-    \=>
-    = families_count = FamilyHelp.where(help_type_id: ht.id).map(&:family_id).uniq.length
-    %br
+  %tr
+    %td Всего
+    %td= render 'type_table', types: @types
+  %tr
+    %td За месяц
+    %td= render 'type_table', types: @types_for_month
+  %tr
+    %td За квартал
+    %td= render 'type_table', types: @types_for_quater
+  %tr
+    %td За год
+    %td= render 'type_table', types: @types_for_year
