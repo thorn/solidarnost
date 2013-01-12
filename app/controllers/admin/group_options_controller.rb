@@ -3,7 +3,7 @@ class Admin::GroupOptionsController < Admin::BaseController
   before_filter :find_group_option, only: [:show, :edit, :update, :destroy]
 
   def index
-    @group_options = GroupOption.all
+    @group_options = GroupOption.order(:group_id)
   end
 
   def show

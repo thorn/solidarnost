@@ -28,7 +28,7 @@ module ApplicationHelper
 
   def group_options_for_select(gr, family, params = nil)
     if gr.group_options.length > 0
-      res = gr.group_options.order(:created_at).inject("") do |res, go|
+      res = gr.group_options.order(:updated_at).inject("") do |res, go|
         if family and family.group_options.include?(go)
           res << "<option selected=\"selected\" value=\"#{go.id}\">#{go.name}"
         elsif params and params[:group_options_id_in] and params[:group_options_id_in].include?(go.id.to_s)
