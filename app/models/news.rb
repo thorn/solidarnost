@@ -40,7 +40,7 @@ class News < ActiveRecord::Base
     elsif object.class == Visit
       attributes = {title: "Совершен визит в семью <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.title} c приоритетом #{object.family.priority} в #{object.created_at}" , text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 1 }
     elsif object.class == FamilyHelp
-      attributes = {title: "Оказана помощь семье <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.title}</a> c приоритетом #{object.family.priority} в размере #{object.amount}", text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 2 }
+      attributes = {title: "Оказана #{object.help_type.name} семье <a href='/families/#{object.family.id}'>#{object.family.id} - #{object.family.title}</a> c приоритетом #{object.family.priority} в размере #{object.amount}", text: "Ссылка: <a href='/families/#{object.family.id}'>#{object.created_at}</a><br /> Описание:<br><pre>#{object.description}</pre>", news_type: 2 }
     end
 
     News.create!(attributes)

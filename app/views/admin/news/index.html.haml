@@ -7,8 +7,8 @@
         %th
           %div(align="center")
             %input#mark_all(type="checkbox")
+        %th Дата
         %th Название
-        %th Тип
         %th Действия
     %tbody
       - @news.each do |news|
@@ -16,8 +16,8 @@
           %td
             %div(align="center")
               = check_box_tag "model_ids[]", news.id
+          %td= l news.created_at, format: :long
           %td= raw(news.title)
-          %td= news.news_type
           %td
             = link_to (news.read? ? "Отметить непрочтенной" : "Отметить прочтенной"), mark_as_read_admin_news_path(news)
             = link_to "Удалить", admin_news_path(news), method: :delete
