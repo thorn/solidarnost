@@ -6,22 +6,22 @@ class Admin::NewsController < Admin::BaseController
   def index
     case params[:filter]
       when "archived"
-        @news = News.archived.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.archived.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Архив новостей"
       when "families"
-        @news = News.active.families.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.active.families.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Созданные семьи"
       when "visits"
-        @news = News.active.visits.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.active.visits.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Совершенные визиты"
       when "helps"
-        @news = News.active.helps.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.active.helps.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Оказанная помощь"
       when "info"
-        @news = News.active.info.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.active.info.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Информационные оповещения"
       else
-        @news = News.active.order(:created_at).page(params[:page]).per_page(100)
+        @news = News.active.order("created_at DESC").page(params[:page]).per_page(100)
         @header = "Все новости"
       end
   end
