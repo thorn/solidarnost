@@ -66,8 +66,10 @@ class Family < ActiveRecord::Base
   has_many :attachments, as: :attachable
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
-  has_many :transactions
-  accepts_nested_attributes_for :transactions, allow_destroy: true
+  has_many :incomes
+  accepts_nested_attributes_for :incomes, allow_destroy: true
+  has_many :expenses
+  accepts_nested_attributes_for :expenses, allow_destroy: true
 
   belongs_to :city
   belongs_to :area
