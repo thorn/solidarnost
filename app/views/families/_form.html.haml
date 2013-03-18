@@ -24,6 +24,8 @@
         %a(href="#volunteers_tab")Добровольцы
       %li
         %a(href="#description_tab")Описание
+      %li
+        %a(href="#income_tab")Доходы/Расходы
     .tab-content
       #main_tab.active.tab-pane
         %table
@@ -110,6 +112,7 @@
         .field
           = f.label :description, "Описание"
           = f.text_area :description
+      #income_tag.tab-pane
   - if params[:action] == "edit"
     = f.submit 'Сохранить', class: "btn primary"
   - else

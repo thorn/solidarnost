@@ -17,6 +17,24 @@ FactoryGirl.define do
     status 0
   end
 
+  factory :transaction do
+    name "Transaction"
+    setting
+  end
+
+  factory :setting do
+    group_name"
+    name"
+    start"
+    end"
+    value"
+    amount"
+    start_at"
+    end_at"
+    created_at"
+    updated_at"
+  end
+
   sequence :email do |n|
     "person#{n}@example.com"
   end
