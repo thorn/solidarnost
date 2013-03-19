@@ -69,17 +69,27 @@
                 = f.label :credit_time, "Срок кредита"
                 = f.text_field :credit_time, class: "date_select"
 
-          = raw(render_table @layout, @row_count, @family)
+            = raw(render_table @layout, @row_count, @family)
 
-          - if permitted_to? :edit, :families
-            %tr
-              %td
-                - Group.for_admin.each do |g|
-                  = raw(render_select(g, @family))
+            - if permitted_to? :edit, :families
+              %tr
+                %td
+                  - Group.for_admin.each do |g|
+                    = raw(render_select(g, @family))
         .row
           = f.fields_for :attachments do |af|
             = render 'attachment_fields', f: af
           = link_to_add_fields "Добавить файл", f, :attachments
+      #income_tab.tab-pane
+        .row
+          .span8
+            %h2 Доходы
+            = f.fields_for :incomes do |fld|
+              = render "income_fields", f: fld
+          .span8
+            %h2 Расходы
+            = f.fields_for :expenses do |fld|
+              = render "expense_fields", f: fld
       #children_tab.tab-pane
         = f.fields_for :children do |fld|
           = render "child_fields", f: fld
@@ -89,13 +99,13 @@
           = render "father_fields", f: fld
       #mother_tab.tab-pane
         = f.fields_for :mother do |fld|
-          =render "mother_fields", f: fld
+          = render "mother_fields", f: fld
       #trusty_tab.tab-pane
         = f.fields_for :trusty do |fld|
-          =render "trusty_fields", f: fld
+          = render "trusty_fields", f: fld
       #other_tab.tab-pane
         = f.fields_for :family_members do |fld|
-          =render "family_member_fields", f: fld
+          = render "family_member_fields", f: fld
         = link_to_add_fields "Добавить анкету", f, :family_members
       #volunteers_tab.tab-pane
         = f.label :user_tokens, "Прикрепленные к семье люди"
@@ -112,7 +122,6 @@
         .field
           = f.label :description, "Описание"
           = f.text_area :description
-      #income_tag.tab-pane
   - if params[:action] == "edit"
     = f.submit 'Сохранить', class: "btn primary"
   - else

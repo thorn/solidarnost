@@ -5,6 +5,4 @@ class Setting < ActiveRecord::Base
   scope :incomes, where(group_name: "income")
   scope :expenses, where(group_name: "expense")
   has_many :groups, dependent: :nullify
-  has_many :incomes
-  has_many :expenses
 end

@@ -1,3 +1,2 @@
 class Income < Transaction
-
 end

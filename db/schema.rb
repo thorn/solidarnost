@@ -159,6 +159,14 @@ ActiveRecord::Schema.define(:version => 20130318111210) do
     t.string   "profession"
   end
 
+  create_table "finances", :force => true do |t|
+    t.string   "finance_type"
+    t.string   "name"
+    t.integer  "family_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "group_options", :force => true do |t|
     t.string   "name"
     t.integer  "coeff"

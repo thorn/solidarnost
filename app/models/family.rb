@@ -67,9 +67,9 @@ class Family < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
 
   has_many :incomes
-  accepts_nested_attributes_for :incomes, allow_destroy: true
+  accepts_nested_attributes_for :incomes, allow_destroy: true, reject_if: lambda { |a| a[:amount].blank? }
   has_many :expenses
-  accepts_nested_attributes_for :expenses, allow_destroy: true
+  accepts_nested_attributes_for :expenses, allow_destroy: true, reject_if: lambda { |a| a[:amount].blank? }
 
   belongs_to :city
   belongs_to :area

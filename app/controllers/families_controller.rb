@@ -30,6 +30,14 @@ class FamiliesController < ApplicationController
     @family.build_mother
     @family.build_father
     @family.build_trusty
+    @income_settings = Setting.incomes
+    @income_settings.each do |s|
+      @family.incomes.build(setting_id: s.id)
+    end
+    @income_settings = Setting.expenses
+    @expense_settings.each do |s|
+      @family.expenses.build(setting_id: s.id)
+    end
   end
 
   def edit
@@ -38,6 +46,14 @@ class FamiliesController < ApplicationController
     @family.build_mother if @family.mother.nil?
     @family.build_father if @family.father.nil?
     @family.build_trusty if @family.trusty.nil?
+    @income_settings = Setting.incomes
+    @income_settings.each do |s|
+      @family.incomes.build(setting_id: s.id) if !@family.incomes.map(&:setting_id).include?(s.id)
+    end
+    @expense_settings = Setting.expenses
+    @expense_settings.each do |s|
+      @family.expenses.build(setting_id: s.id) if !@family.expenses.map(&:setting_id).include?(s.id)
+    end
   end
 
   def create
