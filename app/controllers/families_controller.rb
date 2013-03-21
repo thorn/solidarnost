@@ -34,7 +34,7 @@ class FamiliesController < ApplicationController
     @income_settings.each do |s|
       @family.incomes.build(setting_id: s.id)
     end
-    @income_settings = Setting.expenses
+    @expense_settings = Setting.expenses
     @expense_settings.each do |s|
       @family.expenses.build(setting_id: s.id)
     end
