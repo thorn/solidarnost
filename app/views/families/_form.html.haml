@@ -11,6 +11,8 @@
       %li.active
         %a(href="#main_tab")Семья
       %li
+        %a(href="#income_tab")Доходы/Расходы
+      %li
         %a(href="#children_tab")Дети
       %li
         %a(href="#father_tab")Отец
@@ -24,8 +26,6 @@
         %a(href="#volunteers_tab")Добровольцы
       %li
         %a(href="#description_tab")Описание
-      %li
-        %a(href="#income_tab")Доходы/Расходы
     .tab-content
       #main_tab.active.tab-pane
         %table
@@ -114,7 +114,6 @@
         = f.select :volunteer_tokens, options_from_collection_for_select(User.all, :id, :name, @family.users.collect{|u| u.id}), {include_blank: true}, { class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда" }
         = f.label :visit_date, "Дата визита"
         = f.text_field :visit_date, class: "date_select"
-
       #description_tab.tab-pane
         .field
           = f.label :necessity_tokens, "Введите нужные предметы"

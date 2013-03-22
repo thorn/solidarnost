@@ -14,12 +14,12 @@
 .tab-content
   #data_tab.active.tab-pane
     = render 'data_tab'
+  #incomes_tab.tab-pane
+    = render 'incomes_tab'
   #help_tab.tab-pane
     = render 'help_tab'
   #desc_tab.tab-pane
     = render 'desc_tab'
-  #incomes_tab.tab-pane
-    = render 'incomes_tab'
 = link_to 'Редактировать', edit_family_path(@family), class: "btn"
 = link_to 'Назад', families_path, class: "btn"
 - if permitted_to? :persist, :families
