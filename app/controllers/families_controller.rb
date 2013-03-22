@@ -20,6 +20,8 @@ class FamiliesController < ApplicationController
   end
 
   def show
+    @incomes = @family.incomes.joins(:setting).order('settings.start')
+    @expenses = @family.expenses.joins(:setting).order('settings.start')
   end
 
   def new
@@ -30,11 +32,11 @@ class FamiliesController < ApplicationController
     @family.build_mother
     @family.build_father
     @family.build_trusty
-    @income_settings = Setting.incomes
+    @income_settings = Setting.incomes.order(:start)
     @income_settings.each do |s|
       @family.incomes.build(setting_id: s.id)
     end
-    @expense_settings = Setting.expenses
+    @expense_settings = Setting.expenses.order(:start)
     @expense_settings.each do |s|
       @family.expenses.build(setting_id: s.id)
     end

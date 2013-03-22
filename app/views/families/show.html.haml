@@ -9,6 +9,8 @@
     %a(href="#help_tab")Визиты и помощь
   %li
     %a(href="#desc_tab")Описание
+  %li
+    %a(href="#incomes_tab")Доходы и расходы
 .tab-content
   #data_tab.active.tab-pane
     = render 'data_tab'
@@ -16,6 +18,8 @@
     = render 'help_tab'
   #desc_tab.tab-pane
     = render 'desc_tab'
+  #incomes_tab.tab-pane
+    = render 'incomes_tab'
 = link_to 'Редактировать', edit_family_path(@family), class: "btn"
 = link_to 'Назад', families_path, class: "btn"
 - if permitted_to? :persist, :families

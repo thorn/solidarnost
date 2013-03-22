@@ -1,0 +1,31 @@
+.row
+  .span6
+    .row
+      %h2.span6 Доходы
+    - @incomes.each do |income|
+      .row
+        %h3.span6= income.setting.name
+      .row
+        .span6= income.amount
+  .span6
+    .row
+      %h2.span6 Расходы
+    - @expenses.each do |expense|
+      .row
+        %h3.span6= expense.setting.name
+      .row
+        .span6= expense.amount
+.row
+  .span6
+    %h3
+      Всего:
+      = @incomes.map(&:amount).sum
+  .span6
+    %h3
+      Всего:
+      = @expenses.map(&:amount).sum
+.row
+  .span12
+    %h2
+      Разница:
+      = @incomes.map(&:amount).sum - @expenses.map(&:amount).sum
