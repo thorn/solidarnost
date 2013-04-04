@@ -1,5 +1,5 @@
 $ ->
-  $("body").on 'change', "#family_city_id, #search_city_id_in", (event) ->
+  $("body").on 'change', "#family_city_id", (event) ->
     select = $(event.target)
     nested = $(select.parent()).find('.nested_select').first()
     $.get("/admin/cities/get_new.json?id=#{$(select).val()}", (data) ->
