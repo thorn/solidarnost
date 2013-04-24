@@ -1,6 +1,7 @@
 = content_for :sidebar do
   %li= link_to 'Экспорт в Excel', "#", class: "btn info excel_export"
 = form_for @search, url: search_family_helps_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
+  = hidden_field_tag :page, params[:page] || 1
   .field
     = f.label :family_id_equals, "Номер семьи"
     = f.text_field :family_id_equals
@@ -33,7 +34,7 @@
 %h1
   Найденная помощь
   %small= "Всего оказано на #{@whole_amount} руб. Всего семей #{@whole_families}. Людей: #{@whole_people}"
-
+= will_paginate @family_helps
 = form_tag delete_multiple_path, :id => "delete_multiple" do
   = render 'families/table'
   = submit_tag "Удалить отмеченные", :class => "btn error noprint"
