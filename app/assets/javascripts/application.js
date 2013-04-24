@@ -131,7 +131,7 @@ $(function(){
   });
 
   $('body').on('click', '.pagination a', function(ev){
-    var page = $(ev.target).attr('href').split('/families/search?page=')[1]
+    var page = $(ev.target).attr('href').split('?page=')[1];
     if ($(".family_search").length > 0){
       $(".family_search input#page").val(page);
       $(".family_search").submit();
