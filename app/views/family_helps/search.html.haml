@@ -3,7 +3,7 @@
 = form_for @search, url: search_family_helps_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
   .field
     = f.label :family_id_equals, "Номер семьи"
-    = f.select :family_id_equals, Family.scoped.collect{|f| ["#{f.id} #{f.title}", f.id]}, { :include_blank => true}, {:class => "select_multiple", :multiple => false, 'data-placeholder' => "Нажмите сюда" }
+    = f.text_field :family_id_equals
   .multiparam_field
     = f.label :amount_greater_than_or_equal_to, "Размер помощи"
     От
