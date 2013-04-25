@@ -20,8 +20,12 @@ Solidarnost::Application.routes.draw do
     get  :search, on: :collection
   end
   resources :family_helps do
-    post :search, on: :collection
-    get  :search, on: :collection
+    collection do
+      post :search
+      get :search
+      post :help_search
+      get :help_search
+    end
   end
 
   resources :users_families

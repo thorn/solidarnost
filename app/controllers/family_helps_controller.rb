@@ -21,6 +21,23 @@ class FamilyHelpsController < ApplicationController
   def edit
   end
 
+  def help_search
+    @search = FamilyHelp.includes(:family).includes(:help_type).search(params[:search])
+    @family_helps = @search.page(params[:page]).per_page(100)
+    @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount || 0}
+    @whole_help_count = @search.count
+    @groups = Group.for_families
+    if @family_helps.length > 0
+      fam = Family.select("member_counter").where(id: @search.all.map(&:family_id).uniq)
+      @whole_people = fam.sum(:member_counter)
+      @whole_families = fam.count
+    else
+      fam = Family.select("member_counter").where(id: @search.all.map(&:family_id).uniq)
+      @whole_people = fam.sum(:member_counter)
+      @whole_families = fam.count
+    end
+  end
+
   def search
     @search = FamilyHelp.search(params[:search])
     @family_helps = @search.page(params[:page]).per_page(100)
@@ -39,7 +56,8 @@ class FamilyHelpsController < ApplicationController
     respond_to do |format|
       format.html
       format.xls do
-        render  xls: @families,
+        fam = Family.where(id: @search.all.map(&:family_id).uniq)
+        render  xls: fam,
                 columns: [
                   :id,
                   :title,

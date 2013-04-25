@@ -1,0 +1,34 @@
+= content_for :sidebar do
+  %li= link_to 'Экспорт в Excel', "#", class: "btn info excel_export"
+= form_for @search, url: help_search_family_helps_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
+  = render 'search_form_fields', f: f
+
+%h1
+  Найденная помощь
+  %small= "Всего оказано на #{@whole_amount} руб. Всего семей #{@whole_families}. Людей: #{@whole_people}. Количество помощи: #{@whole_help_count}"
+  %table
+    %thead
+      %th ID
+      %th Имя
+      %th Приоритет
+      %th Дата
+      %th Размер помощи
+      %th Тип
+      %th Волонтеры
+      %th Фонд
+    %tbody
+      - @family_helps.each do |fh|
+        %tr
+          %td= fh.family.id
+          %td= fh.family.title
+          %td= fh.family.priority
+          %td= fh.made_at
+          %td= fh.amount
+          %td= fh.help_type.name
+          %td
+            - fh.users.each do |u|
+              = u.name
+          %td
+            - fh.funds.each do |fund|
+              = fund.name
+= will_paginate @family_helps

@@ -1,0 +1,29 @@
+= hidden_field_tag :page, params[:page] || 1
+.field
+  = f.label :family_id_equals, "Номер семьи"
+  = f.text_field :family_id_equals
+.multiparam_field
+  = f.label :amount_greater_than_or_equal_to, "Размер помощи"
+  От
+  = f.number_field :amount_greater_than_or_equal_to, min:0
+  До
+  = f.number_field :amount_less_than_or_equal_to, min:0
+.multiparam_field
+  = f.label :made_at_greater_than_or_equal_to, "Помощь оказана"
+  = f.text_field :made_at_greater_than_or_equal_to, class: 'date_select'
+  = f.text_field :made_at_less_than_or_equal_to, class: 'date_select'
+.field
+  = f.label :description_contains, "Описание содержит"
+  = f.text_field :description_contains
+.field
+  = f.label :help_type_id_equals, "Тип помощи"
+  = f.select :help_type_id_equals, HelpType.scoped.collect{|ht| [ht.name, ht.id]}, include_blank: true
+.field
+  = f.label :users_id_equals, "Пользователь"
+  = f.select :users_id_equals, User.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
+.field
+  = f.label :funds_id_equals, "Фонд"
+  = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
+.actions
+  = f.submit "Поиск", :class => "btn primary"
+  %input{:type => "button", :value => "Сброс", :class => "btn", :class => "clear_form_button"}

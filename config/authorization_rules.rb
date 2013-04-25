@@ -78,7 +78,7 @@ end
 privileges do
   privilege :superman, :includes => [:persist, :manage, :delete_multiple, :read_multiple, :additional, :mark_as_read]
   privilege :manage, :includes => [:create, :read, :update, :delete]
-  privilege :additional, includes: [:home, :about, :search, :get_new]
+  privilege :additional, includes: [:home, :about, :search, :help_search, :get_new]
   privilege :read, :includes => [:index, :show]
   privilege :create, :includes => :new
   privilege :update, :includes => :edit
