@@ -27,18 +27,19 @@ class FamilySearch
         par[:search][:id_not_in] = ids_with_help
       end
 
-      if par[:search][:without_parents]
-        par[:search][:mother_counter_and_father_counter_equals] = 0
+      if par[:without_mother]
+        par[:search][:mother_counter_equals] = 0
         par[:search][:children_counter_greater_than] = 0
-      else
-        if par[:search][:without_mother]
-          par[:search][:children_counter_greater_than] = 0
-          par[:search][:mother_counter] = 0
-        end
-        if par[:search][:without_father]
-          par[:search][:children_counter_greater_than] = 0
-          par[:search][:father_counter] = 0
-        end
+      end
+      if par[:without_father]
+        par[:search][:father_counter_equals] = 0
+        par[:search][:children_counter_greater_than] = 0
+      end
+      if par[:with_mother]
+        par[:search][:mother_counter_equals] = 1
+      end
+      if par[:with_father]
+        par[:search][:father_counter_equals] = 1
       end
     end
   end

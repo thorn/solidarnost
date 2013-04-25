@@ -25,12 +25,14 @@
       = f.number_field :children_age_less_than_or_equal_to, min:0
 
     .multiparam_field
-      = label_tag "Сирота"
-      = check_box_tag :without_parents
-    .multiparam_field
       = label_tag "Нет отца   Нет матери"
-      = check_box_tag :without_father
-      = check_box_tag :without_mother
+      = check_box_tag :without_father, "on", params[:without_father]
+      = check_box_tag :without_mother, "on", params[:without_mother]
+
+    .multiparam_field
+      = label_tag "Есть отец Есть мать"
+      = check_box_tag :with_father, "on", params[:with_father]
+      = check_box_tag :with_mother, "on", params[:with_mother]
 
     = f.label :children_study_id_equals, "Образование"
     = f.select :children_study_id_equals, StudyCategory.all.collect {|o| [o.name, o.id]}, :include_blank => true
