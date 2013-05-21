@@ -1,7 +1,7 @@
 authorization do
   role :guest do
     has_permission_on [:families], :to => :read
-    has_permission_on :devise_registrations, :to => :manage
+    # has_permission_on :devise_registrations, :to => :manage
     has_permission_on :devise_sessions, :to => :manage
   end
 
