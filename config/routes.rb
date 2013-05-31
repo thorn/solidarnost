@@ -54,7 +54,13 @@ Solidarnost::Application.routes.draw do
     end
   end
 
-  resources :children
+  resources :children do
+    collection do
+      get :search
+      post :search
+    end
+  end
+
   resources :trusties
   resources :mothers
   resources :fathers
