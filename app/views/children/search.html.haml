@@ -21,23 +21,15 @@
   .field
     = f.label :birthday_less_than_or_equal_to, "Возраст меньше"
     = f.date_select :birthday_less_than_or_equal_to ,start_year: Time.now.year - 50, end_year: Time.now.year
-
-  .multiparam_field
-    = label_tag "Нет отца   Нет матери"
-    = check_box_tag :without_father, "on", params[:without_father]
-    = check_box_tag :without_mother, "on", params[:without_mother]
-
-  .multiparam_field
-    = label_tag "Есть отец Есть мать"
-    = check_box_tag :with_father, "on", params[:with_father]
-    = check_box_tag :with_mother, "on", params[:with_mother]
-
   .field
     = f.label :study_id_equals, "Образование"
     = f.select :study_id_equals, StudyCategory.all.collect {|o| [o.name, o.id]}, :include_blank => true
   .field
     = f.label :family_status_equals, "Подтвержденность семьи"
     = f.select :family_status_equals, Family.status_for_select, include_blank: true
+  .field.multiparam_field
+    = f.label :family_priority_between, "Приоритет от и до"
+    = f.multiparameter_field :family_priority_between, {:field_type => :number_field}, {:field_type => :number_field}, :size => 5
   .actions
     = f.submit "Поиск", class: "btn primary"
     %input{type: "button", value: "Сброс", class: "btn", class: "clear_form_button"}
