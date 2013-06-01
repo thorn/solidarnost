@@ -1,4 +1,5 @@
 = form_for @search, url: search_children_path, html: {method: :post, class: "form-stacked noprint family_search"} do |f|
+  = hidden_field_tag :page, params[:page] || 1
   = f.label :first_name_contains, "Имя содержит"
   = f.text_field :first_name_contains
   = f.label :second_name_contains, "Фамилия содержит"
