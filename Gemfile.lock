@@ -299,6 +299,7 @@ DEPENDENCIES
   jquery-rails
   libnotify
   meta_search
+  nokogiri
   pg
   quiet_assets
   rails (= 3.1.3)
