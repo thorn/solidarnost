@@ -63,3 +63,8 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
+
+
+gem 'capistrano'
+gem 'rvm-capistrano' #, git: 'https://github.com/wayneeseguin/rvm-capistrano'
+gem 'unicorn'
