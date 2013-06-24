@@ -68,3 +68,4 @@ end
 gem 'capistrano'
 gem 'rvm-capistrano' #, git: 'https://github.com/wayneeseguin/rvm-capistrano'
 gem 'unicorn'
+gem 'nokogiri'
