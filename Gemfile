@@ -10,7 +10,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'declarative_authorization'
 gem "compass"
-gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails', '~> 1.4.3' #, :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'meta_search'
 gem 'will_paginate'
 gem 'carrierwave','>= 0.5.3'
@@ -44,6 +44,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'therubyracer', '~> 0.9.2'
 gem 'jquery-rails'
 gem 'quiet_assets'
 gem 'thin'
