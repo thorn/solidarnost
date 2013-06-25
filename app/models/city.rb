@@ -1,8 +1,8 @@
 #-*- encoding: utf-8 -*-
 require "nokogiri"
-
+require "csv"
 module Parser
-  class StreetParser
+  class CityParser
     def initialize(filename)
       City.delete_all
       @document = Nokogiri::XML(File.open(filename))
@@ -16,23 +16,23 @@ module Parser
         unless City.find_by_aoguid(el[:AOGUID])
           new_parent = create_city(el, parent_id)
           recursive_parse(new_parent.id, el[:AOGUID])
-        # else
-        #   create_city(el, nil)
+        else
+          create_city(el, nil)
         end
       end
     end
 
     def create_root
       root = City.create(name: "Россия", aoguid: "0")
-      dag = @document.at_css('Object[AOGUID="0bb7fa19-736d-49cf-ad0e-9774c4dae09b"]')
+      # dag = @document.at_css('Object[AOGUID="0bb7fa19-736d-49cf-ad0e-9774c4dae09b"]')
+      dag = @document.at_css('Object[AOGUID="b2d8cd20-cabc-4deb-afad-f3c4b4d55821"]')
       daghestan = create_city dag, root.id
     end
 
     def create_city(el, parent_id = nil)
-      # name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
+      name = el[:SHORTNAME].length <= 3 ? "#{el[:SHORTNAME]}. #{el[:OFFNAME]}" : "#{el[:SHORTNAME]} #{el[:OFFNAME]}"
       attr = {
-        prefix:     el[:SHORTNAME],
-        name:       el[:OFFNAME],
+        name:       name,
         aoguid:     el[:AOGUID],
         parent_id:  parent_id
       }
@@ -48,7 +48,8 @@ class City < ActiveRecord::Base
   include Parser
 
   def self.parse_all
-    s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
+    # s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
+    s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'ingushetia.xml'))
   end
 
   def name
