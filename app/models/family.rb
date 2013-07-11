@@ -64,7 +64,7 @@ class Family < ActiveRecord::Base
   has_many :groups, through: :group_options
 
   has_many :attachments, as: :attachable
-  accepts_nested_attributes_for :attachments, allow_destroy: true
+  accepts_nested_attributes_for :attachments, allow_destroy: true, reject_if: lambda {|a| a[:file].blank?}
 
   has_many :incomes
   accepts_nested_attributes_for :incomes, allow_destroy: true, reject_if: lambda { |a| a[:amount].blank? }
