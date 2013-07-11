@@ -49,7 +49,7 @@ class City < ActiveRecord::Base
 
   def self.parse_all
     # s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
-    s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'ingushetia.xml'))
+    s = CityParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'ingushetia.xml'))
   end
 
   def name
