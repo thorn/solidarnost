@@ -21,21 +21,21 @@ gem 'to_xls', '~> 1.0.0'
 group :test do
   gem 'cucumber-rails'
 end
-group :test, :development do
-  gem 'bullet'
-  gem 'guard-spork'
-  gem 'hirb'
-  gem 'libnotify'
-  gem 'capybara'
-  gem 'rspec-rails', '~> 2.5'
-  gem 'autotest'
-  gem 'spork', '~> 0.9.0.rc9'
-  gem 'test_notifier'
-  gem 'database_cleaner'
-  gem 'factory_girl'
-  gem 'email_spec'
-  gem 'guard-rspec'
-end
+# group :test, :development do
+#   gem 'bullet'
+#   gem 'guard-spork'
+#   gem 'hirb'
+#   gem 'libnotify'
+#   gem 'capybara'
+#   gem 'rspec-rails', '~> 2.5'
+#   gem 'autotest'
+#   gem 'spork', '~> 0.9.0.rc9'
+#   gem 'test_notifier'
+#   gem 'database_cleaner'
+#   gem 'factory_girl'
+#   gem 'email_spec'
+#   gem 'guard-rspec'
+# end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

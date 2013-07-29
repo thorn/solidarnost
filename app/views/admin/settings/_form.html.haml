@@ -10,7 +10,7 @@
 
   .field
     = f.label :group_name, "Имя группы"
-    = f.select :group_name, [["Раскладка", "layout"],["Приоритет", "Приоритет"],["Доход","income"], ["Расход", "expense"]]
+    = f.select :group_name, [["Раскладка", "layout"],["Приоритет", "Приоритет"],["Доход","income"], ["Расход", "expense"], ["Другие", "other"]]
   .field
     = f.label :name, "Название (номер строки)"
     = f.text_field :name

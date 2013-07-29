@@ -146,4 +146,14 @@ module ApplicationHelper
     raw(res)
   end
 
+  def app_name
+    name_setting = Setting.find_by_name('app_name')
+    if name_setting
+      name_setting.value
+    else
+      "Nadejda"
+    end
+
+  end
+
 end

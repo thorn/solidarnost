@@ -10,7 +10,10 @@
     = f.label :name, "Название коэффициента"
     = f.text_field :name
   .field
-    = f.label :trouble, "Является ли коэффициент проблемой?"
+    = f.label :problem, "Является ли коэффициент проблемой?"
+    = f.check_box :problem
+  .field
+    = f.label :trouble, "Отображать на главной?"
     = f.check_box :trouble
   .field
     = f.label :coeff, "Значение"

@@ -4,6 +4,7 @@ class FamiliesController < ApplicationController
   before_filter :find_family, only: [:show, :edit, :update, :destroy, :persist]
   before_filter :make_layout, only: [:edit, :new, :show]
   before_filter :gather_news_info, only: [:index, :edit, :new, :show, :search]
+  before_filter :gather_families_info, only: [:index, :edit, :new, :show, :search]
   before_filter :find_groups, only: [:index, :search]
   filter_access_to [:show, :edit, :update, :destroy], attribute_check: true
 
@@ -129,6 +130,10 @@ class FamiliesController < ApplicationController
 
     def gather_news_info
       @info = News.get_info
+    end
+
+    def gather_families_info
+      @gr_opts = GroupOption.where(trouble: true)
     end
 
     def find_groups

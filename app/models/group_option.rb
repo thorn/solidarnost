@@ -1,7 +1,7 @@
 class GroupOption < ActiveRecord::Base
   belongs_to :group
-  has_many :family_coeffs
-  has_many :families, through: :family_coeffs
+  has_many :coefficients
+  has_many :families, through: :coefficients,source: :coefficientable, :source_type => 'Family'
 
   validates :name, presence: true
 

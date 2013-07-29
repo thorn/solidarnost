@@ -11,6 +11,7 @@
         %th Коэффициент
         %th Группа
         %th Проблема
+        %th Отображать на главной?
         %th Действия
     %tbody
       - @group_options.each do |group_option|
@@ -21,6 +22,7 @@
           %td= group_option.name
           %td= group_option.coeff
           %td= group_option.group.name
+          %td= group_option.problem? ? "Да": "Нет"
           %td= group_option.trouble? ? "Да": "Нет"
           %td
             = link_to 'Удалить', [:admin, group_option], :confirm => 'Все семьи, у которых есть этот коэффициент, будут удалены!', :method => :delete

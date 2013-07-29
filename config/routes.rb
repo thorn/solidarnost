@@ -9,7 +9,8 @@ Solidarnost::Application.routes.draw do
 
   resources :families do
     collection do
-      match :search
+      get :search
+      post :search
     end
     member do
       match :persist
