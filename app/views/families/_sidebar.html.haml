@@ -17,4 +17,4 @@
   %h3 Коэффициенты
   %ul
     - @gr_opts.each do |go|
-      %li= link_to "#{go.name} (#{go.families.count})", search_families_path("group_options_id_in" => [go.id])
+      %li= link_to "#{go.name} - #{go.group.name} (#{go.families.count})", search_families_path("group_options_id_in" => [go.id])
