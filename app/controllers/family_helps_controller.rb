@@ -36,6 +36,24 @@ class FamilyHelpsController < ApplicationController
       @whole_people = fam.sum(:member_counter)
       @whole_families = fam.count
     end
+    respond_to do |format|
+      format.html
+      format.xls do
+        f_h = @search.all
+        render  xls: f_h,
+                columns: [
+                  :family_id,
+                  :family_name,
+                  :family_priority,
+                  :created_date,
+                  :amount,
+                  :help_type_name,
+                  :user_names,
+                  :fund_names
+                ],
+                headers: %W[ ID Имя Приоритет Дата #{"Размер помощи"} Тип Волонтеры Фонд]
+      end
+    end
   end
 
   def search

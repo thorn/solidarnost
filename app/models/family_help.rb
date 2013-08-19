@@ -23,6 +23,30 @@ class FamilyHelp < ActiveRecord::Base
     self.fund_ids = ids
   end
 
+  def family_name
+    self.family.title if self.family
+  end
+
+  def family_priority
+    self.family.priority if self.family
+  end
+
+  def help_type_name
+    self.help_type.name if self.help_type
+  end
+
+  def user_names
+    self.users.map(&:name).join(' ')
+  end
+
+  def fund_names
+    self.funds.map(&:name).join(' ')
+  end
+
+  def created_date
+    self.created_at.to_date if self.created_at
+  end
+
   scope :during_visits, where("visit_id IS NOT ?", nil)
   scope :without_visit, where("visit_id IS ?", nil)
   attr_accessor :during_visit
