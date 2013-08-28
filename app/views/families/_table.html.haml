@@ -22,9 +22,9 @@
               = select_tag "group_options_id_in[]", group_options_for_select(gr, nil, params), include_blank: true
         %th.noprint Действия
     %tbody
-      - priorities = Setting.priority
+      - @priorities ||= Setting.priority
       - @families.each do |family|
-        - for priority in priorities do
+        - for priority in @priorities do
           - if family.priority > priority.start and family.priority <= priority.end
             - color = priority.value
             - name = priority.name

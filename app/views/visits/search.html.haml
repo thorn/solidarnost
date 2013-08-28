@@ -30,3 +30,4 @@
 = form_tag delete_multiple_path, id: "delete_multiple" do
   = render 'families/table'
   = submit_tag "Удалить отмеченные", class: "btn error noprint"
+= will_paginate @visits
