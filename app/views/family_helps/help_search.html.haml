@@ -13,6 +13,7 @@
       %th Приоритет
       %th Дата
       %th Размер помощи
+      %th Количество
       %th Тип
       %th Волонтеры
       %th Фонд
@@ -24,6 +25,7 @@
           %td= fh.family.priority
           %td= fh.made_at
           %td= fh.amount
+          %td= fh.help_number
           %td= fh.help_type.name
           %td
             - fh.users.each do |u|
