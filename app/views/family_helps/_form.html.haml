@@ -21,6 +21,9 @@
     = f.label :help_type_id, "Тип помощи"
     = f.select :help_type_id, HelpType.all.collect{|h| [h.name, h.id]}
   .field
+    = f.label :help_number, "Количество помощи"
+    = f.number_field :help_number
+  .field
     = f.label :amount, "Введите размер предполагаемой помощи в рублях"
     = f.number_field :amount, min:0
   - if params[:action] == "edit"

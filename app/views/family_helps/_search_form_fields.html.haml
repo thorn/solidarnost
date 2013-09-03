@@ -9,6 +9,12 @@
   До
   = f.number_field :amount_less_than_or_equal_to, min:0
 .multiparam_field
+  = f.label :help_number_greater_than_or_equal_to, "Количество помощи"
+  От
+  = f.number_field :help_number_greater_than_or_equal_to, min: 0
+  До
+  = f.number_field :help_number_less_than_or_equal_to, min: 0
+.multiparam_field
   = f.label :made_at_greater_than_or_equal_to, "Помощь оказана"
   = f.text_field :made_at_greater_than_or_equal_to, class: 'date_select'
   = f.text_field :made_at_less_than_or_equal_to, class: 'date_select'
