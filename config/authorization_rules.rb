@@ -38,7 +38,7 @@ authorization do
       if_attribute :status => is {0}
     end
     has_permission_on :devise_sessions, to: :manage
-    has_permission_on :admin_cities, to: :read
+    has_permission_on :admin_cities, to: [:read, :get_new]
   end
 
   role :volunteer do
