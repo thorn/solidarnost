@@ -19,6 +19,7 @@ authorization do
                        :family_helps,
                        :visits
                       ], to: [:read, :additional]
+    has_permission_on :admin_cities, to: [:read, :get_new]
   end
 
   role :operator do
