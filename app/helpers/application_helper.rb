@@ -93,12 +93,11 @@ module ApplicationHelper
   def city_edit(form, params = nil)
     if form.object.class == MetaSearch::Searches::Family
       if params && params[:search] && params[:search][:city_id_in]
-        puts params[:search].to_yaml
-        city = City.find(params[:search][:city_id_in].first.to_i).parent
+        city = City.find(params[:search][:city_id_in].first.to_i)
         parents = get_parents(city)
 
         res = parents.inject("") do |res, city|
-          res << render_city_select(city, form, false, true, false)
+          res << render_city_select(city, form, true, true, false)
           res << '<div class="nested_select">'
         end
         parents.length.times {res << "</div>"}
