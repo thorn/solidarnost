@@ -47,6 +47,18 @@ class FamilyHelp < ActiveRecord::Base
     self.created_at.to_date if self.created_at
   end
 
+  def family_member_count
+    self.family.member_count
+  end
+
+  def family_address
+    self.family.address
+  end
+
+  def family_phone
+    self.family.phone
+  end
+
   scope :during_visits, where("visit_id IS NOT ?", nil)
   scope :without_visit, where("visit_id IS ?", nil)
   attr_accessor :during_visit
