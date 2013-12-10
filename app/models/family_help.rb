@@ -48,7 +48,7 @@ class FamilyHelp < ActiveRecord::Base
   end
 
   def family_member_count
-    self.family.member_count
+    self.family.member_counter
   end
 
   def family_address
