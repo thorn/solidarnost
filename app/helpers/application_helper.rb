@@ -160,6 +160,15 @@ module ApplicationHelper
     raw(res)
   end
 
+  def help_funds_for_select(params)
+    selected_ids = params[:help_fund_ids] || []
+    res = Fund.all.inject("") do |res, fund|
+      selected = selected_ids.include?(fund.id.to_s) ? 'selected="selected"' : nil
+      res << "<option #{selected} value=\"#{fund.id}\">#{fund.name}</option>"
+    end
+    raw(res)
+  end
+
   def app_name
     name_setting = Setting.find_by_name('app_name')
     if name_setting
