@@ -23,8 +23,29 @@ class FamilySearch
     if (par[:help_type]) and (!par[:date_from].blank? or !par[:date_to].blank? )
       help_from = par[:date_from].blank? ? Date.today : Date.parse(par[:date_from])
       help_to   = par[:date_to].blank? ? Date.today : Date.parse(par[:date_to])
-      ids_with_help = Family.includes(:family_helps).where("family_helps.made_at >= ? and family_helps.made_at <= ? and family_helps.help_type_id = ?", help_from, help_to, par[:help_type].to_i).map(&:id) << -1
+      help_type = par[:help_type].blank? ? HelpType.all.map(&:id) : par[:help_type].to_i
+      if par[:help_fund_ids] && par[:help_fund_ids].length > 0
+        no_help_from_fund_ids = par[:help_fund_ids].map(&:to_i)
+      end
+      family_helps = FamilyHelp.includes(:family_help_funds).where(
+        "    made_at >= ?
+         and made_at <= ?
+        ",
+        help_from,
+        help_to
+      ).where(help_type_id: help_type, "family_help_funds.fund_id" => no_help_from_fund_ids)
+      ids_with_help = family_helps.map(&:family_id)
       par[:search][:id_not_in] = ids_with_help
+      # ids_with_help = Family.includes(:family_helps)
+      # .where(
+      #      "family_helps.made_at >= ?
+      #   and family_helps.made_at <= ?
+      #   and family_helps.help_type_id = ?",
+      #   help_from,
+      #   help_to,
+      #   par[:help_type].to_i
+      # ).map(&:id) << -1
+      # par[:search][:id_not_in] = ids_with_help
     end
 
     if par[:without_mother]

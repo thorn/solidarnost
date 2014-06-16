@@ -93,12 +93,11 @@ module ApplicationHelper
   def city_edit(form, params = nil)
     if form.object.class == MetaSearch::Searches::Family
       if params && params[:search] && params[:search][:city_id_in]
-        puts params[:search].to_yaml
-        city = City.find(params[:search][:city_id_in].first.to_i).parent
+        city = City.find(params[:search][:city_id_in].first.to_i)
         parents = get_parents(city)
 
         res = parents.inject("") do |res, city|
-          res << render_city_select(city, form, false, true, false)
+          res << render_city_select(city, form, true, true, false)
           res << '<div class="nested_select">'
         end
         parents.length.times {res << "</div>"}
@@ -177,6 +176,15 @@ module ApplicationHelper
     puts selected_id
     res = Fund.all.inject("") do |res, fund|
       selected = fund.id == selected_id ? 'selected="selected"' : nil
+      res << "<option #{selected} value=\"#{fund.id}\">#{fund.name}</option>"
+    end
+    raw(res)
+  end
+
+  def help_funds_for_select(params)
+    selected_ids = params[:help_fund_ids] || []
+    res = Fund.all.inject("") do |res, fund|
+      selected = selected_ids.include?(fund.id.to_s) ? 'selected="selected"' : nil
       res << "<option #{selected} value=\"#{fund.id}\">#{fund.name}</option>"
     end
     raw(res)

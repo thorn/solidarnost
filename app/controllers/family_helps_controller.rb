@@ -44,14 +44,15 @@ class FamilyHelpsController < ApplicationController
                 columns: [
                   :family_id,
                   :family_name,
-                  :family_priority,
+                  :family_member_count,
+                  :family_address,
+                  :family_phone,
                   :created_date,
                   :amount,
                   :help_type_name,
-                  :user_names,
                   :fund_names
                 ],
-                headers: %W[ ID Имя Приоритет Дата #{"Размер помощи"} Тип Волонтеры Фонд]
+                headers: %W[ ID Имя #{"Людей в семье"} Адрес Телефон Дата #{"Размер помощи"} Тип Фонд]
       end
     end
   end

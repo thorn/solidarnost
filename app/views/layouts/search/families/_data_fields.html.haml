@@ -35,6 +35,7 @@
   = text_field_tag :date_from, params[:date_from], class: "date_select"
   = text_field_tag :date_to  , params[:date_to], class: "date_select"
   = select_tag :help_type, help_types_for_select(params), include_blank: true
+  = select_tag :help_fund_ids, help_funds_for_select(params), multiple: true
 .field
   = f.label :users_id_equals, "Доброволец"
   = f.select :users_id_equals, User.all.collect{|u| [u.name, u.id]}, include_blank: true
