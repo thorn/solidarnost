@@ -12,6 +12,10 @@ class ChildrenController < ApplicationController
   end
 
   def search
+    if params[:search] && params[:search][:city_id_in]
+      city = City.find(params[:search][:city_id_in])
+      params[:search][:city_id_in] = city.subtree.map(&:id) if city
+    end
     @search = Child.order("id DESC").search(params[:search])
     @children = @search.page(params[:page]).per_page(100)
     @whole_children = @search.all.length

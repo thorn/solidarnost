@@ -108,7 +108,23 @@ module ApplicationHelper
         res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true)
         res << content_tag(:div, "", class: "nested_select")
       end
+    elsif form.object.class == MetaSearch::Searches::Child
+      if params && params[:search] && params[:search][:family_city_id_in]
+        puts params[:search].to_yaml
+        city = City.find(params[:search][:family_city_id_in].first.to_i).parent
+        parents = get_parents(city)
 
+        res = parents.inject("") do |res, city|
+          res << render_city_select(city, form, false, true, false, true)
+          res << '<div class="nested_select">'
+        end
+        parents.length.times {res << "</div>"}
+
+        return raw(res)
+      else
+        res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true, true)
+        res << content_tag(:div, "", class: "nested_select")
+      end
     elsif form.object.city
       parents = form.object.get_parents
 
@@ -133,18 +149,18 @@ module ApplicationHelper
     parents.reverse!
   end
 
-  def render_city_select(city, form, search = false, blank = false, no_select = false)
+  def render_city_select(city, form, search = false, blank = false, no_select = false, child_search = false)
     options = city.siblings.order(:name).inject("") do |res, el|
       selected = ((city == el) and !no_select) ? 'selected="selected"' : ''
       res << "<option #{selected} value=\"#{el.id}\">#{el.name}</option>"
     end
     field_name = search ? :city_id_in : :city_id
+    field_name = :family_city_id_in if child_search
     form.select field_name, options, include_blank: blank
   end
 
   def help_types_for_select(params)
     selected_id = params[:help_type].to_i
-    puts "#{selected_id}|-------------------------"
     res = HelpType.all.inject("") do |res, type|
       selected = type.id == selected_id ? 'selected="selected"' : nil
       res << "<option #{selected} value=\"#{type.id}\">#{type.name}</option>"
@@ -153,7 +169,12 @@ module ApplicationHelper
   end
 
   def funds_for_select(params)
-    selected_id = params[:fund_id].to_i
+    if params[:search] && !params[:search][:family_funds_id_equals].nil?
+      selected_id = params[:search][:family_funds_id_equals]
+    else
+      selected_id = params[:fund_id].to_i
+    end
+    puts selected_id
     res = Fund.all.inject("") do |res, fund|
       selected = fund.id == selected_id ? 'selected="selected"' : nil
       res << "<option #{selected} value=\"#{fund.id}\">#{fund.name}</option>"

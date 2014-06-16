@@ -24,8 +24,8 @@ module Parser
 
     def create_root
       root = City.create(name: "Россия", aoguid: "0")
-      # dag = @document.at_css('Object[AOGUID="0bb7fa19-736d-49cf-ad0e-9774c4dae09b"]')
-      dag = @document.at_css('Object[AOGUID="b2d8cd20-cabc-4deb-afad-f3c4b4d55821"]')
+      dag = @document.at_css('Object[AOGUID="0bb7fa19-736d-49cf-ad0e-9774c4dae09b"]')
+      # dag = @document.at_css('Object[AOGUID="b2d8cd20-cabc-4deb-afad-f3c4b4d55821"]')
       daghestan = create_city dag, root.id
     end
 
@@ -48,8 +48,8 @@ class City < ActiveRecord::Base
   include Parser
 
   def self.parse_all
-    # s = StreetParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
-    s = CityParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'ingushetia.xml'))
+    s = CityParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'daghestan.xml'))
+    # s = CityParser.new(File.join(File.expand_path(File.dirname(__FILE__)), 'ingushetia.xml'))
   end
 
   def name
@@ -79,6 +79,6 @@ class City < ActiveRecord::Base
         child.update_attribute(:parent_id, city_copy.id) if child.children.length.zero?
       end
     end
-    falsee
+    false
   end
 end
