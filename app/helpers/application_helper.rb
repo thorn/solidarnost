@@ -91,6 +91,8 @@ module ApplicationHelper
   end
 
   def city_edit(form, params = nil)
+    Family.search
+    Child.search
     if form.object.class == MetaSearch::Searches::Family
       if params && params[:search] && params[:search][:city_id_in]
         city = City.find(params[:search][:city_id_in].first.to_i)

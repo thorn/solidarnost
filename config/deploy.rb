@@ -13,6 +13,7 @@ load "config/recipes/assets"
 load "config/recipes/set_environment"
 # load "config/recipes/check"
 
+# server "62.76.178.189", :web, :app, :db, primary: true
 server "62.76.187.72", :web, :app, :db, primary: true
 
 set :user, "deployer"
@@ -25,7 +26,7 @@ set :scm, "git"
 set :repository, "git@github.com:thorn/#{application}.git"
 set :branch, "master"
 
-set :debian_version, "testing"
+set :debian_version, "stable"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true

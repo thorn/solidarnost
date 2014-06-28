@@ -14,12 +14,22 @@
       - else
         Нет прикрепленных волонтеров
   .info-block
+    .info-block-title Информация о заявке
+    .info-block-body
+      .info
+        .info-name
+          %span Дата создания
+        .info-value= @family.created_at.strftime("%d.%m.%C %H:%m")
+      .info
+        .info-name
+          %span Время последнего изменения
+        .info-value= @family.updated_at.strftime("%d.%m.%C %H:%m")
     .info-block-title Контактные данные
     .info-block-body
       .info
         .info-name
           %span Населенный пункт
-        .info-value= @family.city_name
+        .info-value= @family.full_city_name
     .info-block-body
       .info
         .info-name
