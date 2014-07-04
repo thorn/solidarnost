@@ -19,11 +19,11 @@
       .info
         .info-name
           %span Дата создания
-        .info-value= @family.created_at.strftime("%d.%m.%C %H:%m")
+        .info-value= @family.created_at.strftime("%d.%m.%Y %H:%m")
       .info
         .info-name
           %span Время последнего изменения
-        .info-value= @family.updated_at.strftime("%d.%m.%C %H:%m")
+        .info-value= @family.updated_at.strftime("%d.%m.%Y %H:%m")
     .info-block-title Контактные данные
     .info-block-body
       .info
