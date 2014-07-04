@@ -34,11 +34,11 @@
   .field
     = f.label :family_funds_id_equals, "Семья прикреплена к фонду"
     = f.select :family_funds_id_equals, funds_for_select(params), include_blank: true
-  /.field
-  /  .city_select
-  /    = f.label :city_id_in, "Населенный пункт"
-  /    .step_select
-  /      = city_edit(f, params)# unless Rails.env == 'development'
+  .field
+    .city_select
+      = f.label :city_id_in, "Населенный пункт"
+    .step_select
+      = city_edit(f, params)
   .actions
     = f.submit "Поиск", class: "btn primary"
     %input{type: "button", value: "Сброс", class: "btn", class: "clear_form_button"}

@@ -28,6 +28,9 @@
   = f.label :users_id_equals, "Пользователь"
   = f.select :users_id_equals, User.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
 .field
+  = f.label :family_city_id_in, "Населенный пункт"
+  = city_edit(f, params)
+.field
   = f.label :funds_id_equals, "Фонд"
   = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
 .actions

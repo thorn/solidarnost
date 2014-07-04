@@ -93,6 +93,7 @@ module ApplicationHelper
   def city_edit(form, params = nil)
     Family.search
     Child.search
+    FamilyHelp.search
     if form.object.class == MetaSearch::Searches::Family
       if params && params[:search] && params[:search][:city_id_in]
         city = City.find(params[:search][:city_id_in].first.to_i)
@@ -109,21 +110,20 @@ module ApplicationHelper
         res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true)
         res << content_tag(:div, "", class: "nested_select")
       end
-    elsif form.object.class == MetaSearch::Searches::Child
+    elsif [MetaSearch::Searches::FamilyHelp, MetaSearch::Searches::Child].include?(form.object.class)
       if params && params[:search] && params[:search][:family_city_id_in]
-        puts params[:search].to_yaml
-        city = City.find(params[:search][:family_city_id_in].first.to_i).parent
+        city = City.find(params[:search][:family_city_id_in].to_i)
         parents = get_parents(city)
 
         res = parents.inject("") do |res, city|
-          res << render_city_select(city, form, false, true, false, true)
+          res << render_city_select(city, form, true, true, false, :family_city_id_in)
           res << '<div class="nested_select">'
         end
         parents.length.times {res << "</div>"}
 
         return raw(res)
       else
-        res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true, true)
+        res = render_city_select(City.roots.first.children.first.children.first, form, true, true, true, :family_city_id_in)
         res << content_tag(:div, "", class: "nested_select")
       end
     elsif form.object.city
@@ -150,13 +150,12 @@ module ApplicationHelper
     parents.reverse!
   end
 
-  def render_city_select(city, form, search = false, blank = false, no_select = false, child_search = false)
+  def render_city_select(city, form, search = false, blank = false, no_select = false, field_name = false)
     options = city.siblings.order(:name).inject("") do |res, el|
       selected = ((city == el) and !no_select) ? 'selected="selected"' : ''
       res << "<option #{selected} value=\"#{el.id}\">#{el.name}</option>"
     end
-    field_name = search ? :city_id_in : :city_id
-    field_name = :family_city_id_in if child_search
+    field_name = (search ? :city_id_in : :city_id) unless field_name
     form.select field_name, options, include_blank: blank
   end
 
