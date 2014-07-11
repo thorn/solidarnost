@@ -25,7 +25,7 @@ class FamilyHelpsController < ApplicationController
     @search = FamilyHelp.includes(:family).includes(:help_type).search(params[:search])
     @family_helps = @search.page(params[:page]).per_page(100)
     @whole_amount = @search.all.inject(0){|sum, help| sum += help.amount || 0}
-    @whole_help_count = @search.count
+    @whole_help_count = @search.all.inject(0){|sum, help| sum += help.help_number || 1}
     @groups = Group.for_families
     if @family_helps.length > 0
       fam = Family.select("member_counter").where(id: @search.all.map(&:family_id).uniq)
@@ -45,6 +45,7 @@ class FamilyHelpsController < ApplicationController
                   :family_id,
                   :family_name,
                   :family_member_count,
+                  :family_full_city_name,
                   :family_address,
                   :family_phone,
                   :created_date,
@@ -52,7 +53,7 @@ class FamilyHelpsController < ApplicationController
                   :help_type_name,
                   :fund_names
                 ],
-                headers: %W[ ID Имя #{"Людей в семье"} Адрес Телефон Дата #{"Размер помощи"} Тип Фонд]
+                headers: %W[ ID Имя #{"Людей в семье"} Город Адрес Телефон Дата #{"Размер помощи"} Тип Фонд]
       end
     end
   end

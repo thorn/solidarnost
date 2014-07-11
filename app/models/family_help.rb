@@ -27,6 +27,10 @@ class FamilyHelp < ActiveRecord::Base
     self.family.title if self.family
   end
 
+  def family_full_city_name
+    self.family.full_city_name if self.family
+  end
+
   def family_priority
     self.family.priority if self.family
   end
