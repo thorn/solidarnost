@@ -48,7 +48,7 @@ class FamilyHelpsController < ApplicationController
                   :family_full_city_name,
                   :family_address,
                   :family_phone,
-                  :created_date,
+                  :made_at,
                   :amount,
                   :help_type_name,
                   :fund_names
