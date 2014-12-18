@@ -40,8 +40,10 @@
   = f.label :users_id_equals, "Доброволец"
   = f.select :users_id_equals, User.all.collect{|u| [u.name, u.id]}, include_blank: true
 .field
-  = f.label :fund_id, "Фонд"
-  = select_tag :fund_id, funds_for_select(params), include_blank: true
+  = f.label :funds_id_in, "Фонд"
+
+  = f.select :funds_id_in, Fund.all.collect{|f| [f.name, f.id]}, include_blank: true, multiple: true
+  =# select_tag :search_fund_ids_in, funds_for_select(params), include_blank: true
 .multiparam_field
   = f.label :created_at_greater_than_or_equal_to, "Заявка создана"
   = f.text_field :created_at_greater_than_or_equal_to, class: 'date_select'
