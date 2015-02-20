@@ -31,6 +31,9 @@
   = f.label :family_city_id_in, "Населенный пункт"
   = city_edit(f, params)
 .field
+  = f.label :family_area_id_in, "Район семьи"
+  = f.select :family_area_id_in, Area.scoped.map{|a| [a.name, a.id]}, { include_blank: true }, {class: "select_multiple", multiple: true, 'data-placeholder' => "Нажмите сюда"}
+.field
   = f.label :funds_id_equals, "Фонд"
   = f.select :funds_id_equals, Fund.scoped.collect{|u| [u.name, u.id] }, {include_blank: true}, {class: "select_multiple", multiple: false,'data-placeholder' => "Нажмите сюда"}
 .actions

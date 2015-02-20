@@ -251,3 +251,4 @@ ru:
   will_paginate:
     next_label: Следующая страница
     previous_label: Предыдущая страница
+    page_gap: '...'
