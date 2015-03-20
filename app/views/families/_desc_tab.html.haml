@@ -13,4 +13,31 @@
   .info-block-title Описание
   .info-block-body
     %p= @family.description
+.info-block
+  .info-block-title Создатель
+  .info-block-body
+    - if @family.creator
+      .info
+        .info-name
+          %span Имя
+        .info-value
+          = @family.creator.name
+      .info
+        - if @family.creator.fund
+          .info-name
+            %span Фонд
+          .info-value
+            = @family.creator.fund.name
+      .info
+        .info-name
+          %span Роль
+        .info-value
+          =  @family.creator.roles.first.name
+      .info
+        .info-name
+          %span Email
+        .info-value
+          =  @family.creator.email
+    - else
+      Нет информации
 = render 'buttons'
