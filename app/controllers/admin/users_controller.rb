@@ -17,7 +17,10 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
-    puts params[:user]
+    if params[:user][:password].blank?
+      params[:user].delete("password")
+      params[:user].delete("password_confirmation")
+    end
     if @user.update_attributes(params[:user])
       redirect_to admin_users_path
     else
