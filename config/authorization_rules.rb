@@ -42,6 +42,12 @@ authorization do
     has_permission_on :admin_cities, to: [:read, :get_new]
   end
 
+  role :helper do
+    has_permission_on [:family_helps, :visits, :pages], to: [:create, :read]
+    has_permission_on :devise_sessions, to: :manage
+    has_permission_on :admin_cities, to: [:read, :get_new]
+  end
+
   role :volunteer do
     has_permission_on [:families, :family_helps], :to => :manage
   end
