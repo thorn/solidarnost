@@ -58,6 +58,7 @@ class Family < ActiveRecord::Base
 
   has_many :users_families
   has_many :users, through: :users_families
+  belongs_to :creator, class_name: "User"
 
   has_many :funds, through: :users
 

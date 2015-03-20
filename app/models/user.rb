@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   validates :name, :phone, :address, presence: true
 
   before_create :set_role
+  has_many :created_families, foreign_key: "creator_id", class_name: "Family"
 
   def role_symbols
     (roles || []).map {|r| r.name.to_sym}

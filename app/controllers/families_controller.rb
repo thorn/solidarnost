@@ -60,7 +60,7 @@ class FamiliesController < ApplicationController
   end
 
   def create
-    @family = Family.new(params[:family])
+    @family = current_user.created_familes.build(params[:family])
     @family.group_option_ids = params[:group_option_ids].collect{|id| id.to_i} if params[:group_option_ids]
     if @family.save
       @family.process_visits(params[:family])
