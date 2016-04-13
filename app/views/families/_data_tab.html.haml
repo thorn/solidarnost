@@ -168,6 +168,6 @@
       - @family.attachments.each do |a|
         .info
           .info-name
-            %span= link_to File.basename(a.file.path), a.file_url
+            %span= link_to(File.basename(a.file.path), a.file_url) if a.file.path
           .info-value= link_to a.description, a.file_url
 = render "buttons"
